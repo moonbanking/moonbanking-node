@@ -16,7 +16,7 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { APIKeyCreateParams, APIKeyCreateResponse, APIKeys } from './resources/api-keys';
+import { APIKeys } from './resources/api-keys';
 import {
   BankListParams,
   BankListResponse,
@@ -756,11 +756,7 @@ MoonBanking.World = World;
 export declare namespace MoonBanking {
   export type RequestOptions = Opts.RequestOptions;
 
-  export {
-    APIKeys as APIKeys,
-    type APIKeyCreateResponse as APIKeyCreateResponse,
-    type APIKeyCreateParams as APIKeyCreateParams,
-  };
+  export { APIKeys as APIKeys };
 
   export {
     Banks as Banks,

@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { APIKeys, type APIKeyCreateResponse, type APIKeyCreateParams } from './api-keys';
+export { APIKeys } from './api-keys';
 export {
   Banks,
   type BankRetrieveResponse,

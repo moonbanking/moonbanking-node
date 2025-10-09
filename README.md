@@ -29,9 +29,9 @@ const client = new MoonBanking({
   bearerToken: process.env['MOON_BANKING_BEARER_TOKEN'], // This is the default and can be omitted
 });
 
-const apiKey = await client.apiKeys.create({ name: 'REPLACE_ME' });
+const bank = await client.banks.retrieve('6jkxE4N8gHXgDPK');
 
-console.log(apiKey.data);
+console.log(bank.data);
 ```
 
 ### Request & Response types
@@ -46,8 +46,7 @@ const client = new MoonBanking({
   bearerToken: process.env['MOON_BANKING_BEARER_TOKEN'], // This is the default and can be omitted
 });
 
-const params: MoonBanking.APIKeyCreateParams = { name: 'REPLACE_ME' };
-const apiKey: MoonBanking.APIKeyCreateResponse = await client.apiKeys.create(params);
+const bank: MoonBanking.BankRetrieveResponse = await client.banks.retrieve('6jkxE4N8gHXgDPK');
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -60,7 +59,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const apiKey = await client.apiKeys.create({ name: 'REPLACE_ME' }).catch(async (err) => {
+const bank = await client.banks.retrieve('6jkxE4N8gHXgDPK').catch(async (err) => {
   if (err instanceof MoonBanking.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -100,7 +99,7 @@ const client = new MoonBanking({
 });
 
 // Or, configure per-request:
-await client.apiKeys.create({ name: 'REPLACE_ME' }, {
+await client.banks.retrieve('6jkxE4N8gHXgDPK', {
   maxRetries: 5,
 });
 ```
@@ -117,7 +116,7 @@ const client = new MoonBanking({
 });
 
 // Override per-request:
-await client.apiKeys.create({ name: 'REPLACE_ME' }, {
+await client.banks.retrieve('6jkxE4N8gHXgDPK', {
   timeout: 5 * 1000,
 });
 ```
@@ -140,13 +139,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new MoonBanking();
 
-const response = await client.apiKeys.create({ name: 'REPLACE_ME' }).asResponse();
+const response = await client.banks.retrieve('6jkxE4N8gHXgDPK').asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: apiKey, response: raw } = await client.apiKeys.create({ name: 'REPLACE_ME' }).withResponse();
+const { data: bank, response: raw } = await client.banks.retrieve('6jkxE4N8gHXgDPK').withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(apiKey.data);
+console.log(bank.data);
 ```
 
 ### Logging
@@ -226,7 +225,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.apiKeys.create({
+client.banks.retrieve({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

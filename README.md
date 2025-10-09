@@ -29,9 +29,9 @@ const client = new MoonBanking({
   bearerToken: process.env['MOON_BANKING_BEARER_TOKEN'], // This is the default and can be omitted
 });
 
-const bank = await client.banks.retrieve('6jkxE4N8gHXgDPK');
+const banks = await client.banks.list();
 
-console.log(bank.data);
+console.log(banks.data);
 ```
 
 ### Request & Response types
@@ -46,7 +46,7 @@ const client = new MoonBanking({
   bearerToken: process.env['MOON_BANKING_BEARER_TOKEN'], // This is the default and can be omitted
 });
 
-const bank: MoonBanking.BankRetrieveResponse = await client.banks.retrieve('6jkxE4N8gHXgDPK');
+const banks: MoonBanking.BankListResponse = await client.banks.list();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -59,7 +59,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const bank = await client.banks.retrieve('6jkxE4N8gHXgDPK').catch(async (err) => {
+const banks = await client.banks.list().catch(async (err) => {
   if (err instanceof MoonBanking.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -99,7 +99,7 @@ const client = new MoonBanking({
 });
 
 // Or, configure per-request:
-await client.banks.retrieve('6jkxE4N8gHXgDPK', {
+await client.banks.list({
   maxRetries: 5,
 });
 ```
@@ -116,7 +116,7 @@ const client = new MoonBanking({
 });
 
 // Override per-request:
-await client.banks.retrieve('6jkxE4N8gHXgDPK', {
+await client.banks.list({
   timeout: 5 * 1000,
 });
 ```
@@ -139,13 +139,13 @@ Unlike `.asResponse()` this method consumes the body, returning once it is parse
 ```ts
 const client = new MoonBanking();
 
-const response = await client.banks.retrieve('6jkxE4N8gHXgDPK').asResponse();
+const response = await client.banks.list().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: bank, response: raw } = await client.banks.retrieve('6jkxE4N8gHXgDPK').withResponse();
+const { data: banks, response: raw } = await client.banks.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(bank.data);
+console.log(banks.data);
 ```
 
 ### Logging
@@ -225,7 +225,7 @@ parameter. This library doesn't validate at runtime that the request matches the
 send will be sent as-is.
 
 ```ts
-client.banks.retrieve({
+client.banks.list({
   // ...
   // @ts-expect-error baz is not yet public
   baz: 'undocumented option',

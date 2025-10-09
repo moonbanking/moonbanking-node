@@ -1,13 +1,5 @@
 # APIKeys
 
-Types:
-
-- <code><a href="./src/resources/api-keys.ts">APIKeyCreateResponse</a></code>
-
-Methods:
-
-- <code title="post /api-keys">client.apiKeys.<a href="./src/resources/api-keys.ts">create</a>({ ...params }) -> APIKeyCreateResponse</code>
-
 # Banks
 
 Types:

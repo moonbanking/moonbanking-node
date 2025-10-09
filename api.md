@@ -1,5 +1,3 @@
-# APIKeys
-
 # Banks
 
 Types:

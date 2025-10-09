@@ -16,7 +16,6 @@ import * as Errors from './core/error';
 import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
-import { APIKeys } from './resources/api-keys';
 import {
   BankListParams,
   BankListResponse,
@@ -740,14 +739,12 @@ export class MoonBanking {
 
   static toFile = Uploads.toFile;
 
-  apiKeys: API.APIKeys = new API.APIKeys(this);
   banks: API.Banks = new API.Banks(this);
   countries: API.Countries = new API.Countries(this);
   stories: API.Stories = new API.Stories(this);
   world: API.World = new API.World(this);
 }
 
-MoonBanking.APIKeys = APIKeys;
 MoonBanking.Banks = Banks;
 MoonBanking.Countries = Countries;
 MoonBanking.Stories = Stories;
@@ -755,8 +752,6 @@ MoonBanking.World = World;
 
 export declare namespace MoonBanking {
   export type RequestOptions = Opts.RequestOptions;
-
-  export { APIKeys as APIKeys };
 
   export {
     Banks as Banks,

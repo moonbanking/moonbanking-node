@@ -1,0 +1,43 @@
+{
+  "dxt_version": "0.2",
+  "name": "moon-banking-mcp",
+  "version": "0.0.1",
+  "description": "The official MCP Server for the Moon Banking API",
+  "author": {
+    "name": "Moon Banking",
+    "email": "support@moonbanking.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stainless-sdks/moon-banking-typescript.git"
+  },
+  "homepage": "https://github.com/stainless-sdks/moon-banking-typescript/tree/main/packages/mcp-server#readme",
+  "documentation": "https://moonbanking.local",
+  "server": {
+    "type": "node",
+    "entry_point": "index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/index.js"],
+      "env": {
+        "MOON_BANKING_BEARER_TOKEN": "${user_config.MOON_BANKING_BEARER_TOKEN}"
+      }
+    }
+  },
+  "user_config": {
+    "MOON_BANKING_BEARER_TOKEN": {
+      "title": "bearer_token",
+      "description": "",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "tools": [],
+  "tools_generated": true,
+  "compatibility": {
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  },
+  "keywords": ["api"]
+}

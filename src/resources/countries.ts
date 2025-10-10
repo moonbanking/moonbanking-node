@@ -53,6 +53,8 @@ export interface CountryRetrieveResponse {
    */
   data: CountryRetrieveResponse.Data;
 
+  success: true;
+
   timestamp: string;
 
   version: string;
@@ -620,6 +622,8 @@ export interface CountryListResponse {
   data: Array<CountryListResponse.Data>;
 
   pagination: CountryListResponse.Pagination;
+
+  success: true;
 
   timestamp: string;
 
@@ -1220,6 +1224,8 @@ export interface CountryListStoriesResponse {
   data: Array<CountryListStoriesResponse.Data>;
 
   pagination: CountryListStoriesResponse.Pagination;
+
+  success: true;
 
   timestamp: string;
 

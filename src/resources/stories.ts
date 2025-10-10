@@ -39,6 +39,8 @@ export interface StoryRetrieveResponse {
    */
   data: StoryRetrieveResponse.Data;
 
+  success: true;
+
   timestamp: string;
 
   version: string;
@@ -159,6 +161,8 @@ export interface StoryListResponse {
   data: Array<StoryListResponse.Data>;
 
   pagination: StoryListResponse.Pagination;
+
+  success: true;
 
   timestamp: string;
 

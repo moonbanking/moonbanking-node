@@ -24,6 +24,8 @@ export interface WorldRetrieveResponse {
    */
   data: WorldRetrieveResponse.Data;
 
+  success: true;
+
   timestamp: string;
 
   version: string;

@@ -52,6 +52,8 @@ export interface BankRetrieveResponse {
    */
   data: BankRetrieveResponse.Data;
 
+  success: true;
+
   timestamp: string;
 
   version: string;
@@ -626,6 +628,8 @@ export interface BankListResponse {
   data: Array<BankListResponse.Data>;
 
   pagination: BankListResponse.Pagination;
+
+  success: true;
 
   timestamp: string;
 
@@ -1233,6 +1237,8 @@ export interface BankRetrieveStoriesResponse {
   data: Array<BankRetrieveStoriesResponse.Data>;
 
   pagination: BankRetrieveStoriesResponse.Pagination;
+
+  success: true;
 
   timestamp: string;
 

@@ -50,12 +50,13 @@ describe('resource stories', () => {
     await expect(
       client.stories.list(
         {
-          include: 'bank,country,paginationTotal',
+          ending_before: '6jkxE4N8gHXgDPK',
+          include: 'bank,country',
           limit: 20,
-          offset: 0,
           search: 'customer service',
           sortBy: 'createdAt',
           sortOrder: 'asc',
+          starting_after: '8HsY5nBc7jAqM4u',
         },
         { path: '/_stainless_unknown_path' },
       ),

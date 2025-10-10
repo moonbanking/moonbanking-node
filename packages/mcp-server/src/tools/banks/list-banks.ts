@@ -31,18 +31,19 @@ export const tool: Tool = {
         description:
           "Only return banks in the specified country. A country's ID is Moon Banking's unique identifier for the country.",
       },
+      ending_before: {
+        type: 'string',
+        description:
+          'Cursor for backward pagination. Use the id of the first item from the current page to get the previous page.',
+      },
       include: {
         type: 'string',
         description:
-          'An optional  comma-separated list of fields to include in the response. Possible values: `scores`, `country`, `paginationTotal`',
+          'An optional  comma-separated list of fields to include in the response. Possible values: `scores`, `country`',
       },
       limit: {
         type: 'integer',
         description: 'Number of items to return.',
-      },
-      offset: {
-        type: 'integer',
-        description: 'Offset for pagination.',
       },
       search: {
         type: 'string',
@@ -124,6 +125,11 @@ export const tool: Tool = {
         description: 'Sort order. Either ascending or descending.',
         enum: ['asc', 'desc'],
       },
+      starting_after: {
+        type: 'string',
+        description:
+          'Cursor for forward pagination. Use the id of the last item from the previous page to get the next page.',
+      },
     },
     required: [],
   },
@@ -134,7 +140,8 @@ export const tool: Tool = {
 
 export const handler = async (client: MoonBanking, args: Record<string, unknown> | undefined) => {
   const body = args as any;
-  return asTextContentResult(await client.banks.list(body));
+  const response = await client.banks.list(body).asResponse();
+  return asTextContentResult(await response.json());
 };
 
 export default { metadata, tool, handler };

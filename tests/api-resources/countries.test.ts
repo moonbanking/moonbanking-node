@@ -46,12 +46,13 @@ describe('resource countries', () => {
     await expect(
       client.countries.list(
         {
-          include: 'scores,paginationTotal',
+          ending_before: '6jkxE4N8gHXgDPK',
+          include: 'scores',
           limit: 20,
-          offset: 0,
           search: 'United States',
           sortBy: 'name',
           sortOrder: 'asc',
+          starting_after: '8HsY5nBc7jAqM4u',
         },
         { path: '/_stainless_unknown_path' },
       ),
@@ -77,12 +78,13 @@ describe('resource countries', () => {
       client.countries.listStories(
         'US',
         {
+          ending_before: '6jkxE4N8gHXgDPK',
           include: 'paginationTotal,bank',
           limit: 20,
-          offset: 0,
           search: 'customer service',
           sortBy: 'createdAt',
           sortOrder: 'desc',
+          starting_after: '8HsY5nBc7jAqM4u',
           tags: 'CRYPTO_FRIENDLY,CUSTOMER_SERVICE,FEES_PRICING,DIGITAL_EXPERIENCE,SECURITY_TRUST,ACCOUNT_FEATURES,BRANCH_ATM_ACCESS,INTERNATIONAL_BANKING,BUSINESS_BANKING,PROCESSING_SPEED,TRANSPARENCY,INNOVATION,INVESTMENT_SERVICES,LENDING',
         },
         { path: '/_stainless_unknown_path' },

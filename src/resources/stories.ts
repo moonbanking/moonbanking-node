@@ -2,6 +2,7 @@
 
 import { APIResource } from '../core/resource';
 import { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
 import { RequestOptions } from '../internal/request-options';
 import { path } from '../internal/utils/path';
 
@@ -27,10 +28,12 @@ export class Stories extends APIResource {
   list(
     query: StoryListParams | null | undefined = {},
     options?: RequestOptions,
-  ): APIPromise<StoryListResponse> {
-    return this._client.get('/stories', { query, ...options });
+  ): PagePromise<StoryListResponsesCursorPage, StoryListResponse> {
+    return this._client.getAPIList('/stories', CursorPage<StoryListResponse>, { query, ...options });
   }
 }
+
+export type StoryListResponsesCursorPage = CursorPage<StoryListResponse>;
 
 export interface StoryRetrieveResponse {
   /**
@@ -157,158 +160,110 @@ export namespace StoryRetrieveResponse {
   }
 }
 
+/**
+ * The story model contains user-generated content about banks, as well as
+ * information about the bank and country in which the bank is located.
+ */
 export interface StoryListResponse {
-  data: Array<StoryListResponse.Data>;
+  /**
+   * The story's auto-generated unique identifier.
+   */
+  id: string;
 
-  pagination: StoryListResponse.Pagination;
+  /**
+   * The ID of the bank this story is about.
+   */
+  bankId: string;
 
-  success: true;
+  /**
+   * The date and time the story was created in Moon Banking.
+   */
+  createdAt: string;
 
-  timestamp: string;
+  /**
+   * An array of tags associated with this story for categorization and filtering.
+   * Possible tags are `CRYPTO_FRIENDLY`, `FEES_PRICING`, `DIGITAL_EXPERIENCE`,
+   * `ACCOUNT_FEATURES`, `CUSTOMER_SERVICE`, `SECURITY_TRUST`, `BRANCH_ATM_ACCESS`,
+   * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
+   * `INNOVATION`, `INVESTMENT_SERVICES` and `LENDING`.
+   */
+  tags: Array<string>;
 
-  version: string;
+  /**
+   * The story content submitted by the user.
+   */
+  text: string;
 
-  message?: string;
+  /**
+   * The number of thumbs up votes for this story.
+   */
+  thumbsUpCount: number;
+
+  /**
+   * The date and time the story was last updated in Moon Banking.
+   */
+  updatedAt: string;
+
+  /**
+   * The bank about which the story was written.
+   */
+  bank?: StoryListResponse.Bank;
+
+  /**
+   * The country of the bank about which the story was written.
+   */
+  country?: StoryListResponse.Country;
 }
 
 export namespace StoryListResponse {
   /**
-   * The story model contains user-generated content about banks, as well as
-   * information about the bank and country in which the bank is located.
+   * The bank about which the story was written.
    */
-  export interface Data {
+  export interface Bank {
     /**
-     * The story's auto-generated unique identifier.
+     * The bank's auto-generated unique identifier.
      */
     id: string;
 
     /**
-     * The ID of the bank this story is about.
+     * The ID of the country where this bank is located.
      */
-    bankId: string;
+    countryId: string;
 
     /**
-     * The date and time the story was created in Moon Banking.
+     * The bank's official name or display name.
      */
-    createdAt: string;
+    name: string;
 
     /**
-     * An array of tags associated with this story for categorization and filtering.
-     * Possible tags are `CRYPTO_FRIENDLY`, `FEES_PRICING`, `DIGITAL_EXPERIENCE`,
-     * `ACCOUNT_FEATURES`, `CUSTOMER_SERVICE`, `SECURITY_TRUST`, `BRANCH_ATM_ACCESS`,
-     * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
-     * `INNOVATION`, `INVESTMENT_SERVICES` and `LENDING`.
+     * The bank's official website URL.
      */
-    tags: Array<string>;
-
-    /**
-     * The story content submitted by the user.
-     */
-    text: string;
-
-    /**
-     * The number of thumbs up votes for this story.
-     */
-    thumbsUpCount: number;
-
-    /**
-     * The date and time the story was last updated in Moon Banking.
-     */
-    updatedAt: string;
-
-    /**
-     * The bank about which the story was written.
-     */
-    bank?: Data.Bank;
-
-    /**
-     * The country of the bank about which the story was written.
-     */
-    country?: Data.Country;
+    url?: string | null;
   }
 
-  export namespace Data {
+  /**
+   * The country of the bank about which the story was written.
+   */
+  export interface Country {
     /**
-     * The bank about which the story was written.
+     * The country's auto-generated unique identifier.
      */
-    export interface Bank {
-      /**
-       * The bank's auto-generated unique identifier.
-       */
-      id: string;
-
-      /**
-       * The ID of the country where this bank is located.
-       */
-      countryId: string;
-
-      /**
-       * The bank's official name or display name.
-       */
-      name: string;
-
-      /**
-       * The bank's official website URL.
-       */
-      url?: string | null;
-    }
+    id: string;
 
     /**
-     * The country of the bank about which the story was written.
+     * The country's ISO 3166-1 code (2 characters).
      */
-    export interface Country {
-      /**
-       * The country's auto-generated unique identifier.
-       */
-      id: string;
-
-      /**
-       * The country's ISO 3166-1 code (2 characters).
-       */
-      code: string;
-
-      /**
-       * The country's flag emoji representation.
-       */
-      emoji: string;
-
-      /**
-       * The country's official name. Must be unique across all countries.
-       */
-      name: string;
-    }
-  }
-
-  export interface Pagination {
-    /**
-     * Current page number
-     */
-    currentPage: number;
+    code: string;
 
     /**
-     * Whether there are more items available
+     * The country's flag emoji representation.
      */
-    hasMore: boolean;
+    emoji: string;
 
     /**
-     * Number of items per page
+     * The country's official name. Must be unique across all countries.
      */
-    limit: number;
-
-    /**
-     * Current offset
-     */
-    offset: number;
-
-    /**
-     * Total number of items (if known)
-     */
-    total?: number;
-
-    /**
-     * Total number of pages
-     */
-    totalPages?: number;
+    name: string;
   }
 }
 
@@ -320,22 +275,12 @@ export interface StoryRetrieveParams {
   include?: string;
 }
 
-export interface StoryListParams {
+export interface StoryListParams extends CursorPageParams {
   /**
    * An optional comma-separated list of fields to include in the response. Possible
-   * values: `bank`, `country`, `paginationTotal`
+   * values: `bank`, `country`
    */
   include?: string;
-
-  /**
-   * Number of items to return.
-   */
-  limit?: number;
-
-  /**
-   * Offset for pagination.
-   */
-  offset?: number;
 
   /**
    * Search stories by text content.
@@ -357,6 +302,7 @@ export declare namespace Stories {
   export {
     type StoryRetrieveResponse as StoryRetrieveResponse,
     type StoryListResponse as StoryListResponse,
+    type StoryListResponsesCursorPage as StoryListResponsesCursorPage,
     type StoryRetrieveParams as StoryRetrieveParams,
     type StoryListParams as StoryListParams,
   };

@@ -29,9 +29,10 @@ const client = new MoonBanking({
   bearerToken: process.env['MOON_BANKING_BEARER_TOKEN'], // This is the default and can be omitted
 });
 
-const banks = await client.banks.list();
+const page = await client.banks.list();
+const bankListResponse = page.data[0];
 
-console.log(banks.data);
+console.log(bankListResponse.id);
 ```
 
 ### Request & Response types
@@ -46,7 +47,7 @@ const client = new MoonBanking({
   bearerToken: process.env['MOON_BANKING_BEARER_TOKEN'], // This is the default and can be omitted
 });
 
-const banks: MoonBanking.BankListResponse = await client.banks.list();
+const [bankListResponse]: [MoonBanking.BankListResponse] = await client.banks.list();
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -59,7 +60,7 @@ a subclass of `APIError` will be thrown:
 
 <!-- prettier-ignore -->
 ```ts
-const banks = await client.banks.list().catch(async (err) => {
+const page = await client.banks.list().catch(async (err) => {
   if (err instanceof MoonBanking.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -143,9 +144,11 @@ const response = await client.banks.list().asResponse();
 console.log(response.headers.get('X-My-Header'));
 console.log(response.statusText); // access the underlying Response object
 
-const { data: banks, response: raw } = await client.banks.list().withResponse();
+const { data: page, response: raw } = await client.banks.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-console.log(banks.data);
+for await (const bankListResponse of page) {
+  console.log(bankListResponse.id);
+}
 ```
 
 ### Logging

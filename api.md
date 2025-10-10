@@ -9,8 +9,8 @@ Types:
 Methods:
 
 - <code title="get /banks/{id}">client.banks.<a href="./src/resources/banks.ts">retrieve</a>(id, { ...params }) -> BankRetrieveResponse</code>
-- <code title="get /banks">client.banks.<a href="./src/resources/banks.ts">list</a>({ ...params }) -> BankListResponse</code>
-- <code title="get /banks/{id}/stories">client.banks.<a href="./src/resources/banks.ts">retrieveStories</a>(id, { ...params }) -> BankRetrieveStoriesResponse</code>
+- <code title="get /banks">client.banks.<a href="./src/resources/banks.ts">list</a>({ ...params }) -> BankListResponsesCursorPage</code>
+- <code title="get /banks/{id}/stories">client.banks.<a href="./src/resources/banks.ts">retrieveStories</a>(id, { ...params }) -> BankRetrieveStoriesResponsesCursorPage</code>
 
 # Countries
 
@@ -23,8 +23,8 @@ Types:
 Methods:
 
 - <code title="get /countries/{code}">client.countries.<a href="./src/resources/countries.ts">retrieve</a>(code, { ...params }) -> CountryRetrieveResponse</code>
-- <code title="get /countries">client.countries.<a href="./src/resources/countries.ts">list</a>({ ...params }) -> CountryListResponse</code>
-- <code title="get /countries/{code}/stories">client.countries.<a href="./src/resources/countries.ts">listStories</a>(code, { ...params }) -> CountryListStoriesResponse</code>
+- <code title="get /countries">client.countries.<a href="./src/resources/countries.ts">list</a>({ ...params }) -> CountryListResponsesCursorPage</code>
+- <code title="get /countries/{code}/stories">client.countries.<a href="./src/resources/countries.ts">listStories</a>(code, { ...params }) -> CountryListStoriesResponsesCursorPage</code>
 
 # Stories
 
@@ -36,7 +36,7 @@ Types:
 Methods:
 
 - <code title="get /stories/{id}">client.stories.<a href="./src/resources/stories.ts">retrieve</a>(id, { ...params }) -> StoryRetrieveResponse</code>
-- <code title="get /stories">client.stories.<a href="./src/resources/stories.ts">list</a>({ ...params }) -> StoryListResponse</code>
+- <code title="get /stories">client.stories.<a href="./src/resources/stories.ts">list</a>({ ...params }) -> StoryListResponsesCursorPage</code>
 
 # World
 

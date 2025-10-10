@@ -8,6 +8,8 @@ export {
   type BankRetrieveParams,
   type BankListParams,
   type BankRetrieveStoriesParams,
+  type BankListResponsesCursorPage,
+  type BankRetrieveStoriesResponsesCursorPage,
 } from './banks';
 export {
   Countries,
@@ -17,6 +19,8 @@ export {
   type CountryRetrieveParams,
   type CountryListParams,
   type CountryListStoriesParams,
+  type CountryListResponsesCursorPage,
+  type CountryListStoriesResponsesCursorPage,
 } from './countries';
 export {
   Stories,
@@ -24,5 +28,6 @@ export {
   type StoryListResponse,
   type StoryRetrieveParams,
   type StoryListParams,
+  type StoryListResponsesCursorPage,
 } from './stories';
 export { World, type WorldRetrieveResponse, type WorldRetrieveParams } from './world';

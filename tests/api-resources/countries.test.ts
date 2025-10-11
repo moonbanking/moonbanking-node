@@ -60,8 +60,8 @@ describe('resource countries', () => {
   });
 
   // Prism tests are disabled
-  test.skip('listStories', async () => {
-    const responsePromise = client.countries.listStories('US');
+  test.skip('stories', async () => {
+    const responsePromise = client.countries.stories('US');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -72,10 +72,10 @@ describe('resource countries', () => {
   });
 
   // Prism tests are disabled
-  test.skip('listStories: request options and params are passed correctly', async () => {
+  test.skip('stories: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.countries.listStories(
+      client.countries.stories(
         'US',
         {
           ending_before: '6jkxE4N8gHXgDPK',

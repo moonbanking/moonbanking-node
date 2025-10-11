@@ -66,8 +66,8 @@ describe('resource banks', () => {
   });
 
   // Prism tests are disabled
-  test.skip('retrieveStories', async () => {
-    const responsePromise = client.banks.retrieveStories('6jkxE4N8gHXgDPK');
+  test.skip('stories', async () => {
+    const responsePromise = client.banks.stories('6jkxE4N8gHXgDPK');
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -78,10 +78,10 @@ describe('resource banks', () => {
   });
 
   // Prism tests are disabled
-  test.skip('retrieveStories: request options and params are passed correctly', async () => {
+  test.skip('stories: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.banks.retrieveStories(
+      client.banks.stories(
         '6jkxE4N8gHXgDPK',
         {
           ending_before: '6jkxE4N8gHXgDPK',

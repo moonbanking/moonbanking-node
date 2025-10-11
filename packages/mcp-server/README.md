@@ -227,13 +227,13 @@ The following tools are available in this MCP server.
 
 - `retrieve_banks` (`read`): This endpoint allows you to retrieve a specific bank by providing the bank ID. You can include related data like scores and country information in the response.
 - `list_banks` (`read`): This endpoint allows you to retrieve a paginated list of all banks. By default, a maximum of ten banks are shown per page. You can search banks by name, filter by country, sort them by various fields, and include related data like scores and country information.
-- `retrieve_stories_banks` (`read`): This endpoint allows you to retrieve a paginated list of all stories for a specific bank. By default, a maximum of ten stories are shown per page. You can search stories by text content, filter by tags, and sort them by various fields.
+- `stories_banks` (`read`): This endpoint allows you to retrieve a paginated list of all stories for a specific bank. By default, a maximum of ten stories are shown per page. You can search stories by text content, filter by tags, and sort them by various fields.
 
 ### Resource `countries`:
 
 - `retrieve_countries` (`read`): This endpoint allows you to retrieve a specific country by providing the 2-letter ISO country code. You can include related data like scores in the response.
 - `list_countries` (`read`): This endpoint allows you to retrieve a paginated list of all countries. By default, a maximum of ten countries are shown per page. You can search countries by name or 2-letter code, sort them by various fields, and include related data like scores.
-- `list_stories_countries` (`read`): This endpoint allows you to retrieve a paginated list of all stories for banks in a specific country. By default, a maximum of ten stories are shown per page. You can search stories by text content, filter by tags, and sort them by various fields.
+- `stories_countries` (`read`): This endpoint allows you to retrieve a paginated list of all stories for banks in a specific country. By default, a maximum of ten stories are shown per page. You can search stories by text content, filter by tags, and sort them by various fields.
 
 ### Resource `stories`:
 

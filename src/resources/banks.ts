@@ -38,12 +38,12 @@ export class Banks extends APIResource {
    * specific bank. By default, a maximum of ten stories are shown per page. You can
    * search stories by text content, filter by tags, and sort them by various fields.
    */
-  retrieveStories(
+  stories(
     id: string,
-    query: BankRetrieveStoriesParams | null | undefined = {},
+    query: BankStoriesParams | null | undefined = {},
     options?: RequestOptions,
-  ): PagePromise<BankRetrieveStoriesResponsesCursorPage, BankRetrieveStoriesResponse> {
-    return this._client.getAPIList(path`/banks/${id}/stories`, CursorPage<BankRetrieveStoriesResponse>, {
+  ): PagePromise<BankStoriesResponsesCursorPage, BankStoriesResponse> {
+    return this._client.getAPIList(path`/banks/${id}/stories`, CursorPage<BankStoriesResponse>, {
       query,
       ...options,
     });
@@ -52,7 +52,7 @@ export class Banks extends APIResource {
 
 export type BankListResponsesCursorPage = CursorPage<BankListResponse>;
 
-export type BankRetrieveStoriesResponsesCursorPage = CursorPage<BankRetrieveStoriesResponse>;
+export type BankStoriesResponsesCursorPage = CursorPage<BankStoriesResponse>;
 
 export interface BankRetrieveResponse {
   /**
@@ -1197,7 +1197,7 @@ export namespace BankListResponse {
  * The story model contains user-generated content about banks, as well as
  * information about the bank and country in which the bank is located.
  */
-export interface BankRetrieveStoriesResponse {
+export interface BankStoriesResponse {
   /**
    * The story's auto-generated unique identifier.
    */
@@ -1240,15 +1240,15 @@ export interface BankRetrieveStoriesResponse {
   /**
    * The bank about which the story was written.
    */
-  bank?: BankRetrieveStoriesResponse.Bank;
+  bank?: BankStoriesResponse.Bank;
 
   /**
    * The country of the bank about which the story was written.
    */
-  country?: BankRetrieveStoriesResponse.Country;
+  country?: BankStoriesResponse.Country;
 }
 
-export namespace BankRetrieveStoriesResponse {
+export namespace BankStoriesResponse {
   /**
    * The bank about which the story was written.
    */
@@ -1409,7 +1409,7 @@ export interface BankListParams extends CursorPageParams {
   sortOrder?: 'asc' | 'desc';
 }
 
-export interface BankRetrieveStoriesParams extends CursorPageParams {
+export interface BankStoriesParams extends CursorPageParams {
   /**
    * An optional comma-separated list of fields to include in the response. Possible
    * values: `bank`, `country`
@@ -1445,11 +1445,11 @@ export declare namespace Banks {
   export {
     type BankRetrieveResponse as BankRetrieveResponse,
     type BankListResponse as BankListResponse,
-    type BankRetrieveStoriesResponse as BankRetrieveStoriesResponse,
+    type BankStoriesResponse as BankStoriesResponse,
     type BankListResponsesCursorPage as BankListResponsesCursorPage,
-    type BankRetrieveStoriesResponsesCursorPage as BankRetrieveStoriesResponsesCursorPage,
+    type BankStoriesResponsesCursorPage as BankStoriesResponsesCursorPage,
     type BankRetrieveParams as BankRetrieveParams,
     type BankListParams as BankListParams,
-    type BankRetrieveStoriesParams as BankRetrieveStoriesParams,
+    type BankStoriesParams as BankStoriesParams,
   };
 }

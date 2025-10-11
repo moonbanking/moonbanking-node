@@ -24,9 +24,9 @@ import {
   BankListResponsesCursorPage,
   BankRetrieveParams,
   BankRetrieveResponse,
-  BankRetrieveStoriesParams,
-  BankRetrieveStoriesResponse,
-  BankRetrieveStoriesResponsesCursorPage,
+  BankStoriesParams,
+  BankStoriesResponse,
+  BankStoriesResponsesCursorPage,
   Banks,
 } from './resources/banks';
 import {
@@ -34,11 +34,11 @@ import {
   CountryListParams,
   CountryListResponse,
   CountryListResponsesCursorPage,
-  CountryListStoriesParams,
-  CountryListStoriesResponse,
-  CountryListStoriesResponsesCursorPage,
   CountryRetrieveParams,
   CountryRetrieveResponse,
+  CountryStoriesParams,
+  CountryStoriesResponse,
+  CountryStoriesResponsesCursorPage,
 } from './resources/countries';
 import {
   Stories,
@@ -786,24 +786,24 @@ export declare namespace MoonBanking {
     Banks as Banks,
     type BankRetrieveResponse as BankRetrieveResponse,
     type BankListResponse as BankListResponse,
-    type BankRetrieveStoriesResponse as BankRetrieveStoriesResponse,
+    type BankStoriesResponse as BankStoriesResponse,
     type BankListResponsesCursorPage as BankListResponsesCursorPage,
-    type BankRetrieveStoriesResponsesCursorPage as BankRetrieveStoriesResponsesCursorPage,
+    type BankStoriesResponsesCursorPage as BankStoriesResponsesCursorPage,
     type BankRetrieveParams as BankRetrieveParams,
     type BankListParams as BankListParams,
-    type BankRetrieveStoriesParams as BankRetrieveStoriesParams,
+    type BankStoriesParams as BankStoriesParams,
   };
 
   export {
     Countries as Countries,
     type CountryRetrieveResponse as CountryRetrieveResponse,
     type CountryListResponse as CountryListResponse,
-    type CountryListStoriesResponse as CountryListStoriesResponse,
+    type CountryStoriesResponse as CountryStoriesResponse,
     type CountryListResponsesCursorPage as CountryListResponsesCursorPage,
-    type CountryListStoriesResponsesCursorPage as CountryListStoriesResponsesCursorPage,
+    type CountryStoriesResponsesCursorPage as CountryStoriesResponsesCursorPage,
     type CountryRetrieveParams as CountryRetrieveParams,
     type CountryListParams as CountryListParams,
-    type CountryListStoriesParams as CountryListStoriesParams,
+    type CountryStoriesParams as CountryStoriesParams,
   };
 
   export {

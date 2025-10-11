@@ -6,10 +6,10 @@ export { Metadata, Endpoint, HandlerFunction };
 
 import retrieve_banks from './banks/retrieve-banks';
 import list_banks from './banks/list-banks';
-import retrieve_stories_banks from './banks/retrieve-stories-banks';
+import stories_banks from './banks/stories-banks';
 import retrieve_countries from './countries/retrieve-countries';
 import list_countries from './countries/list-countries';
-import list_stories_countries from './countries/list-stories-countries';
+import stories_countries from './countries/stories-countries';
 import retrieve_stories from './stories/retrieve-stories';
 import list_stories from './stories/list-stories';
 import retrieve_world from './world/retrieve-world';
@@ -22,10 +22,10 @@ function addEndpoint(endpoint: Endpoint) {
 
 addEndpoint(retrieve_banks);
 addEndpoint(list_banks);
-addEndpoint(retrieve_stories_banks);
+addEndpoint(stories_banks);
 addEndpoint(retrieve_countries);
 addEndpoint(list_countries);
-addEndpoint(list_stories_countries);
+addEndpoint(stories_countries);
 addEndpoint(retrieve_stories);
 addEndpoint(list_stories);
 addEndpoint(retrieve_world);

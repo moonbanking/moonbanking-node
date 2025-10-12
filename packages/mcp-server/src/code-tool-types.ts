@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { ClientOptions } from 'moon-banking';
+import { ClientOptions } from 'moonbanking';
 
 export type WorkerInput = {
   opts: ClientOptions;

@@ -1,5 +1,5 @@
 import { inspect } from 'node:util';
-import { buildHeaders, type HeadersLike, type NullableHeaders } from 'moon-banking/internal/headers';
+import { buildHeaders, type HeadersLike, type NullableHeaders } from 'moonbanking/internal/headers';
 
 function inspectNullableHeaders(headers: NullableHeaders) {
   return `NullableHeaders {${[

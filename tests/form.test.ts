@@ -1,5 +1,5 @@
-import { multipartFormRequestOptions, createForm } from 'moon-banking/internal/uploads';
-import { toFile } from 'moon-banking/core/uploads';
+import { multipartFormRequestOptions, createForm } from 'moonbanking/internal/uploads';
+import { toFile } from 'moonbanking/core/uploads';
 
 describe('form data validation', () => {
   test('valid values do not error', async () => {

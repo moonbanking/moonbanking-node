@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { maybeFilter } from 'moon-banking-mcp/filtering';
-import { Metadata, asTextContentResult } from 'moon-banking-mcp/tools/types';
+import { maybeFilter } from 'moonbanking-mcp/filtering';
+import { Metadata, asTextContentResult } from 'moonbanking-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import MoonBanking from 'moon-banking';
+import MoonBanking from 'moonbanking';
 
 export const metadata: Metadata = {
   resource: 'countries',

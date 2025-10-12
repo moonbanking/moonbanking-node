@@ -5,8 +5,8 @@
   "compilerOptions": {
     "rootDir": "./dist/src",
     "paths": {
-      "moon-banking/*": ["./dist/src/*"],
-      "moon-banking": ["./dist/src/index.ts"]
+      "moonbanking/*": ["./dist/src/*"],
+      "moonbanking": ["./dist/src/index.ts"]
     },
     "noEmit": false,
     "declaration": true,

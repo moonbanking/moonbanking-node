@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^moon-banking-mcp$': '<rootDir>/src/index.ts',
-    '^moon-banking-mcp/(.*)$': '<rootDir>/src/$1',
+    '^moonbanking-mcp$': '<rootDir>/src/index.ts',
+    '^moonbanking-mcp/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: ['<rootDir>/dist/'],
   testPathIgnorePatterns: ['scripts'],

@@ -1,10 +1,10 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { APIPromise } from 'moon-banking/core/api-promise';
+import { APIPromise } from 'moonbanking/core/api-promise';
 
 import util from 'node:util';
-import MoonBanking from 'moon-banking';
-import { APIUserAbortError } from 'moon-banking';
+import MoonBanking from 'moonbanking';
+import { APIUserAbortError } from 'moonbanking';
 const defaultFetch = fetch;
 
 describe('instantiate client', () => {
@@ -312,13 +312,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['MOON_BANKING_BASE_URL'] = ''; // empty
       const client = new MoonBanking({ bearerToken: 'My Bearer Token' });
-      expect(client.baseURL).toEqual('https://api.moonbanking.local/v1');
+      expect(client.baseURL).toEqual('https://api.moonbanking.com/v1');
     });
 
     test('blank env variable', () => {
       process.env['MOON_BANKING_BASE_URL'] = '  '; // blank
       const client = new MoonBanking({ bearerToken: 'My Bearer Token' });
-      expect(client.baseURL).toEqual('https://api.moonbanking.local/v1');
+      expect(client.baseURL).toEqual('https://api.moonbanking.com/v1');
     });
 
     test('in request options', () => {
@@ -434,14 +434,14 @@ describe('instantiate client', () => {
 
   test('with environment variable arguments', () => {
     // set options via env var
-    process.env['MOON_BANKING_BEARER_TOKEN'] = 'My Bearer Token';
+    process.env['MOON_BANKING_API_KEY'] = 'My Bearer Token';
     const client = new MoonBanking();
     expect(client.bearerToken).toBe('My Bearer Token');
   });
 
   test('with overridden environment variable arguments', () => {
     // set options via env var
-    process.env['MOON_BANKING_BEARER_TOKEN'] = 'another My Bearer Token';
+    process.env['MOON_BANKING_API_KEY'] = 'another My Bearer Token';
     const client = new MoonBanking({ bearerToken: 'My Bearer Token' });
     expect(client.bearerToken).toBe('My Bearer Token');
   });

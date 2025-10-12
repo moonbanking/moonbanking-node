@@ -55,12 +55,12 @@ $ cd moon-banking-typescript
 # With yarn
 $ yarn link
 $ cd ../my-package
-$ yarn link moon-banking
+$ yarn link moonbanking
 
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global moon-banking
+$ pnpm link -—global moonbanking
 ```
 
 ## Running tests

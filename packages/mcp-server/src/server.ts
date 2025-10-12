@@ -10,8 +10,8 @@ import {
   Implementation,
   Tool,
 } from '@modelcontextprotocol/sdk/types.js';
-import { ClientOptions } from 'moon-banking';
-import MoonBanking from 'moon-banking';
+import { ClientOptions } from 'moonbanking';
+import MoonBanking from 'moonbanking';
 import {
   applyCompatibilityTransformations,
   ClientCapabilities,
@@ -27,13 +27,13 @@ import { McpOptions } from './options';
 export { McpOptions } from './options';
 export { ClientType } from './compat';
 export { Filter } from './tools';
-export { ClientOptions } from 'moon-banking';
+export { ClientOptions } from 'moonbanking';
 export { endpoints } from './tools';
 
 export const newMcpServer = () =>
   new McpServer(
     {
-      name: 'moon_banking_api',
+      name: 'moonbanking_api',
       version: '0.0.1',
     },
     { capabilities: { tools: {}, logging: {} } },

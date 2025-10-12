@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { MoonBanking } from 'moon-banking';
+import { MoonBanking } from 'moonbanking';
 
 const { stringifyQuery } = MoonBanking.prototype as any;
 

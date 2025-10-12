@@ -8,8 +8,8 @@
     "moduleResolution": "node",
     "esModuleInterop": true,
     "paths": {
-      "moon-banking-mcp/*": ["./src/*"],
-      "moon-banking-mcp": ["./src/index.ts"]
+      "moonbanking-mcp/*": ["./src/*"],
+      "moonbanking-mcp": ["./src/index.ts"]
     },
     "noEmit": true,
 

@@ -1,10 +1,10 @@
 # Moon Banking TypeScript API Library
 
-[![NPM version](<https://img.shields.io/npm/v/moon-banking.svg?label=npm%20(stable)>)](https://npmjs.org/package/moon-banking) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/moon-banking)
+[![NPM version](<https://img.shields.io/npm/v/moonbanking.svg?label=npm%20(stable)>)](https://npmjs.org/package/moonbanking) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/moonbanking)
 
 This library provides convenient access to the Moon Banking REST API from server-side TypeScript or JavaScript.
 
-The REST API documentation can be found on [moonbanking.local](https://moonbanking.local). The full API of this library can be found in [api.md](api.md).
+The REST API documentation can be found on [docs.moonbanking.com](https://docs.moonbanking.com). The full API of this library can be found in [api.md](api.md).
 
 It is generated with [Stainless](https://www.stainless.com/).
 
@@ -15,7 +15,7 @@ npm install git+ssh://git@github.com:stainless-sdks/moon-banking-typescript.git
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install moon-banking`
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npm install moonbanking`
 
 ## Usage
 
@@ -23,10 +23,10 @@ The full API of this library can be found in [api.md](api.md).
 
 <!-- prettier-ignore -->
 ```js
-import MoonBanking from 'moon-banking';
+import MoonBanking from 'moonbanking';
 
 const client = new MoonBanking({
-  bearerToken: process.env['MOON_BANKING_BEARER_TOKEN'], // This is the default and can be omitted
+  bearerToken: process.env['MOON_BANKING_API_KEY'], // This is the default and can be omitted
 });
 
 const page = await client.banks.list();
@@ -41,10 +41,10 @@ This library includes TypeScript definitions for all request params and response
 
 <!-- prettier-ignore -->
 ```ts
-import MoonBanking from 'moon-banking';
+import MoonBanking from 'moonbanking';
 
 const client = new MoonBanking({
-  bearerToken: process.env['MOON_BANKING_BEARER_TOKEN'], // This is the default and can be omitted
+  bearerToken: process.env['MOON_BANKING_API_KEY'], // This is the default and can be omitted
 });
 
 const [bankListResponse]: [MoonBanking.BankListResponse] = await client.banks.list();
@@ -165,7 +165,7 @@ The log level can be configured in two ways:
 2. Using the `logLevel` client option (overrides the environment variable if set)
 
 ```ts
-import MoonBanking from 'moon-banking';
+import MoonBanking from 'moonbanking';
 
 const client = new MoonBanking({
   logLevel: 'debug', // Show all log messages
@@ -193,7 +193,7 @@ When providing a custom logger, the `logLevel` option still controls which messa
 below the configured level will not be sent to your logger.
 
 ```ts
-import MoonBanking from 'moon-banking';
+import MoonBanking from 'moonbanking';
 import pino from 'pino';
 
 const logger = pino();
@@ -262,7 +262,7 @@ globalThis.fetch = fetch;
 Or pass it to the client:
 
 ```ts
-import MoonBanking from 'moon-banking';
+import MoonBanking from 'moonbanking';
 import fetch from 'my-fetch';
 
 const client = new MoonBanking({ fetch });
@@ -273,7 +273,7 @@ const client = new MoonBanking({ fetch });
 If you want to set custom `fetch` options without overriding the `fetch` function, you can provide a `fetchOptions` object when instantiating the client or making a request. (Request-specific options override client options.)
 
 ```ts
-import MoonBanking from 'moon-banking';
+import MoonBanking from 'moonbanking';
 
 const client = new MoonBanking({
   fetchOptions: {
@@ -290,7 +290,7 @@ options to requests:
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
 
 ```ts
-import MoonBanking from 'moon-banking';
+import MoonBanking from 'moonbanking';
 import * as undici from 'undici';
 
 const proxyAgent = new undici.ProxyAgent('http://localhost:8888');
@@ -304,7 +304,7 @@ const client = new MoonBanking({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
 
 ```ts
-import MoonBanking from 'moon-banking';
+import MoonBanking from 'moonbanking';
 
 const client = new MoonBanking({
   fetchOptions: {
@@ -316,7 +316,7 @@ const client = new MoonBanking({
 <img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
 
 ```ts
-import MoonBanking from 'npm:moon-banking';
+import MoonBanking from 'npm:moonbanking';
 
 const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
 const client = new MoonBanking({

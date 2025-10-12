@@ -1,5 +1,5 @@
 {
-  "name": "moon-banking-mcp",
+  "name": "moonbanking-mcp",
   "version": "0.0.1",
   "description": "The official MCP Server for the Moon Banking API",
   "author": "Moon Banking <support@moonbanking.com>",
@@ -30,7 +30,7 @@
     "fix": "eslint --fix --ext ts,js ."
   },
   "dependencies": {
-    "moon-banking": "file:../../dist/",
+    "moonbanking": "file:../../dist/",
     "@cloudflare/cabidela": "^0.2.4",
     "@modelcontextprotocol/sdk": "^1.11.5",
     "@valtown/deno-http-worker": "^0.0.21",
@@ -68,8 +68,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "moon-banking-mcp": ".",
-    "moon-banking-mcp/*": "./src/*"
+    "moonbanking-mcp": ".",
+    "moonbanking-mcp/*": "./src/*"
   },
   "exports": {
     ".": {

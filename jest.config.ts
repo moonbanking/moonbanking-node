@@ -7,8 +7,8 @@ const config: JestConfigWithTsJest = {
     '^.+\\.(t|j)sx?$': ['@swc/jest', { sourceMaps: 'inline' }],
   },
   moduleNameMapper: {
-    '^moon-banking$': '<rootDir>/src/index.ts',
-    '^moon-banking/(.*)$': '<rootDir>/src/$1',
+    '^moonbanking$': '<rootDir>/src/index.ts',
+    '^moonbanking/(.*)$': '<rootDir>/src/$1',
   },
   modulePathIgnorePatterns: [
     '<rootDir>/ecosystem-tests/',

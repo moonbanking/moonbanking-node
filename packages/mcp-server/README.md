@@ -19,12 +19,12 @@ cd moon-banking-typescript
 
 ```sh
 # set env vars as needed
-export MOON_BANKING_BEARER_TOKEN="My Bearer Token"
+export MOON_BANKING_API_KEY="My Bearer Token"
 node ./packages/mcp-server/dist/index.js
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npx -y moon-banking-mcp`
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npx -y moonbanking-mcp`
 
 ### Via MCP Client
 
@@ -38,7 +38,7 @@ For clients with a configuration JSON, it might look something like this:
 ```json
 {
   "mcpServers": {
-    "moon_banking_api": {
+    "moonbanking_api": {
       "command": "node",
       "args": [
         "/path/to/local/moon-banking-typescript/packages/mcp-server",
@@ -46,7 +46,7 @@ For clients with a configuration JSON, it might look something like this:
         "--tools=all"
       ],
       "env": {
-        "MOON_BANKING_BEARER_TOKEN": "My Bearer Token"
+        "MOON_BANKING_API_KEY": "My Bearer Token"
       }
     }
   }
@@ -153,15 +153,15 @@ Authorization can be provided via the `Authorization` header using the Bearer sc
 
 Additionally, authorization can be provided via the following headers:
 | Header | Equivalent client option | Security scheme |
-| ----------------------------- | ------------------------ | --------------- |
-| `x-moon-banking-bearer-token` | `bearerToken` | Authorization |
+| ------------------------ | ------------------------ | --------------- |
+| `x-moon-banking-api-key` | `bearerToken` | Authorization |
 
 A configuration JSON for this server might look like this, assuming the server is hosted at `http://localhost:3000`:
 
 ```json
 {
   "mcpServers": {
-    "moon_banking_api": {
+    "moonbanking_api": {
       "url": "http://localhost:3000",
       "headers": {
         "Authorization": "Bearer <auth value>"
@@ -188,10 +188,10 @@ http://localhost:3000?client=cursor&capability=tool-name-length%3D40
 
 ```js
 // Import the server, generated endpoints, or the init function
-import { server, endpoints, init } from "moon-banking-mcp/server";
+import { server, endpoints, init } from "moonbanking-mcp/server";
 
 // import a specific tool
-import retrieveBanks from "moon-banking-mcp/tools/banks/retrieve-banks";
+import retrieveBanks from "moonbanking-mcp/tools/banks/retrieve-banks";
 
 // initialize the server and all endpoints
 init({ server, endpoints });

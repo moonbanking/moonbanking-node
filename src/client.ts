@@ -64,7 +64,7 @@ import { isEmptyObj } from './internal/utils/values';
 
 export interface ClientOptions {
   /**
-   * Defaults to process.env['MOON_BANKING_BEARER_TOKEN'].
+   * Defaults to process.env['MOON_BANKING_API_KEY'].
    */
   bearerToken?: string | undefined;
 
@@ -158,8 +158,8 @@ export class MoonBanking {
   /**
    * API Client for interfacing with the Moon Banking API.
    *
-   * @param {string | undefined} [opts.bearerToken=process.env['MOON_BANKING_BEARER_TOKEN'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['MOON_BANKING_BASE_URL'] ?? https://api.moonbanking.local/v1] - Override the default base URL for the API.
+   * @param {string | undefined} [opts.bearerToken=process.env['MOON_BANKING_API_KEY'] ?? undefined]
+   * @param {string} [opts.baseURL=process.env['MOON_BANKING_BASE_URL'] ?? https://api.moonbanking.com/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -169,19 +169,19 @@ export class MoonBanking {
    */
   constructor({
     baseURL = readEnv('MOON_BANKING_BASE_URL'),
-    bearerToken = readEnv('MOON_BANKING_BEARER_TOKEN'),
+    bearerToken = readEnv('MOON_BANKING_API_KEY'),
     ...opts
   }: ClientOptions = {}) {
     if (bearerToken === undefined) {
       throw new Errors.MoonBankingError(
-        "The MOON_BANKING_BEARER_TOKEN environment variable is missing or empty; either provide it, or instantiate the MoonBanking client with an bearerToken option, like new MoonBanking({ bearerToken: 'My Bearer Token' }).",
+        "The MOON_BANKING_API_KEY environment variable is missing or empty; either provide it, or instantiate the MoonBanking client with an bearerToken option, like new MoonBanking({ bearerToken: 'My Bearer Token' }).",
       );
     }
 
     const options: ClientOptions = {
       bearerToken,
       ...opts,
-      baseURL: baseURL || `https://api.moonbanking.local/v1`,
+      baseURL: baseURL || `https://api.moonbanking.com/v1`,
     };
 
     this.baseURL = options.baseURL!;
@@ -227,7 +227,7 @@ export class MoonBanking {
    * Check whether the base URL is set to its default.
    */
   #baseURLOverridden(): boolean {
-    return this.baseURL !== 'https://api.moonbanking.local/v1';
+    return this.baseURL !== 'https://api.moonbanking.com/v1';
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {

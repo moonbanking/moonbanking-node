@@ -1,7 +1,7 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 import { IncomingMessage } from 'node:http';
-import { ClientOptions } from 'moon-banking';
+import { ClientOptions } from 'moonbanking';
 
 export const parseAuthHeaders = (req: IncomingMessage): Partial<ClientOptions> => {
   if (req.headers.authorization) {
@@ -16,8 +16,8 @@ export const parseAuthHeaders = (req: IncomingMessage): Partial<ClientOptions> =
   }
 
   const bearerToken =
-    Array.isArray(req.headers['x-moon-banking-bearer-token']) ?
-      req.headers['x-moon-banking-bearer-token'][0]
-    : req.headers['x-moon-banking-bearer-token'];
+    Array.isArray(req.headers['x-moon-banking-api-key']) ?
+      req.headers['x-moon-banking-api-key'][0]
+    : req.headers['x-moon-banking-api-key'];
   return { bearerToken };
 };

@@ -2,7 +2,7 @@
 
 import { dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import MoonBanking, { ClientOptions } from 'moonbanking';
+import Moonbanking, { ClientOptions } from 'moonbanking';
 import { Endpoint, ContentBlock, Metadata } from './tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
@@ -31,7 +31,7 @@ export async function codeTool(): Promise<Endpoint> {
   const { newDenoHTTPWorker } = await import('@valtown/deno-http-worker');
   const { workerPath } = await import('./code-tool-paths.cjs');
 
-  const handler = async (client: MoonBanking, args: unknown) => {
+  const handler = async (client: Moonbanking, args: unknown) => {
     const baseURLHostname = new URL(client.baseURL).hostname;
     const { code } = args as { code: string };
 

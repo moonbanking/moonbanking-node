@@ -1,8 +1,8 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { MoonBanking } from 'moonbanking';
+import { Moonbanking } from 'moonbanking';
 
-const { stringifyQuery } = MoonBanking.prototype as any;
+const { stringifyQuery } = Moonbanking.prototype as any;
 
 describe(stringifyQuery, () => {
   for (const [input, expected] of [

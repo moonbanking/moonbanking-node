@@ -20,6 +20,7 @@ cd moon-banking-typescript
 ```sh
 # set env vars as needed
 export MOON_BANKING_API_KEY="My Bearer Token"
+export MOONBANKING_ENVIRONMENT="production"
 node ./packages/mcp-server/dist/index.js
 ```
 
@@ -46,7 +47,8 @@ For clients with a configuration JSON, it might look something like this:
         "--tools=all"
       ],
       "env": {
-        "MOON_BANKING_API_KEY": "My Bearer Token"
+        "MOON_BANKING_API_KEY": "My Bearer Token",
+        "MOONBANKING_ENVIRONMENT": "production"
       }
     }
   }

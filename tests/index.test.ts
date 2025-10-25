@@ -321,6 +321,23 @@ describe('instantiate client', () => {
       expect(client.baseURL).toEqual('https://api.moonbanking.com/v1');
     });
 
+    test('env variable with environment', () => {
+      process.env['MOONBANKING_BASE_URL'] = 'https://example.com/from_env';
+
+      expect(
+        () => new Moonbanking({ bearerToken: 'My Bearer Token', environment: 'production' }),
+      ).toThrowErrorMatchingInlineSnapshot(
+        `"Ambiguous URL; The \`baseURL\` option (or MOONBANKING_BASE_URL env var) and the \`environment\` option are given. If you want to use the environment you must pass baseURL: null"`,
+      );
+
+      const client = new Moonbanking({
+        bearerToken: 'My Bearer Token',
+        baseURL: null,
+        environment: 'production',
+      });
+      expect(client.baseURL).toEqual('https://api.moonbanking.com/v1');
+    });
+
     test('in request options', () => {
       const client = new Moonbanking({ bearerToken: 'My Bearer Token' });
       expect(client.buildURL('/foo', null, 'http://localhost:5000/option')).toEqual(

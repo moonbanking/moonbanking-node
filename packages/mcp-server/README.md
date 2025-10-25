@@ -241,3 +241,7 @@ The following tools are available in this MCP server.
 ### Resource `world`:
 
 - `retrieve_world` (`read`): This endpoint allows you to retrieve global overview data that aggregates banks votes, stories and other data across all banks in all countries. You can include related data like scores in the response.
+
+### Resource `bank_votes`:
+
+- `list_bank_votes` (`read`): This endpoint allows you to retrieve a paginated list of bank votes. You can filter by bank ID, category, country, vote type (upvote or downvote), and other parameters.

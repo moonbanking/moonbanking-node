@@ -1,6 +1,12 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
 export {
+  BankVotes,
+  type BankVoteListResponse,
+  type BankVoteListParams,
+  type BankVoteListResponsesCursorPage,
+} from './bank-votes';
+export {
   Banks,
   type BankRetrieveResponse,
   type BankListResponse,

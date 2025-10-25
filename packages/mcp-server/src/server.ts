@@ -88,7 +88,6 @@ export function initMcpServer(params: {
   };
 
   let client = new Moonbanking({
-    ...{ environment: (readEnv('MOONBANKING_ENVIRONMENT') || undefined) as any },
     logger,
     ...params.clientOptions,
     defaultHeaders: {

@@ -126,6 +126,37 @@ On timeout, an `APIConnectionTimeoutError` is thrown.
 
 Note that requests which time out will be [retried twice by default](#retries).
 
+## Auto-pagination
+
+List methods in the MoonBanking API are paginated.
+You can use the `for await … of` syntax to iterate through items across all pages:
+
+```ts
+async function fetchAllBankListResponses(params) {
+  const allBankListResponses = [];
+  // Automatically fetches more pages as needed.
+  for await (const bankListResponse of client.banks.list({ limit: 20, starting_after: 'bank_123' })) {
+    allBankListResponses.push(bankListResponse);
+  }
+  return allBankListResponses;
+}
+```
+
+Alternatively, you can request a single page at a time:
+
+```ts
+let page = await client.banks.list({ limit: 20, starting_after: 'bank_123' });
+for (const bankListResponse of page.data) {
+  console.log(bankListResponse);
+}
+
+// Convenience methods are provided for manually paginating:
+while (page.hasNextPage()) {
+  page = await page.getNextPage();
+  // ...
+}
+```
+
 ## Advanced Usage
 
 ### Accessing raw Response data (e.g., headers)

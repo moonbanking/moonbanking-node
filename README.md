@@ -27,6 +27,7 @@ import Moonbanking from 'moonbanking';
 
 const client = new Moonbanking({
   bearerToken: process.env['MOON_BANKING_API_KEY'], // This is the default and can be omitted
+  environment: 'beta', // defaults to 'production'
 });
 
 const page = await client.banks.list();
@@ -45,6 +46,7 @@ import Moonbanking from 'moonbanking';
 
 const client = new Moonbanking({
   bearerToken: process.env['MOON_BANKING_API_KEY'], // This is the default and can be omitted
+  environment: 'beta', // defaults to 'production'
 });
 
 const [bankListResponse]: [Moonbanking.BankListResponse] = await client.banks.list();

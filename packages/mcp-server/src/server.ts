@@ -11,7 +11,7 @@ import {
   Tool,
 } from '@modelcontextprotocol/sdk/types.js';
 import { ClientOptions } from 'moonbanking';
-import MoonBanking from 'moonbanking';
+import Moonbanking from 'moonbanking';
 import {
   applyCompatibilityTransformations,
   ClientCapabilities,
@@ -87,7 +87,7 @@ export function initMcpServer(params: {
     error: logAtLevel('error'),
   };
 
-  let client = new MoonBanking({
+  let client = new Moonbanking({
     logger,
     ...params.clientOptions,
     defaultHeaders: {
@@ -178,7 +178,7 @@ export async function selectTools(endpoints: Endpoint[], options?: McpOptions): 
 export async function executeHandler(
   tool: Tool,
   handler: HandlerFunction,
-  client: MoonBanking,
+  client: Moonbanking,
   args: Record<string, unknown> | undefined,
   compatibilityOptions?: Partial<ClientCapabilities>,
 ) {

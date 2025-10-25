@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { type MoonBanking } from '../client';
+import { type Moonbanking } from '../client';
 
 import { type PromiseOrValue } from '../internal/types';
 import { APIResponseProps, defaultParseResponse } from '../internal/parse';
@@ -11,13 +11,13 @@ import { APIResponseProps, defaultParseResponse } from '../internal/parse';
  */
 export class APIPromise<T> extends Promise<T> {
   private parsedPromise: Promise<T> | undefined;
-  #client: MoonBanking;
+  #client: Moonbanking;
 
   constructor(
-    client: MoonBanking,
+    client: Moonbanking,
     private responsePromise: Promise<APIResponseProps>,
     private parseResponse: (
-      client: MoonBanking,
+      client: Moonbanking,
       props: APIResponseProps,
     ) => PromiseOrValue<T> = defaultParseResponse,
   ) {

@@ -19,6 +19,12 @@ import * as Uploads from './core/uploads';
 import * as API from './resources/index';
 import { APIPromise } from './core/api-promise';
 import {
+  BankVoteListParams,
+  BankVoteListResponse,
+  BankVoteListResponsesCursorPage,
+  BankVotes,
+} from './resources/bank-votes';
+import {
   BankListParams,
   BankListResponse,
   BankListResponsesCursorPage,
@@ -763,12 +769,14 @@ export class MoonBanking {
   countries: API.Countries = new API.Countries(this);
   stories: API.Stories = new API.Stories(this);
   world: API.World = new API.World(this);
+  bankVotes: API.BankVotes = new API.BankVotes(this);
 }
 
 MoonBanking.Banks = Banks;
 MoonBanking.Countries = Countries;
 MoonBanking.Stories = Stories;
 MoonBanking.World = World;
+MoonBanking.BankVotes = BankVotes;
 
 export declare namespace MoonBanking {
   export type RequestOptions = Opts.RequestOptions;
@@ -807,5 +815,12 @@ export declare namespace MoonBanking {
     World as World,
     type WorldRetrieveResponse as WorldRetrieveResponse,
     type WorldRetrieveParams as WorldRetrieveParams,
+  };
+
+  export {
+    BankVotes as BankVotes,
+    type BankVoteListResponse as BankVoteListResponse,
+    type BankVoteListResponsesCursorPage as BankVoteListResponsesCursorPage,
+    type BankVoteListParams as BankVoteListParams,
   };
 }

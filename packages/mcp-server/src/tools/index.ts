@@ -11,6 +11,7 @@ import list_countries from './countries/list-countries';
 import retrieve_stories from './stories/retrieve-stories';
 import list_stories from './stories/list-stories';
 import retrieve_world from './world/retrieve-world';
+import list_bank_votes from './bank-votes/list-bank-votes';
 
 export const endpoints: Endpoint[] = [];
 
@@ -25,6 +26,7 @@ addEndpoint(list_countries);
 addEndpoint(retrieve_stories);
 addEndpoint(list_stories);
 addEndpoint(retrieve_world);
+addEndpoint(list_bank_votes);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

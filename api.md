@@ -43,3 +43,13 @@ Types:
 Methods:
 
 - <code title="get /world">client.world.<a href="./src/resources/world.ts">retrieve</a>({ ...params }) -> WorldRetrieveResponse</code>
+
+# BankVotes
+
+Types:
+
+- <code><a href="./src/resources/bank-votes.ts">BankVoteListResponse</a></code>
+
+Methods:
+
+- <code title="get /bank-votes">client.bankVotes.<a href="./src/resources/bank-votes.ts">list</a>({ ...params }) -> BankVoteListResponsesCursorPage</code>

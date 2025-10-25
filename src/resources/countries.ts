@@ -32,28 +32,9 @@ export class Countries extends APIResource {
   ): PagePromise<CountryListResponsesCursorPage, CountryListResponse> {
     return this._client.getAPIList('/countries', CursorPage<CountryListResponse>, { query, ...options });
   }
-
-  /**
-   * This endpoint allows you to retrieve a paginated list of all stories for banks
-   * in a specific country. By default, a maximum of ten stories are shown per page.
-   * You can search stories by text content, filter by tags, and sort them by various
-   * fields.
-   */
-  stories(
-    code: string,
-    query: CountryStoriesParams | null | undefined = {},
-    options?: RequestOptions,
-  ): PagePromise<CountryStoriesResponsesCursorPage, CountryStoriesResponse> {
-    return this._client.getAPIList(path`/countries/${code}/stories`, CursorPage<CountryStoriesResponse>, {
-      query,
-      ...options,
-    });
-  }
 }
 
 export type CountryListResponsesCursorPage = CursorPage<CountryListResponse>;
-
-export type CountryStoriesResponsesCursorPage = CursorPage<CountryStoriesResponse>;
 
 export interface CountryRetrieveResponse {
   /**
@@ -1180,113 +1161,6 @@ export namespace CountryListResponse {
   }
 }
 
-/**
- * The story model contains user-generated content about banks, as well as
- * information about the bank and country in which the bank is located.
- */
-export interface CountryStoriesResponse {
-  /**
-   * The story's auto-generated unique identifier.
-   */
-  id: string;
-
-  /**
-   * The ID of the bank this story is about.
-   */
-  bankId: string;
-
-  /**
-   * The date and time the story was created in Moon Banking.
-   */
-  createdAt: string;
-
-  /**
-   * An array of tags associated with this story for categorization and filtering.
-   * Possible tags are `CRYPTO_FRIENDLY`, `FEES_PRICING`, `DIGITAL_EXPERIENCE`,
-   * `ACCOUNT_FEATURES`, `CUSTOMER_SERVICE`, `SECURITY_TRUST`, `BRANCH_ATM_ACCESS`,
-   * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
-   * `INNOVATION`, `INVESTMENT_SERVICES` and `LENDING`.
-   */
-  tags: Array<string>;
-
-  /**
-   * The story content submitted by the user.
-   */
-  text: string;
-
-  /**
-   * The number of thumbs up votes for this story.
-   */
-  thumbsUpCount: number;
-
-  /**
-   * The date and time the story was last updated in Moon Banking.
-   */
-  updatedAt: string;
-
-  /**
-   * The bank about which the story was written.
-   */
-  bank?: CountryStoriesResponse.Bank;
-
-  /**
-   * The country of the bank about which the story was written.
-   */
-  country?: CountryStoriesResponse.Country;
-}
-
-export namespace CountryStoriesResponse {
-  /**
-   * The bank about which the story was written.
-   */
-  export interface Bank {
-    /**
-     * The bank's auto-generated unique identifier.
-     */
-    id: string;
-
-    /**
-     * The ID of the country where this bank is located.
-     */
-    countryId: string;
-
-    /**
-     * The bank's official name or display name.
-     */
-    name: string;
-
-    /**
-     * The bank's official website URL.
-     */
-    url?: string | null;
-  }
-
-  /**
-   * The country of the bank about which the story was written.
-   */
-  export interface Country {
-    /**
-     * The country's auto-generated unique identifier.
-     */
-    id: string;
-
-    /**
-     * The country's ISO 3166-1 code (2 characters).
-     */
-    code: string;
-
-    /**
-     * The country's flag emoji representation.
-     */
-    emoji: string;
-
-    /**
-     * The country's official name. Must be unique across all countries.
-     */
-    name: string;
-  }
-}
-
 export interface CountryRetrieveParams {
   /**
    * An optional comma-separated list of fields to include in the response. Possible
@@ -1383,47 +1257,12 @@ export interface CountryListParams extends CursorPageParams {
   sortOrder?: 'asc' | 'desc';
 }
 
-export interface CountryStoriesParams extends CursorPageParams {
-  /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `paginationTotal`, `bank`
-   */
-  include?: string;
-
-  /**
-   * Search stories by text content.
-   */
-  search?: string;
-
-  /**
-   * Field to sort stories by.
-   */
-  sortBy?: 'createdAt' | 'thumbsUpCount';
-
-  /**
-   * Sort order. Either ascending or descending.
-   */
-  sortOrder?: 'asc' | 'desc';
-
-  /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `CRYPTO_FRIENDLY`, `CUSTOMER_SERVICE`, `FEES_PRICING`,
-   * `DIGITAL_EXPERIENCE`, `SECURITY_TRUST`, `ACCOUNT_FEATURES`, `BRANCH_ATM_ACCESS`,
-   * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
-   * `INNOVATION`, `INVESTMENT_SERVICES`, `LENDING`
-   */
-  tags?: string;
-}
-
 export declare namespace Countries {
   export {
     type CountryRetrieveResponse as CountryRetrieveResponse,
     type CountryListResponse as CountryListResponse,
-    type CountryStoriesResponse as CountryStoriesResponse,
     type CountryListResponsesCursorPage as CountryListResponsesCursorPage,
-    type CountryStoriesResponsesCursorPage as CountryStoriesResponsesCursorPage,
     type CountryRetrieveParams as CountryRetrieveParams,
     type CountryListParams as CountryListParams,
-    type CountryStoriesParams as CountryStoriesParams,
   };
 }

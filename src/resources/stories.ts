@@ -22,8 +22,8 @@ export class Stories extends APIResource {
   /**
    * This endpoint allows you to retrieve a paginated list of all stories. By
    * default, a maximum of ten stories are shown per page. You can search stories by
-   * text content, sort them by various fields, and include related data like bank
-   * and country information.
+   * text content, filter by bank ID, sort them by various fields, and include
+   * related data like bank and country information.
    */
   list(
     query: StoryListParams | null | undefined = {},
@@ -277,6 +277,16 @@ export interface StoryRetrieveParams {
 
 export interface StoryListParams extends CursorPageParams {
   /**
+   * The bank's auto-generated unique identifier.
+   */
+  bankId?: string;
+
+  /**
+   * The country's ISO 3166-1 code (2 characters).
+   */
+  countryCode?: string;
+
+  /**
    * An optional comma-separated list of fields to include in the response. Possible
    * values: `bank`, `country`
    */
@@ -296,6 +306,15 @@ export interface StoryListParams extends CursorPageParams {
    * Sort order. Either ascending or descending.
    */
   sortOrder?: 'asc' | 'desc';
+
+  /**
+   * An optional comma-separated list of fields to include in the response. Possible
+   * values: `CRYPTO_FRIENDLY`, `CUSTOMER_SERVICE`, `FEES_PRICING`,
+   * `DIGITAL_EXPERIENCE`, `SECURITY_TRUST`, `ACCOUNT_FEATURES`, `BRANCH_ATM_ACCESS`,
+   * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
+   * `INNOVATION`, `INVESTMENT_SERVICES`, `LENDING`
+   */
+  tags?: string;
 }
 
 export declare namespace Stories {

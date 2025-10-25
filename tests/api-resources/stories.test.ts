@@ -50,6 +50,8 @@ describe('resource stories', () => {
     await expect(
       client.stories.list(
         {
+          bankId: '6jkxE4N8gHXgDPK',
+          countryCode: 'US',
           ending_before: '6jkxE4N8gHXgDPK',
           include: 'bank,country',
           limit: 20,
@@ -57,6 +59,7 @@ describe('resource stories', () => {
           sortBy: 'createdAt',
           sortOrder: 'asc',
           starting_after: '8HsY5nBc7jAqM4u',
+          tags: 'CRYPTO_FRIENDLY,CUSTOMER_SERVICE,FEES_PRICING,DIGITAL_EXPERIENCE,SECURITY_TRUST,ACCOUNT_FEATURES,BRANCH_ATM_ACCESS,INTERNATIONAL_BANKING,BUSINESS_BANKING,PROCESSING_SPEED,TRANSPARENCY,INNOVATION,INVESTMENT_SERVICES,LENDING',
         },
         { path: '/_stainless_unknown_path' },
       ),

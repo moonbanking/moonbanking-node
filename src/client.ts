@@ -24,9 +24,6 @@ import {
   BankListResponsesCursorPage,
   BankRetrieveParams,
   BankRetrieveResponse,
-  BankStoriesParams,
-  BankStoriesResponse,
-  BankStoriesResponsesCursorPage,
   Banks,
 } from './resources/banks';
 import {
@@ -36,9 +33,6 @@ import {
   CountryListResponsesCursorPage,
   CountryRetrieveParams,
   CountryRetrieveResponse,
-  CountryStoriesParams,
-  CountryStoriesResponse,
-  CountryStoriesResponsesCursorPage,
 } from './resources/countries';
 import {
   Stories,
@@ -786,24 +780,18 @@ export declare namespace MoonBanking {
     Banks as Banks,
     type BankRetrieveResponse as BankRetrieveResponse,
     type BankListResponse as BankListResponse,
-    type BankStoriesResponse as BankStoriesResponse,
     type BankListResponsesCursorPage as BankListResponsesCursorPage,
-    type BankStoriesResponsesCursorPage as BankStoriesResponsesCursorPage,
     type BankRetrieveParams as BankRetrieveParams,
     type BankListParams as BankListParams,
-    type BankStoriesParams as BankStoriesParams,
   };
 
   export {
     Countries as Countries,
     type CountryRetrieveResponse as CountryRetrieveResponse,
     type CountryListResponse as CountryListResponse,
-    type CountryStoriesResponse as CountryStoriesResponse,
     type CountryListResponsesCursorPage as CountryListResponsesCursorPage,
-    type CountryStoriesResponsesCursorPage as CountryStoriesResponsesCursorPage,
     type CountryRetrieveParams as CountryRetrieveParams,
     type CountryListParams as CountryListParams,
-    type CountryStoriesParams as CountryStoriesParams,
   };
 
   export {

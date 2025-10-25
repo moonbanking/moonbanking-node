@@ -312,13 +312,13 @@ describe('instantiate client', () => {
     test('empty env variable', () => {
       process.env['MOONBANKING_BASE_URL'] = ''; // empty
       const client = new Moonbanking({ bearerToken: 'My Bearer Token' });
-      expect(client.baseURL).toEqual('https://api.moonbanking.com/v1');
+      expect(client.baseURL).toEqual('https://api-dev.moonbanking.com/v1');
     });
 
     test('blank env variable', () => {
       process.env['MOONBANKING_BASE_URL'] = '  '; // blank
       const client = new Moonbanking({ bearerToken: 'My Bearer Token' });
-      expect(client.baseURL).toEqual('https://api.moonbanking.com/v1');
+      expect(client.baseURL).toEqual('https://api-dev.moonbanking.com/v1');
     });
 
     test('in request options', () => {

@@ -159,7 +159,7 @@ export class Moonbanking {
    * API Client for interfacing with the Moonbanking API.
    *
    * @param {string | undefined} [opts.bearerToken=process.env['MOON_BANKING_API_KEY'] ?? undefined]
-   * @param {string} [opts.baseURL=process.env['MOONBANKING_BASE_URL'] ?? https://api.moonbanking.com/v1] - Override the default base URL for the API.
+   * @param {string} [opts.baseURL=process.env['MOONBANKING_BASE_URL'] ?? https://api-dev.moonbanking.com/v1] - Override the default base URL for the API.
    * @param {number} [opts.timeout=1 minute] - The maximum amount of time (in milliseconds) the client will wait for a response before timing out.
    * @param {MergedRequestInit} [opts.fetchOptions] - Additional `RequestInit` options to be passed to `fetch` calls.
    * @param {Fetch} [opts.fetch] - Specify a custom `fetch` function implementation.
@@ -181,7 +181,7 @@ export class Moonbanking {
     const options: ClientOptions = {
       bearerToken,
       ...opts,
-      baseURL: baseURL || `https://api.moonbanking.com/v1`,
+      baseURL: baseURL || `https://api-dev.moonbanking.com/v1`,
     };
 
     this.baseURL = options.baseURL!;
@@ -227,7 +227,7 @@ export class Moonbanking {
    * Check whether the base URL is set to its default.
    */
   #baseURLOverridden(): boolean {
-    return this.baseURL !== 'https://api.moonbanking.com/v1';
+    return this.baseURL !== 'https://api-dev.moonbanking.com/v1';
   }
 
   protected defaultQuery(): Record<string, string | undefined> | undefined {

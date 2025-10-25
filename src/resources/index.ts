@@ -4,23 +4,17 @@ export {
   Banks,
   type BankRetrieveResponse,
   type BankListResponse,
-  type BankStoriesResponse,
   type BankRetrieveParams,
   type BankListParams,
-  type BankStoriesParams,
   type BankListResponsesCursorPage,
-  type BankStoriesResponsesCursorPage,
 } from './banks';
 export {
   Countries,
   type CountryRetrieveResponse,
   type CountryListResponse,
-  type CountryStoriesResponse,
   type CountryRetrieveParams,
   type CountryListParams,
-  type CountryStoriesParams,
   type CountryListResponsesCursorPage,
-  type CountryStoriesResponsesCursorPage,
 } from './countries';
 export {
   Stories,

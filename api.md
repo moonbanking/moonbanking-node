@@ -4,13 +4,11 @@ Types:
 
 - <code><a href="./src/resources/banks.ts">BankRetrieveResponse</a></code>
 - <code><a href="./src/resources/banks.ts">BankListResponse</a></code>
-- <code><a href="./src/resources/banks.ts">BankStoriesResponse</a></code>
 
 Methods:
 
 - <code title="get /banks/{id}">client.banks.<a href="./src/resources/banks.ts">retrieve</a>(id, { ...params }) -> BankRetrieveResponse</code>
 - <code title="get /banks">client.banks.<a href="./src/resources/banks.ts">list</a>({ ...params }) -> BankListResponsesCursorPage</code>
-- <code title="get /banks/{id}/stories">client.banks.<a href="./src/resources/banks.ts">stories</a>(id, { ...params }) -> BankStoriesResponsesCursorPage</code>
 
 # Countries
 
@@ -18,13 +16,11 @@ Types:
 
 - <code><a href="./src/resources/countries.ts">CountryRetrieveResponse</a></code>
 - <code><a href="./src/resources/countries.ts">CountryListResponse</a></code>
-- <code><a href="./src/resources/countries.ts">CountryStoriesResponse</a></code>
 
 Methods:
 
 - <code title="get /countries/{code}">client.countries.<a href="./src/resources/countries.ts">retrieve</a>(code, { ...params }) -> CountryRetrieveResponse</code>
 - <code title="get /countries">client.countries.<a href="./src/resources/countries.ts">list</a>({ ...params }) -> CountryListResponsesCursorPage</code>
-- <code title="get /countries/{code}/stories">client.countries.<a href="./src/resources/countries.ts">stories</a>(code, { ...params }) -> CountryStoriesResponsesCursorPage</code>
 
 # Stories
 

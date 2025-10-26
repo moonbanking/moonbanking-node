@@ -2,11 +2,11 @@
 
 import util from 'node:util';
 import { WorkerInput, WorkerSuccess, WorkerError } from './code-tool-types';
-import { Moonbanking } from 'moonbanking';
+import { MoonBanking } from 'moonbanking';
 
 const fetch = async (req: Request): Promise<Response> => {
   const { opts, code } = (await req.json()) as WorkerInput;
-  const client = new Moonbanking({
+  const client = new MoonBanking({
     ...opts,
   });
 

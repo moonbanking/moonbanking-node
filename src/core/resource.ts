@@ -1,11 +1,11 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import type { Moonbanking } from '../client';
+import type { MoonBanking } from '../client';
 
 export abstract class APIResource {
-  protected _client: Moonbanking;
+  protected _client: MoonBanking;
 
-  constructor(client: Moonbanking) {
+  constructor(client: MoonBanking) {
     this._client = client;
   }
 }

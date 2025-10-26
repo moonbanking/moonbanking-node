@@ -4,7 +4,7 @@ import { maybeFilter } from 'moonbanking-mcp/filtering';
 import { Metadata, asTextContentResult } from 'moonbanking-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import Moonbanking from 'moonbanking';
+import MoonBanking from 'moonbanking';
 
 export const metadata: Metadata = {
   resource: 'bank_votes',
@@ -82,7 +82,7 @@ export const tool: Tool = {
   },
 };
 
-export const handler = async (client: Moonbanking, args: Record<string, unknown> | undefined) => {
+export const handler = async (client: MoonBanking, args: Record<string, unknown> | undefined) => {
   const { jq_filter, ...body } = args as any;
   const response = await client.bankVotes.list(body).asResponse();
   return asTextContentResult(await maybeFilter(jq_filter, await response.json()));

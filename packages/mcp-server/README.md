@@ -1,4 +1,4 @@
-# Moonbanking TypeScript MCP Server
+# Moon Banking TypeScript MCP Server
 
 It is generated with [Stainless](https://www.stainless.com/).
 

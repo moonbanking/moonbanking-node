@@ -1,13 +1,13 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-export { Moonbanking as default } from './client';
+export { MoonBanking as default } from './client';
 
 export { type Uploadable, toFile } from './core/uploads';
 export { APIPromise } from './core/api-promise';
-export { Moonbanking, type ClientOptions } from './client';
+export { MoonBanking, type ClientOptions } from './client';
 export { PagePromise } from './core/pagination';
 export {
-  MoonbankingError,
+  MoonBankingError,
   APIError,
   APIConnectionError,
   APIConnectionTimeoutError,

@@ -3,7 +3,7 @@
 import { Metadata, asTextContentResult } from 'moonbanking-mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
-import Moonbanking from 'moonbanking';
+import MoonBanking from 'moonbanking';
 
 export const metadata: Metadata = {
   resource: 'countries',
@@ -38,7 +38,7 @@ export const tool: Tool = {
   },
 };
 
-export const handler = async (client: Moonbanking, args: Record<string, unknown> | undefined) => {
+export const handler = async (client: MoonBanking, args: Record<string, unknown> | undefined) => {
   const { code, ...body } = args as any;
   return asTextContentResult(await client.countries.retrieve(code, body));
 };

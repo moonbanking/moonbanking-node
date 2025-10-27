@@ -226,7 +226,11 @@ The following tools are available in this MCP server.
 ### Resource `banks`:
 
 - `retrieve_banks` (`read`): This endpoint allows you to retrieve a specific bank by providing the bank ID. You can include related data like scores and country information in the response.
-- `list_banks` (`read`): This endpoint allows you to retrieve a paginated list of all banks. By default, a maximum of ten banks are shown per page. You can search banks by name, filter by country, sort them by various fields, and include related data like scores and country information.
+- `list_banks` (`read`): This endpoint allows you to retrieve a paginated list of all banks. By default, a maximum of ten banks are shown per page. You can search banks by name, filter by country and description (including null/not_null status or semantic content search using vector embeddings), sort them by various fields, and include related data like scores and country information. When searching description content, results are ordered by semantic similarity.
+
+### Resource `bank_votes`:
+
+- `list_bank_votes` (`read`): This endpoint allows you to retrieve a paginated list of bank votes. You can filter by bank ID, category, country, vote type (upvote or downvote), and other parameters.
 
 ### Resource `countries`:
 
@@ -241,7 +245,3 @@ The following tools are available in this MCP server.
 ### Resource `world`:
 
 - `retrieve_world` (`read`): This endpoint allows you to retrieve global overview data that aggregates banks votes, stories and other data across all banks in all countries. You can include related data like scores in the response.
-
-### Resource `bank_votes`:
-
-- `list_bank_votes` (`read`): This endpoint allows you to retrieve a paginated list of bank votes. You can filter by bank ID, category, country, vote type (upvote or downvote), and other parameters.

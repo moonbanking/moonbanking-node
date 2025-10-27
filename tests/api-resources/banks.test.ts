@@ -52,6 +52,8 @@ describe('resource banks', () => {
         {
           countryCode: 'US',
           countryId: '454hfjsjuusbf',
+          description:
+            'A bank that provides banking and investment services to individuals in the United States.',
           ending_before: '6jkxE4N8gHXgDPK',
           include: 'scores,country',
           limit: 20,

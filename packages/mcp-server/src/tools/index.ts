@@ -6,12 +6,12 @@ export { Metadata, Endpoint, HandlerFunction };
 
 import retrieve_banks from './banks/retrieve-banks';
 import list_banks from './banks/list-banks';
+import list_bank_votes from './bank-votes/list-bank-votes';
 import retrieve_countries from './countries/retrieve-countries';
 import list_countries from './countries/list-countries';
 import retrieve_stories from './stories/retrieve-stories';
 import list_stories from './stories/list-stories';
 import retrieve_world from './world/retrieve-world';
-import list_bank_votes from './bank-votes/list-bank-votes';
 
 export const endpoints: Endpoint[] = [];
 
@@ -21,12 +21,12 @@ function addEndpoint(endpoint: Endpoint) {
 
 addEndpoint(retrieve_banks);
 addEndpoint(list_banks);
+addEndpoint(list_bank_votes);
 addEndpoint(retrieve_countries);
 addEndpoint(list_countries);
 addEndpoint(retrieve_stories);
 addEndpoint(list_stories);
 addEndpoint(retrieve_world);
-addEndpoint(list_bank_votes);
 
 export type Filter = {
   type: 'resource' | 'operation' | 'tag' | 'tool';

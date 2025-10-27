@@ -10,6 +10,16 @@ Methods:
 - <code title="get /banks/{id}">client.banks.<a href="./src/resources/banks.ts">retrieve</a>(id, { ...params }) -> BankRetrieveResponse</code>
 - <code title="get /banks">client.banks.<a href="./src/resources/banks.ts">list</a>({ ...params }) -> BankListResponsesCursorPage</code>
 
+# BankVotes
+
+Types:
+
+- <code><a href="./src/resources/bank-votes.ts">BankVoteListResponse</a></code>
+
+Methods:
+
+- <code title="get /bank-votes">client.bankVotes.<a href="./src/resources/bank-votes.ts">list</a>({ ...params }) -> BankVoteListResponsesCursorPage</code>
+
 # Countries
 
 Types:
@@ -43,13 +53,3 @@ Types:
 Methods:
 
 - <code title="get /world">client.world.<a href="./src/resources/world.ts">retrieve</a>({ ...params }) -> WorldRetrieveResponse</code>
-
-# BankVotes
-
-Types:
-
-- <code><a href="./src/resources/bank-votes.ts">BankVoteListResponse</a></code>
-
-Methods:
-
-- <code title="get /bank-votes">client.bankVotes.<a href="./src/resources/bank-votes.ts">list</a>({ ...params }) -> BankVoteListResponsesCursorPage</code>

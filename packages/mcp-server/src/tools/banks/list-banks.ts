@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 export const tool: Tool = {
   name: 'list_banks',
   description:
-    'This endpoint allows you to retrieve a paginated list of all banks. By default, a maximum of ten banks are shown per page. You can search banks by name, filter by country, sort them by various fields, and include related data like scores and country information.',
+    'This endpoint allows you to retrieve a paginated list of all banks. By default, a maximum of ten banks are shown per page. You can search banks by name, filter by country and description (including null/not_null status or semantic content search using vector embeddings), sort them by various fields, and include related data like scores and country information. When searching description content, results are ordered by semantic similarity.',
   inputSchema: {
     type: 'object',
     properties: {
@@ -30,6 +30,11 @@ export const tool: Tool = {
         type: 'string',
         description:
           "Only return banks in the specified country. A country's ID is Moon Banking's unique identifier for the country.",
+      },
+      description: {
+        type: 'string',
+        description:
+          'Filter banks by description. Under the hood, this is a semantic search that uses vector embeddings, so you may get better results if you use general language. Besides a full text search, you can use "null" to return banks without descriptions or "not_null" to return banks with descriptions.',
       },
       ending_before: {
         type: 'string',

@@ -9,9 +9,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/stainless-sdks/moon-banking-typescript.git"
+    "url": "git+https://github.com/moonbanking/moonbanking-node.git"
   },
-  "homepage": "https://github.com/stainless-sdks/moon-banking-typescript/tree/main/packages/mcp-server#readme",
+  "homepage": "https://github.com/moonbanking/moonbanking-node/tree/main/packages/mcp-server#readme",
   "documentation": "https://docs.moonbanking.com",
   "server": {
     "type": "node",

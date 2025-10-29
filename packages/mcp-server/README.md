@@ -9,8 +9,8 @@ It is generated with [Stainless](https://www.stainless.com/).
 Because it's not published yet, clone the repo and build it:
 
 ```sh
-git clone git@github.com:stainless-sdks/moon-banking-typescript.git
-cd moon-banking-typescript
+git clone git@github.com:moonbanking/moonbanking-node.git
+cd moonbanking-node
 ./scripts/bootstrap
 ./scripts/build
 ```
@@ -40,11 +40,7 @@ For clients with a configuration JSON, it might look something like this:
   "mcpServers": {
     "moonbanking_api": {
       "command": "node",
-      "args": [
-        "/path/to/local/moon-banking-typescript/packages/mcp-server",
-        "--client=claude",
-        "--tools=all"
-      ],
+      "args": ["/path/to/local/moonbanking-node/packages/mcp-server", "--client=claude", "--tools=all"],
       "env": {
         "MOON_BANKING_API_KEY": "My Bearer Token"
       }

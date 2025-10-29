@@ -24,7 +24,7 @@ node ./packages/mcp-server/dist/index.js
 ```
 
 > [!NOTE]
-> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npx -y moonbanking-mcp`
+> Once this package is [published to npm](https://www.stainless.com/docs/guides/publish), this will become: `npx -y @moonbanking/mcp`
 
 ### Via MCP Client
 
@@ -188,10 +188,10 @@ http://localhost:3000?client=cursor&capability=tool-name-length%3D40
 
 ```js
 // Import the server, generated endpoints, or the init function
-import { server, endpoints, init } from "moonbanking-mcp/server";
+import { server, endpoints, init } from "@moonbanking/mcp/server";
 
 // import a specific tool
-import retrieveBanks from "moonbanking-mcp/tools/banks/retrieve-banks";
+import retrieveBanks from "@moonbanking/mcp/tools/banks/retrieve-banks";
 
 // initialize the server and all endpoints
 init({ server, endpoints });

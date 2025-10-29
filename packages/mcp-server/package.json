@@ -1,5 +1,5 @@
 {
-  "name": "moonbanking-mcp",
+  "name": "@moonbanking/mcp",
   "version": "0.0.1",
   "description": "The official MCP Server for the Moon Banking API",
   "author": "Moon Banking <support+sdk@moonbanking.com>",
@@ -68,8 +68,8 @@
     "typescript": "5.8.3"
   },
   "imports": {
-    "moonbanking-mcp": ".",
-    "moonbanking-mcp/*": "./src/*"
+    "@moonbanking/mcp": ".",
+    "@moonbanking/mcp/*": "./src/*"
   },
   "exports": {
     ".": {

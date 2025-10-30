@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 (2025-10-30)
+
+Full Changelog: [v0.1.0...v0.1.1](https://github.com/moonbanking/moonbanking-node/compare/v0.1.0...v0.1.1)
+
+### Features
+
+* **api:** update api ([0591d8f](https://github.com/moonbanking/moonbanking-node/commit/0591d8f30c8b3156afecdd9aeda4b732d9f6b0b4))
+
 ## 0.1.0 (2025-10-29)
 
 Full Changelog: [v0.0.1...v0.1.0](https://github.com/moonbanking/moonbanking-node/compare/v0.0.1...v0.1.0)

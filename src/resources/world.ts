@@ -49,7 +49,7 @@ export namespace WorldRetrieveResponse {
     countryCount: number;
 
     /**
-     * The total number of stories provided by users across all banks in all countries.
+     * The total number of stories submitted by users about banks across all countries.
      */
     storyCount: number;
 

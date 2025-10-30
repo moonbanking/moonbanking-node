@@ -1,7 +1,7 @@
 {
   "dxt_version": "0.2",
   "name": "@moonbanking/mcp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "The official MCP Server for the Moon Banking API",
   "author": {
     "name": "Moon Banking",

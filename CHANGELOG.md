@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.3 (2025-10-30)
+
+Full Changelog: [v0.1.2...v0.1.3](https://github.com/moonbanking/moonbanking-node/compare/v0.1.2...v0.1.3)
+
 ## 0.1.2 (2025-10-30)
 
 Full Changelog: [v0.1.1...v0.1.2](https://github.com/moonbanking/moonbanking-node/compare/v0.1.1...v0.1.2)

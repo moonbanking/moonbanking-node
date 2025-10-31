@@ -1,4 +1,4 @@
-# Moon Banking TypeScript API Library
+# Moon Banking TypeScript and JavaScript API Library
 
 [![NPM version](<https://img.shields.io/npm/v/moonbanking.svg?label=npm%20(stable)>)](https://npmjs.org/package/moonbanking) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/moonbanking)
 
@@ -6,12 +6,20 @@ This library provides convenient access to the Moon Banking REST API from server
 
 The REST API documentation can be found on [docs.moonbanking.com](https://docs.moonbanking.com). The full API of this library can be found in [api.md](api.md).
 
-It is generated with [Stainless](https://www.stainless.com/).
-
 ## Installation
 
 ```sh
-npm install moonbanking
+# npm
+npm install --save moonbanking
+
+# pnpm
+pnpm add moonbanking
+
+# yarn
+yarn add moonbanking
+
+# bun
+bun add moonbanking
 ```
 
 ## Usage
@@ -23,7 +31,7 @@ The full API of this library can be found in [api.md](api.md).
 import MoonBanking from 'moonbanking';
 
 const client = new MoonBanking({
-  bearerToken: process.env['MOON_BANKING_API_KEY'], // This is the default and can be omitted
+  bearerToken: process.env['MOON_BANKING_API_KEY'],
 });
 
 const page = await client.banks.list();
@@ -41,10 +49,12 @@ This library includes TypeScript definitions for all request params and response
 import MoonBanking from 'moonbanking';
 
 const client = new MoonBanking({
-  bearerToken: process.env['MOON_BANKING_API_KEY'], // This is the default and can be omitted
+  bearerToken: process.env['MOON_BANKING_API_KEY'],
 });
 
-const [bankListResponse]: [MoonBanking.BankListResponse] = await client.banks.list();
+const bankListResponse: MoonBanking.Banks.BankListResponsesCursorPage = await client.banks.list();
+
+console.log(bankListResponse?.data?.[0]?.id);
 ```
 
 Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
@@ -104,13 +114,13 @@ await client.banks.list({
 
 ### Timeouts
 
-Requests time out after 1 minute by default. You can configure this with a `timeout` option:
+The maximum timeout for requests to the Moon Banking API is 20 seconds. You can configure a shorter timeout with a `timeout` option:
 
 <!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
 const client = new MoonBanking({
-  timeout: 20 * 1000, // 20 seconds (default is 1 minute)
+  timeout: 10 * 1000, // 10 seconds (default is 20 seconds)
 });
 
 // Override per-request:
@@ -232,49 +242,6 @@ const client = new MoonBanking({
 });
 ```
 
-### Making custom/undocumented requests
-
-This library is typed for convenient access to the documented API. If you need to access undocumented
-endpoints, params, or response properties, the library can still be used.
-
-#### Undocumented endpoints
-
-To make requests to undocumented endpoints, you can use `client.get`, `client.post`, and other HTTP verbs.
-Options on the client, such as retries, will be respected when making these requests.
-
-```ts
-await client.post('/some/path', {
-  body: { some_prop: 'foo' },
-  query: { some_query_arg: 'bar' },
-});
-```
-
-#### Undocumented request params
-
-To make requests using undocumented parameters, you may use `// @ts-expect-error` on the undocumented
-parameter. This library doesn't validate at runtime that the request matches the type, so any extra values you
-send will be sent as-is.
-
-```ts
-client.banks.list({
-  // ...
-  // @ts-expect-error baz is not yet public
-  baz: 'undocumented option',
-});
-```
-
-For requests with the `GET` verb, any extra params will be in the query, all other requests will send the
-extra param in the body.
-
-If you want to explicitly send an extra argument, you can do so with the `query`, `body`, and `headers` request
-options.
-
-#### Undocumented response properties
-
-To access undocumented response properties, you may access the response object with `// @ts-expect-error` on
-the response object, or cast the response object to the requisite type. Like the request params, we do not
-validate or strip extra properties from the response from the API.
-
 ### Customizing the fetch client
 
 By default, this library expects a global `fetch` function is defined.
@@ -366,7 +333,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/moonbanking/moonbanking-node/issues) with questions, bugs, or suggestions.
+We are interested in your feedback. Please open an [issue](https://www.github.com/moonbanking/moonbanking-node/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
@@ -375,6 +342,7 @@ TypeScript >= 4.9 is supported.
 The following runtimes are supported:
 
 - Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
+  - Although this library functions in browsers, it is meant to only be used on the server side.
 - Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
 - Deno v1.28.0 or higher.
 - Bun 1.0 or later.

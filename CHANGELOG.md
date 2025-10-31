@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.4 (2025-10-31)
+
+Full Changelog: [v0.1.3...v0.1.4](https://github.com/moonbanking/moonbanking-node/compare/v0.1.3...v0.1.4)
+
+### Bug Fixes
+
+* **mcpb:** pin @anthropic-ai/mcpb version ([967d26c](https://github.com/moonbanking/moonbanking-node/commit/967d26c75249e918fd64b9f440ede78d22db34e4))
+
 ## 0.1.3 (2025-10-31)
 
 Full Changelog: [v0.1.2...v0.1.3](https://github.com/moonbanking/moonbanking-node/compare/v0.1.2...v0.1.3)

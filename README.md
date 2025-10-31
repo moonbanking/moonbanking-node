@@ -4,6 +4,8 @@
 
 This library provides convenient access to the Moon Banking REST API from server-side TypeScript or JavaScript.
 
+It is generated from our [OpenAPI specification](https://github.com/moonbanking/moonbanking-openapi) with [Stainless](https://www.stainless.com/).
+
 The REST API documentation can be found on [docs.moonbanking.com](https://docs.moonbanking.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation

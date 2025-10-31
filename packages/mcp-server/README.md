@@ -1,6 +1,6 @@
 # Moon Banking TypeScript MCP Server
 
-It is generated with [Stainless](https://www.stainless.com/).
+This MCP server is generated from our [OpenAPI specification](https://github.com/moonbanking/moonbanking-openapi) with [Stainless](https://www.stainless.com/).
 
 ## Installation
 
@@ -9,7 +9,7 @@ It is generated with [Stainless](https://www.stainless.com/).
 You can run the MCP Server directly via `npx`:
 
 ```sh
-export MOON_BANKING_API_KEY="My Bearer Token"
+export MOON_BANKING_API_KEY="Bearer mb_sk_..."
 npx -y @moonbanking/mcp@latest
 ```
 
@@ -27,7 +27,7 @@ For clients with a configuration JSON, it might look something like this:
       "command": "npx",
       "args": ["-y", "@moonbanking/mcp", "--client=claude", "--tools=all"],
       "env": {
-        "MOON_BANKING_API_KEY": "My Bearer Token"
+        "MOON_BANKING_API_KEY": "Bearer mb_sk_..."
       }
     }
   }
@@ -145,7 +145,7 @@ A configuration JSON for this server might look like this, assuming the server i
     "moonbanking_api": {
       "url": "http://localhost:3000",
       "headers": {
-        "Authorization": "Bearer <auth value>"
+        "Authorization": "Bearer mb_sk_..."
       }
     }
   }

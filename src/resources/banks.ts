@@ -1219,7 +1219,7 @@ export interface BankListParams extends CursorPageParams {
 
   /**
    * An optional comma-separated list of fields to include in the response. Possible
-   * values: `scores`, `country`
+   * values: `scores`, `country`, `meta`
    */
   include?: string;
 

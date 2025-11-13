@@ -1,6 +1,6 @@
 {
   "name": "moonbanking",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "The official TypeScript library for the Moon Banking API",
   "author": "Moon Banking <support+sdk@moonbanking.com>",
   "types": "dist/index.d.ts",

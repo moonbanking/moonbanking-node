@@ -45,7 +45,7 @@ jobs:
             
             # Get the current file from target repo to get its SHA
             CURRENT_FILE_RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
-              "https://api.github.com/repos/getfullup/moonbanking/contents/apps/web/app/terms/page.mdx?ref=$branch")
+              "https://api.github.com/repos/getfullup/moonbanking/contents/apps/docs/app/terms/page.mdx?ref=$branch")
             
             # Extract SHA if file exists
             if echo "$CURRENT_FILE_RESPONSE" | grep -q '"sha"'; then
@@ -70,7 +70,7 @@ jobs:
               -H "Authorization: token $GITHUB_TOKEN" \
               -H "Content-Type: application/json" \
               -d "$JSON_PAYLOAD" \
-              "https://api.github.com/repos/getfullup/moonbanking/contents/apps/web/app/terms/page.mdx")
+              "https://api.github.com/repos/getfullup/moonbanking/contents/apps/docs/app/terms/page.mdx")
             
             echo "Response for $branch: $RESPONSE"
           }

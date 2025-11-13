@@ -1,0 +1,80 @@
+name: Sync docs on publish
+on:
+  # release:
+  #   types: [published]
+  push:
+    branches:
+      - docs-test
+
+jobs:
+  sync-docs:
+    name: Sync docs
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Sync README to target repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.SYNC_DOCS_TOKEN }}
+        run: |
+          # Read the README.md content
+          README_CONTENT=$(cat packages/mcp-server/README.md)
+          
+          # Create the complete content with metadata at the top
+          cat > /tmp/complete_content.mdx << 'EOF'
+          export const metadata = {
+            title: `MCP`,
+            description: `Create AI agents using Moon Banking's MCP server. Get high-quality data about banks worldwide from your favorite LLM platform with Moon Banking's MCP.`,
+          };
+          
+          EOF
+          
+          # Append the README content
+          echo "$README_CONTENT" >> /tmp/complete_content.mdx
+          
+          # Read the complete content
+          COMPLETE_CONTENT=$(cat /tmp/complete_content.mdx)
+          
+          # Base64 encode the complete content
+          ENCODED_CONTENT=$(echo "$COMPLETE_CONTENT" | base64 -w 0)
+          
+          # Function to update file in a specific branch
+          update_branch() {
+            local branch=$1
+            echo "Updating branch: $branch"
+            
+            # Get the current file from target repo to get its SHA
+            CURRENT_FILE_RESPONSE=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
+              "https://api.github.com/repos/getfullup/moonbanking/contents/apps/web/app/terms/page.mdx?ref=$branch")
+            
+            # Extract SHA if file exists
+            if echo "$CURRENT_FILE_RESPONSE" | grep -q '"sha"'; then
+              CURRENT_SHA=$(echo "$CURRENT_FILE_RESPONSE" | grep '"sha"' | cut -d'"' -f4)
+              SHA_PARAM=", \"sha\": \"$CURRENT_SHA\""
+            else
+              SHA_PARAM=""
+            fi
+            
+            # Create the JSON payload
+            JSON_PAYLOAD=$(cat <<EOF
+          {
+            "message": "Sync MCP server docs from moonbanking-node",
+            "content": "$ENCODED_CONTENT",
+            "branch": "$branch"$SHA_PARAM
+          }
+          EOF
+            )
+            
+            # Update the file in target repo
+            RESPONSE=$(curl -s -X PUT \
+              -H "Authorization: token $GITHUB_TOKEN" \
+              -H "Content-Type: application/json" \
+              -d "$JSON_PAYLOAD" \
+              "https://api.github.com/repos/getfullup/moonbanking/contents/apps/web/app/terms/page.mdx")
+            
+            echo "Response for $branch: $RESPONSE"
+          }
+          
+          # Update both branches
+          update_branch "master"
+          update_branch "preview"

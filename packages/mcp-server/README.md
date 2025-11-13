@@ -1,6 +1,6 @@
 # Moon Banking TypeScript MCP Server
 
-This MCP server is generated from our [OpenAPI specification](https://github.com/moonbanking/moonbanking-openapi) with [Stainless](https://www.stainless.com/).
+The Moon Banking MCP server is generated from our [OpenAPI specification](https://github.com/moonbanking/moonbanking-openapi) with [Stainless](https://www.stainless.com/).
 
 ## Installation
 

@@ -1,10 +1,7 @@
 name: Sync docs on publish
 on:
-  # release:
-  #   types: [published]
-  push:
-    branches:
-      - docs-test
+  release:
+    types: [published]
 
 jobs:
   sync-docs:

@@ -34,7 +34,7 @@ export const newMcpServer = () =>
   new McpServer(
     {
       name: 'moonbanking_api',
-      version: '0.1.3',
+      version: '0.2.0',
     },
     { capabilities: { tools: {}, logging: {} } },
   );

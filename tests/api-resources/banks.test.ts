@@ -55,7 +55,7 @@ describe('resource banks', () => {
           description:
             'A bank that provides banking and investment services to individuals in the United States.',
           ending_before: '6jkxE4N8gHXgDPK',
-          include: 'scores,country',
+          include: 'scores,country,meta',
           limit: 20,
           search: 'Fidelity',
           sortBy: 'name',

@@ -1,5 +1,37 @@
 # Changelog
 
+## 0.2.0 (2025-11-13)
+
+Full Changelog: [v0.1.3...v0.2.0](https://github.com/moonbanking/moonbanking-node/compare/v0.1.3...v0.2.0)
+
+### Features
+
+* **api:** update api ([0cad870](https://github.com/moonbanking/moonbanking-node/commit/0cad870065a144c3261c3439d5dc938e93d21c79))
+* **mcp:** enable optional code execution tool on http mcp servers ([f35e2aa](https://github.com/moonbanking/moonbanking-node/commit/f35e2aaa600ac915b98b3c7dbbc37e939261d13a))
+
+
+### Bug Fixes
+
+* **mcpb:** pin @anthropic-ai/mcpb version ([30883d3](https://github.com/moonbanking/moonbanking-node/commit/30883d3492aecb258dcef7cc2b2e1d944c624f17))
+
+
+### Chores
+
+* **internal:** codegen related update ([95ff3cb](https://github.com/moonbanking/moonbanking-node/commit/95ff3cbee31fa7018a7d6c484705f0a5e950c8d8))
+* **internal:** codegen related update ([3e037d4](https://github.com/moonbanking/moonbanking-node/commit/3e037d41d1d7009d77a3a17375fa758728fe9276))
+* **internal:** grammar fix (it's -&gt; its) ([3702828](https://github.com/moonbanking/moonbanking-node/commit/3702828724bee3f8338332127a12923e54557280))
+* mcp code tool explicit error message when missing a run function ([3fad476](https://github.com/moonbanking/moonbanking-node/commit/3fad4765f9d57783bfe86df8a924906f0b9d8a75))
+* **mcp:** add friendlier MCP code tool errors on incorrect method invocations ([a8cef91](https://github.com/moonbanking/moonbanking-node/commit/a8cef911d8b33dd46698a58980bcb5cd2a9de3db))
+* **mcp:** add line numbers to code tool errors ([24df376](https://github.com/moonbanking/moonbanking-node/commit/24df376bd5cef448a340fc92f1df864bff9321ea))
+* **mcp:** clarify http auth error ([a2845f7](https://github.com/moonbanking/moonbanking-node/commit/a2845f771094b34fd5017b5ffbb787818e577fa5))
+* use structured error when code execution tool errors ([a113bb1](https://github.com/moonbanking/moonbanking-node/commit/a113bb149a8fef41bc41aaf388f4939903cc6e1c))
+
+
+### Documentation
+
+* **mcp:** add a README button for one-click add to Cursor ([21cf3a8](https://github.com/moonbanking/moonbanking-node/commit/21cf3a84e12fc9a34b7592a58467a2a63eb58f58))
+* **mcp:** add a README link to add server to VS Code or Claude Code ([46103f3](https://github.com/moonbanking/moonbanking-node/commit/46103f3065e91ef07aeb4a2318b0dc2f0ccaa8c9))
+
 ## 0.1.3 (2025-10-31)
 
 Full Changelog: [v0.1.2...v0.1.3](https://github.com/moonbanking/moonbanking-node/compare/v0.1.2...v0.1.3)

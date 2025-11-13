@@ -44,7 +44,7 @@ export const tool: Tool = {
       include: {
         type: 'string',
         description:
-          'An optional  comma-separated list of fields to include in the response. Possible values: `scores`, `country`',
+          'An optional  comma-separated list of fields to include in the response. Possible values: `scores`, `country`, `meta`',
       },
       limit: {
         type: 'integer',

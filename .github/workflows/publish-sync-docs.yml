@@ -56,10 +56,14 @@ jobs:
               "https://api.github.com/repos/getfullup/moonbanking/contents/apps/docs/app/mcp/page.mdx?ref=$target_branch")
             
             if echo "$CURRENT_FILE_RESPONSE" | grep -q '"content"'; then
-              CURRENT_CONTENT=$(echo "$CURRENT_FILE_RESPONSE" | grep '"content"' | cut -d'"' -f4 | base64 -d)
-              if [ "$CURRENT_CONTENT" = "$COMPLETE_CONTENT" ]; then
-                echo "Content is already up to date for $target_branch, skipping PR creation"
-                return
+              # Extract and clean the base64 content (remove newlines and whitespace)
+              CURRENT_ENCODED=$(echo "$CURRENT_FILE_RESPONSE" | grep '"content"' | cut -d'"' -f4 | tr -d '\n\r ')
+              if [ -n "$CURRENT_ENCODED" ]; then
+                CURRENT_CONTENT=$(echo "$CURRENT_ENCODED" | base64 -d 2>/dev/null || echo "")
+                if [ "$CURRENT_CONTENT" = "$COMPLETE_CONTENT" ]; then
+                  echo "Content is already up to date for $target_branch, skipping PR creation"
+                  return
+                fi
               fi
             fi
             

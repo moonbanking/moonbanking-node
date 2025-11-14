@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.1 (2025-11-14)
+
+Full Changelog: [v0.2.0...v0.2.1](https://github.com/moonbanking/moonbanking-node/compare/v0.2.0...v0.2.1)
+
+### Bug Fixes
+
+* **mcp:** return tool execution error on jq failure ([ad323a3](https://github.com/moonbanking/moonbanking-node/commit/ad323a376f96bd8e4d0ef9b98c17558906495a22))
+
+
+### Chores
+
+* **mcp:** upgrade jq-web ([d018476](https://github.com/moonbanking/moonbanking-node/commit/d018476963cfd90728d12280982ff73ec47ae0fb))
+
 ## 0.2.0 (2025-11-13)
 
 Full Changelog: [v0.1.3...v0.2.0](https://github.com/moonbanking/moonbanking-node/compare/v0.1.3...v0.2.0)

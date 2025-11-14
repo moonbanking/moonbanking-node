@@ -30,6 +30,8 @@ jobs:
             title: `MCP`,
             description: `Create AI agents using Moon Banking's MCP server. Get high-quality data about banks worldwide from your favorite LLM platform with Moon Banking's MCP.`,
           };
+
+          <ApiKeyNote featureName="MCP" />
           
           EOF
           

@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.0 (2025-11-26)
+
+Full Changelog: [v0.2.1...v0.3.0](https://github.com/moonbanking/moonbanking-node/compare/v0.2.1...v0.3.0)
+
+### Features
+
+* **mcp:** add detail field to docs search tool ([c8f0848](https://github.com/moonbanking/moonbanking-node/commit/c8f0848c6ba753de5738bafd15f88c914a2fc764))
+
 ## 0.2.1 (2025-11-14)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/moonbanking/moonbanking-node/compare/v0.2.0...v0.2.1)

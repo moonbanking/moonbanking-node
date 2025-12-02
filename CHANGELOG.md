@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0 (2025-12-02)
+
+Full Changelog: [v0.2.1...v0.3.0](https://github.com/moonbanking/moonbanking-node/compare/v0.2.1...v0.3.0)
+
+### Features
+
+* **mcp:** add detail field to docs search tool ([c8f0848](https://github.com/moonbanking/moonbanking-node/commit/c8f0848c6ba753de5738bafd15f88c914a2fc764))
+* **mcp:** return logs on code tool errors ([d8c5233](https://github.com/moonbanking/moonbanking-node/commit/d8c5233161e977c5a8db65a9595b6e2fccca875b))
+
+
+### Bug Fixes
+
+* **mcp:** return tool execution error on api error ([429bc70](https://github.com/moonbanking/moonbanking-node/commit/429bc70de0eff55bc6e99849ec78fd026fa250c2))
+
+
+### Chores
+
+* **client:** fix logger property type ([4eb05f5](https://github.com/moonbanking/moonbanking-node/commit/4eb05f56c33f41f727fa193d7b8c18f02da56edc))
+
 ## 0.2.1 (2025-11-14)
 
 Full Changelog: [v0.2.0...v0.2.1](https://github.com/moonbanking/moonbanking-node/compare/v0.2.0...v0.2.1)

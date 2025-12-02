@@ -1,6 +1,6 @@
 // File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
 
-import { Metadata, asTextContentResult } from '@moonbanking/mcp/tools/types';
+import { Metadata, asErrorResult, asTextContentResult } from '@moonbanking/mcp/tools/types';
 
 import { Tool } from '@modelcontextprotocol/sdk/types.js';
 import MoonBanking from 'moonbanking';
@@ -40,7 +40,14 @@ export const tool: Tool = {
 
 export const handler = async (client: MoonBanking, args: Record<string, unknown> | undefined) => {
   const { id, ...body } = args as any;
-  return asTextContentResult(await client.banks.retrieve(id, body));
+  try {
+    return asTextContentResult(await client.banks.retrieve(id, body));
+  } catch (error) {
+    if (error instanceof MoonBanking.APIError) {
+      return asErrorResult(error.message);
+    }
+    throw error;
+  }
 };
 
 export default { metadata, tool, handler };

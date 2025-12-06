@@ -1,5 +1,28 @@
 # Changelog
 
+## 0.4.0 (2025-12-06)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/moonbanking/moonbanking-node/compare/v0.3.0...v0.4.0)
+
+### Features
+
+* **mcp:** add typescript check to code execution tool ([903ec57](https://github.com/moonbanking/moonbanking-node/commit/903ec5716e95e7b47745678e42c4eeaec9324591))
+* **mcp:** handle code mode calls in the Stainless API ([039f192](https://github.com/moonbanking/moonbanking-node/commit/039f1921d8987e664566f1da698f6ce1a46e9ebe))
+
+
+### Bug Fixes
+
+* **mcp:** correct code tool API endpoint ([57cbfab](https://github.com/moonbanking/moonbanking-node/commit/57cbfabc49fa839e6f33c44fb3472870e9b62fe4))
+* **mcp:** return correct lines on typescript errors ([f5ea1d9](https://github.com/moonbanking/moonbanking-node/commit/f5ea1d9f9a53014e46fca4d532cebb9ec5eaa113))
+
+
+### Chores
+
+* **internal:** codegen related update ([cfdd0c0](https://github.com/moonbanking/moonbanking-node/commit/cfdd0c0cf46a48a0c1a3138d3c105dc15cf4da89))
+* **internal:** codegen related update ([f4e6f4e](https://github.com/moonbanking/moonbanking-node/commit/f4e6f4e7fee33dab4d4ee7f0158d36b04ce2280e))
+* **internal:** upgrade eslint ([5a0c8e0](https://github.com/moonbanking/moonbanking-node/commit/5a0c8e0d7cbafa6c9bd81aa35bd0156d23ddd387))
+* use latest @modelcontextprotocol/sdk ([3089564](https://github.com/moonbanking/moonbanking-node/commit/30895647ba16394ab7d02329c629e290de6e104b))
+
 ## 0.3.0 (2025-12-02)
 
 Full Changelog: [v0.2.1...v0.3.0](https://github.com/moonbanking/moonbanking-node/compare/v0.2.1...v0.3.0)

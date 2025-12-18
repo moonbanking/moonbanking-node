@@ -35,7 +35,10 @@ export async function codeTool() {
       headers: {
         ...(stainlessAPIKey && { Authorization: stainlessAPIKey }),
         'Content-Type': 'application/json',
-        client_envs: JSON.stringify({ MOON_BANKING_API_KEY: readEnv('MOON_BANKING_API_KEY') }),
+        client_envs: JSON.stringify({
+          MOON_BANKING_API_KEY: readEnv('MOON_BANKING_API_KEY'),
+          MOON_BANKING_BASE_URL: readEnv('MOON_BANKING_BASE_URL'),
+        }),
       },
       body: JSON.stringify({
         project_name: 'moon-banking',

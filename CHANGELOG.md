@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.4.0 (2025-12-22)
+
+Full Changelog: [v0.3.0...v0.4.0](https://github.com/moonbanking/moonbanking-node/compare/v0.3.0...v0.4.0)
+
+### ⚠ BREAKING CHANGES
+
+* **mcp:** remove deprecated tool schemes
+* **mcp:** **Migration:** To migrate, simply modify the command used to invoke the MCP server. Currently, the only supported tool scheme is code mode. Now, starting the server with just `node /path/to/mcp/server` or `npx package-name` will invoke code tools: changing your command to one of these is likely all you will need to do.
+
+### Features
+
+* **api:** manual updates ([b41a32d](https://github.com/moonbanking/moonbanking-node/commit/b41a32d78dc427a8ba3466603af9f7a4f8a3a935))
+* **mcp:** add typescript check to code execution tool ([903ec57](https://github.com/moonbanking/moonbanking-node/commit/903ec5716e95e7b47745678e42c4eeaec9324591))
+* **mcp:** handle code mode calls in the Stainless API ([039f192](https://github.com/moonbanking/moonbanking-node/commit/039f1921d8987e664566f1da698f6ce1a46e9ebe))
+
+
+### Bug Fixes
+
+* **mcp:** add client instantiation options to code tool ([e0285fa](https://github.com/moonbanking/moonbanking-node/commit/e0285fafc76ce57fa8844992862765d5857df710))
+* **mcp:** correct code tool API endpoint ([57cbfab](https://github.com/moonbanking/moonbanking-node/commit/57cbfabc49fa839e6f33c44fb3472870e9b62fe4))
+* **mcp:** pass base url to code tool ([d2942f8](https://github.com/moonbanking/moonbanking-node/commit/d2942f8178692e94a7d28ebf6f3cd03151c1afc6))
+* **mcp:** return correct lines on typescript errors ([f5ea1d9](https://github.com/moonbanking/moonbanking-node/commit/f5ea1d9f9a53014e46fca4d532cebb9ec5eaa113))
+
+
+### Chores
+
+* **internal:** codegen related update ([cfdd0c0](https://github.com/moonbanking/moonbanking-node/commit/cfdd0c0cf46a48a0c1a3138d3c105dc15cf4da89))
+* **internal:** codegen related update ([f4e6f4e](https://github.com/moonbanking/moonbanking-node/commit/f4e6f4e7fee33dab4d4ee7f0158d36b04ce2280e))
+* **internal:** upgrade eslint ([5a0c8e0](https://github.com/moonbanking/moonbanking-node/commit/5a0c8e0d7cbafa6c9bd81aa35bd0156d23ddd387))
+* **mcp:** remove deprecated tool schemes ([07646f9](https://github.com/moonbanking/moonbanking-node/commit/07646f90b3a40452b7f598097259cc5268703a34))
+* **mcp:** update lockfile ([ea37f3e](https://github.com/moonbanking/moonbanking-node/commit/ea37f3e1019ffb3c5f63206d943b66cd8f31bae6))
+* use latest @modelcontextprotocol/sdk ([3089564](https://github.com/moonbanking/moonbanking-node/commit/30895647ba16394ab7d02329c629e290de6e104b))
+
 ## 0.3.0 (2025-12-02)
 
 Full Changelog: [v0.2.1...v0.3.0](https://github.com/moonbanking/moonbanking-node/compare/v0.2.1...v0.3.0)

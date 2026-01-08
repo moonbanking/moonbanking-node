@@ -9,30 +9,6 @@ const client = new MoonBanking({
 
 describe('resource stories', () => {
   // Prism tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.stories.retrieve('8HsY5nBc7jAqM4u');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('retrieve: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.stories.retrieve(
-        '8HsY5nBc7jAqM4u',
-        { include: 'bank,country' },
-        { path: '/_stainless_unknown_path' },
-      ),
-    ).rejects.toThrow(MoonBanking.NotFoundError);
-  });
-
-  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.stories.list();
     const rawResponse = await responsePromise.asResponse();
@@ -61,6 +37,30 @@ describe('resource stories', () => {
           starting_after: '8HsY5nBc7jAqM4u',
           tags: 'CRYPTO_FRIENDLY,CUSTOMER_SERVICE,FEES_PRICING,DIGITAL_EXPERIENCE,SECURITY_TRUST,ACCOUNT_FEATURES,BRANCH_ATM_ACCESS,INTERNATIONAL_BANKING,BUSINESS_BANKING,PROCESSING_SPEED,TRANSPARENCY,INNOVATION,INVESTMENT_SERVICES,LENDING',
         },
+        { path: '/_stainless_unknown_path' },
+      ),
+    ).rejects.toThrow(MoonBanking.NotFoundError);
+  });
+
+  // Prism tests are disabled
+  test.skip('get', async () => {
+    const responsePromise = client.stories.get('8HsY5nBc7jAqM4u');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.stories.get(
+        '8HsY5nBc7jAqM4u',
+        { include: 'bank,country' },
         { path: '/_stainless_unknown_path' },
       ),
     ).rejects.toThrow(MoonBanking.NotFoundError);

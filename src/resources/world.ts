@@ -10,19 +10,16 @@ export class World extends APIResource {
    * votes, stories and other data across all banks in all countries. You can include
    * related data like scores in the response.
    */
-  retrieve(
-    query: WorldRetrieveParams | null | undefined = {},
-    options?: RequestOptions,
-  ): APIPromise<WorldRetrieveResponse> {
+  get(query: WorldGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<WorldGetResponse> {
     return this._client.get('/world', { query, ...options });
   }
 }
 
-export interface WorldRetrieveResponse {
+export interface WorldGetResponse {
   /**
    * The world model contains global metrics for the entire Moon Banking platform.
    */
-  data: WorldRetrieveResponse.Data;
+  data: WorldGetResponse.Data;
 
   success: true;
 
@@ -33,7 +30,7 @@ export interface WorldRetrieveResponse {
   message?: string;
 }
 
-export namespace WorldRetrieveResponse {
+export namespace WorldGetResponse {
   /**
    * The world model contains global metrics for the entire Moon Banking platform.
    */
@@ -599,7 +596,7 @@ export namespace WorldRetrieveResponse {
   }
 }
 
-export interface WorldRetrieveParams {
+export interface WorldGetParams {
   /**
    * An optional comma-separated list of fields to include in the response. Possible
    * values: `scores`
@@ -608,8 +605,5 @@ export interface WorldRetrieveParams {
 }
 
 export declare namespace World {
-  export {
-    type WorldRetrieveResponse as WorldRetrieveResponse,
-    type WorldRetrieveParams as WorldRetrieveParams,
-  };
+  export { type WorldGetResponse as WorldGetResponse, type WorldGetParams as WorldGetParams };
 }

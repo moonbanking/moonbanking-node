@@ -8,26 +8,27 @@ export {
 } from './bank-votes';
 export {
   Banks,
-  type BankRetrieveResponse,
   type BankListResponse,
-  type BankRetrieveParams,
+  type BankGetResponse,
   type BankListParams,
+  type BankGetParams,
   type BankListResponsesCursorPage,
 } from './banks';
 export {
   Countries,
-  type CountryRetrieveResponse,
   type CountryListResponse,
-  type CountryRetrieveParams,
+  type CountryGetResponse,
   type CountryListParams,
+  type CountryGetParams,
   type CountryListResponsesCursorPage,
 } from './countries';
+export { Search, type SearchGetResponse, type SearchGetParams } from './search';
 export {
   Stories,
-  type StoryRetrieveResponse,
   type StoryListResponse,
-  type StoryRetrieveParams,
+  type StoryGetResponse,
   type StoryListParams,
+  type StoryGetParams,
   type StoryListResponsesCursorPage,
 } from './stories';
-export { World, type WorldRetrieveResponse, type WorldRetrieveParams } from './world';
+export { World, type WorldGetResponse, type WorldGetParams } from './world';

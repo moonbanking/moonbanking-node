@@ -25,30 +25,31 @@ import {
   BankVotes,
 } from './resources/bank-votes';
 import {
+  BankGetParams,
+  BankGetResponse,
   BankListParams,
   BankListResponse,
   BankListResponsesCursorPage,
-  BankRetrieveParams,
-  BankRetrieveResponse,
   Banks,
 } from './resources/banks';
 import {
   Countries,
+  CountryGetParams,
+  CountryGetResponse,
   CountryListParams,
   CountryListResponse,
   CountryListResponsesCursorPage,
-  CountryRetrieveParams,
-  CountryRetrieveResponse,
 } from './resources/countries';
+import { Search, SearchGetParams, SearchGetResponse } from './resources/search';
 import {
   Stories,
+  StoryGetParams,
+  StoryGetResponse,
   StoryListParams,
   StoryListResponse,
   StoryListResponsesCursorPage,
-  StoryRetrieveParams,
-  StoryRetrieveResponse,
 } from './resources/stories';
-import { World, WorldRetrieveParams, WorldRetrieveResponse } from './resources/world';
+import { World, WorldGetParams, WorldGetResponse } from './resources/world';
 import { type Fetch } from './internal/builtin-types';
 import { HeadersLike, NullableHeaders, buildHeaders } from './internal/headers';
 import { FinalRequestOptions, RequestOptions } from './internal/request-options';
@@ -770,6 +771,7 @@ export class MoonBanking {
   countries: API.Countries = new API.Countries(this);
   stories: API.Stories = new API.Stories(this);
   world: API.World = new API.World(this);
+  search: API.Search = new API.Search(this);
 }
 
 MoonBanking.Banks = Banks;
@@ -777,6 +779,7 @@ MoonBanking.BankVotes = BankVotes;
 MoonBanking.Countries = Countries;
 MoonBanking.Stories = Stories;
 MoonBanking.World = World;
+MoonBanking.Search = Search;
 
 export declare namespace MoonBanking {
   export type RequestOptions = Opts.RequestOptions;
@@ -786,11 +789,11 @@ export declare namespace MoonBanking {
 
   export {
     Banks as Banks,
-    type BankRetrieveResponse as BankRetrieveResponse,
     type BankListResponse as BankListResponse,
+    type BankGetResponse as BankGetResponse,
     type BankListResponsesCursorPage as BankListResponsesCursorPage,
-    type BankRetrieveParams as BankRetrieveParams,
     type BankListParams as BankListParams,
+    type BankGetParams as BankGetParams,
   };
 
   export {
@@ -802,25 +805,27 @@ export declare namespace MoonBanking {
 
   export {
     Countries as Countries,
-    type CountryRetrieveResponse as CountryRetrieveResponse,
     type CountryListResponse as CountryListResponse,
+    type CountryGetResponse as CountryGetResponse,
     type CountryListResponsesCursorPage as CountryListResponsesCursorPage,
-    type CountryRetrieveParams as CountryRetrieveParams,
     type CountryListParams as CountryListParams,
+    type CountryGetParams as CountryGetParams,
   };
 
   export {
     Stories as Stories,
-    type StoryRetrieveResponse as StoryRetrieveResponse,
     type StoryListResponse as StoryListResponse,
+    type StoryGetResponse as StoryGetResponse,
     type StoryListResponsesCursorPage as StoryListResponsesCursorPage,
-    type StoryRetrieveParams as StoryRetrieveParams,
     type StoryListParams as StoryListParams,
+    type StoryGetParams as StoryGetParams,
   };
 
+  export { World as World, type WorldGetResponse as WorldGetResponse, type WorldGetParams as WorldGetParams };
+
   export {
-    World as World,
-    type WorldRetrieveResponse as WorldRetrieveResponse,
-    type WorldRetrieveParams as WorldRetrieveParams,
+    Search as Search,
+    type SearchGetResponse as SearchGetResponse,
+    type SearchGetParams as SearchGetParams,
   };
 }

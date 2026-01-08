@@ -1210,23 +1210,10 @@ export interface BankListParams extends CursorPageParams {
   countryId?: string;
 
   /**
-   * Filter banks by description. Under the hood, this is a semantic search that uses
-   * vector embeddings, so you may get better results if you use general language.
-   * Besides a full text search, you can use "null" to return banks without
-   * descriptions or "not_null" to return banks with descriptions.
-   */
-  description?: string;
-
-  /**
    * An optional comma-separated list of fields to include in the response. Possible
    * values: `scores`, `country`, `meta`
    */
   include?: string;
-
-  /**
-   * Search banks by name.
-   */
-  search?: string;
 
   /**
    * Field to sort by.

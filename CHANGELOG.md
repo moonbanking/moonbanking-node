@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.5.0 (2026-01-08)
+
+Full Changelog: [v0.4.1...v0.5.0](https://github.com/moonbanking/moonbanking-node/compare/v0.4.1...v0.5.0)
+
+### Features
+
+* **api:** manual updates ([8bc0415](https://github.com/moonbanking/moonbanking-node/commit/8bc0415181d2ffea45f9dfce5404446ab00c85e1))
+* **api:** update api ([2fc6d4d](https://github.com/moonbanking/moonbanking-node/commit/2fc6d4ddbd2bae23a4563f037a4550df894c3c6f))
+
+
+### Chores
+
+* break long lines in snippets into multiline ([9b54938](https://github.com/moonbanking/moonbanking-node/commit/9b5493841a9de82bec8777bcf7c819b97e22828e))
+* **internal:** codegen related update ([580f0c7](https://github.com/moonbanking/moonbanking-node/commit/580f0c795b9e5e86087d97206a5a2047945edc89))
+
 ## 0.4.1 (2025-12-22)
 
 Full Changelog: [v0.4.0...v0.4.1](https://github.com/moonbanking/moonbanking-node/compare/v0.4.0...v0.4.1)

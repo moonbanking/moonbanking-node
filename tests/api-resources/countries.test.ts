@@ -9,26 +9,6 @@ const client = new MoonBanking({
 
 describe('resource countries', () => {
   // Prism tests are disabled
-  test.skip('retrieve', async () => {
-    const responsePromise = client.countries.retrieve('US');
-    const rawResponse = await responsePromise.asResponse();
-    expect(rawResponse).toBeInstanceOf(Response);
-    const response = await responsePromise;
-    expect(response).not.toBeInstanceOf(Response);
-    const dataAndResponse = await responsePromise.withResponse();
-    expect(dataAndResponse.data).toBe(response);
-    expect(dataAndResponse.response).toBe(rawResponse);
-  });
-
-  // Prism tests are disabled
-  test.skip('retrieve: request options and params are passed correctly', async () => {
-    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
-    await expect(
-      client.countries.retrieve('US', { include: 'scores' }, { path: '/_stainless_unknown_path' }),
-    ).rejects.toThrow(MoonBanking.NotFoundError);
-  });
-
-  // Prism tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.countries.list();
     const rawResponse = await responsePromise.asResponse();
@@ -56,6 +36,26 @@ describe('resource countries', () => {
         },
         { path: '/_stainless_unknown_path' },
       ),
+    ).rejects.toThrow(MoonBanking.NotFoundError);
+  });
+
+  // Prism tests are disabled
+  test.skip('get', async () => {
+    const responsePromise = client.countries.get('US');
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Prism tests are disabled
+  test.skip('get: request options and params are passed correctly', async () => {
+    // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
+    await expect(
+      client.countries.get('US', { include: 'scores' }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(MoonBanking.NotFoundError);
   });
 });

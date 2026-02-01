@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.1 (2026-02-01)
+
+Full Changelog: [v0.6.0...v0.6.1](https://github.com/moonbanking/moonbanking-node/compare/v0.6.0...v0.6.1)
+
+### Chores
+
+* update npm publish configuration and README link ([b35b019](https://github.com/moonbanking/moonbanking-node/commit/b35b019525c14394677723b73a53cdc53ea21be3))
+
 ## 0.6.0 (2026-02-01)
 
 Full Changelog: [v0.5.0...v0.6.0](https://github.com/moonbanking/moonbanking-node/compare/v0.5.0...v0.6.0)

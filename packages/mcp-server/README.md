@@ -39,7 +39,7 @@ For clients with a configuration JSON, it might look something like this:
 If you use Cursor, you can install the MCP server by using the button below. You will need to set your environment variables
 in Cursor's `mcp.json`, which can be found in Cursor Settings > Tools & MCP > New MCP Server.
 
-[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=@moonbanking/mcp&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBtb29uYmFua2luZy9tY3AiXSwiZW52Ijp7Ik1PT05fQkFOS0lOR19BUElfS0VZIjoiU2V0IHlvdXIgTU9PTl9CQU5LSU5HX0FQSV9LRVkgaGVyZS4ifX0)
+[![Add to Cursor](https://cursor.com/deeplink/mcp-install-dark.svg)](https://cursor.com/en-US/install-mcp?name=@moonbanking/mcp-server&config=eyJjb21tYW5kIjoibnB4IiwiYXJncyI6WyIteSIsIkBtb29uYmFua2luZy9tY3AiXSwiZW52Ijp7Ik1PT05fQkFOS0lOR19BUElfS0VZIjoiU2V0IHlvdXIgTU9PTl9CQU5LSU5HX0FQSV9LRVkgaGVyZS4ifX0)
 
 ### VS Code
 

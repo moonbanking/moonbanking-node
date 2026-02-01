@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.6.0 (2026-02-01)
+
+Full Changelog: [v0.5.0...v0.6.0](https://github.com/moonbanking/moonbanking-node/compare/v0.5.0...v0.6.0)
+
+### Features
+
+* **api:** update api ([26e2db4](https://github.com/moonbanking/moonbanking-node/commit/26e2db4a4f979004d955ce9439d58bfa8f01acc8))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([adeedd3](https://github.com/moonbanking/moonbanking-node/commit/adeedd3126566a62911defe9dcabf577abf080e6))
+* **internal:** update `actions/checkout` version ([22b3d42](https://github.com/moonbanking/moonbanking-node/commit/22b3d42ebef64672164f3f1121b34c86e04b0298))
+* **internal:** upgrade babel, qs, js-yaml ([c2e3923](https://github.com/moonbanking/moonbanking-node/commit/c2e39237f6071633bba94d888be02cfe336942ae))
+
 ## 0.5.0 (2026-01-08)
 
 Full Changelog: [v0.4.1...v0.5.0](https://github.com/moonbanking/moonbanking-node/compare/v0.4.1...v0.5.0)

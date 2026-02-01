@@ -10,10 +10,8 @@ export class Banks extends APIResource {
   /**
    * This endpoint allows you to retrieve a paginated list of all banks. By default,
    * a maximum of ten banks are shown per page. You can search banks by name, filter
-   * by country and description (including null/not_null status or semantic content
-   * search using vector embeddings), sort them by various fields, and include
-   * related data like scores and country information. When searching description
-   * content, results are ordered by semantic similarity.
+   * by country, sort them by various fields, and include related data like scores
+   * and country information.
    */
   list(
     query: BankListParams | null | undefined = {},

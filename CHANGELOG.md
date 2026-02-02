@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.6.4 (2026-02-02)
+
+Full Changelog: [v0.6.3...v0.6.4](https://github.com/moonbanking/moonbanking-node/compare/v0.6.3...v0.6.4)
+
+### Chores
+
+* comment out NPM_TOKEN validation in check-release-environment script ([2e691e3](https://github.com/moonbanking/moonbanking-node/commit/2e691e31026d1af61b2f544dc6abd79dc2119820))
+* update Node.js version and npm in publish workflow ([0d7ce41](https://github.com/moonbanking/moonbanking-node/commit/0d7ce41b6f8d5c4c70ceaf9ba952214f7ba19532))
+
 ## 0.6.3 (2026-02-02)
 
 Full Changelog: [v0.6.2...v0.6.3](https://github.com/moonbanking/moonbanking-node/compare/v0.6.2...v0.6.3)

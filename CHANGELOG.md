@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.6.3 (2026-02-02)
+
+Full Changelog: [v0.6.2...v0.6.3](https://github.com/moonbanking/moonbanking-node/compare/v0.6.2...v0.6.3)
+
+### Chores
+
+* update npm publish workflow and script ([979d997](https://github.com/moonbanking/moonbanking-node/commit/979d997c8757032e4a66dc270b92a524c410e7ca))
+
 ## 0.6.2 (2026-02-01)
 
 Full Changelog: [v0.6.1...v0.6.2](https://github.com/moonbanking/moonbanking-node/compare/v0.6.1...v0.6.2)

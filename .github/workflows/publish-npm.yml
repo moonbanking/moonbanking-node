@@ -22,8 +22,16 @@ jobs:
       - name: Set up Node
         uses: actions/setup-node@v3
         with:
-          node-version: '20'
+          node-version: '22'
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Update npm to latest
+        run: npm install -g npm@latest
+
+      - name: Check npm version
+        run: |
+          echo "npm version: $(npm --version)"
+          echo "Node version: $(node --version)"
 
       - name: Install dependencies
         run: |

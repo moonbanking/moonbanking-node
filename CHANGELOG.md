@@ -1,5 +1,21 @@
 # Changelog
 
+## 0.6.5 (2026-02-06)
+
+Full Changelog: [v0.6.4...v0.6.5](https://github.com/moonbanking/moonbanking-node/compare/v0.6.4...v0.6.5)
+
+### Bug Fixes
+
+* **client:** avoid memory leak with abort signals ([c824eed](https://github.com/moonbanking/moonbanking-node/commit/c824eed02d8cb2574954fb436ce3719dbee3854f))
+* **client:** avoid removing abort listener too early ([fb373a9](https://github.com/moonbanking/moonbanking-node/commit/fb373a9c1fabd18aad61482f2bd9352ae77729eb))
+
+
+### Chores
+
+* **client:** do not parse responses with empty content-length ([ca2a002](https://github.com/moonbanking/moonbanking-node/commit/ca2a0028858c2652a8d2d3ab45d91105358fee72))
+* **client:** restructure abort controller binding ([7ed6f10](https://github.com/moonbanking/moonbanking-node/commit/7ed6f103d24efdc4c6d57a98846ed40944555595))
+* **internal:** fix pagination internals not accepting option promises ([95a1b40](https://github.com/moonbanking/moonbanking-node/commit/95a1b405effe4773610eed42ebf877b908c0379b))
+
 ## 0.6.4 (2026-02-02)
 
 Full Changelog: [v0.6.3...v0.6.4](https://github.com/moonbanking/moonbanking-node/compare/v0.6.3...v0.6.4)

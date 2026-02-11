@@ -31,6 +31,7 @@ describe('resource banks', () => {
           ending_before: '6jkxE4N8gHXgDPK',
           include: 'scores,country,meta',
           limit: 20,
+          search: 'Fidelity',
           sortBy: 'name',
           sortOrder: 'asc',
           starting_after: '8HsY5nBc7jAqM4u',

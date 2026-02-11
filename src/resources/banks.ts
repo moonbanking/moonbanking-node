@@ -1206,6 +1206,11 @@ export interface BankListParams extends CursorPageParams {
   include?: string;
 
   /**
+   * Search banks by name.
+   */
+  search?: string;
+
+  /**
    * Field to sort by.
    */
   sortBy?:

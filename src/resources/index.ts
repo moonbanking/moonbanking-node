@@ -10,8 +10,10 @@ export {
   Banks,
   type BankListResponse,
   type BankGetResponse,
+  type BankGetByHostnameResponse,
   type BankListParams,
   type BankGetParams,
+  type BankGetByHostnameParams,
   type BankListResponsesCursorPage,
 } from './banks';
 export {

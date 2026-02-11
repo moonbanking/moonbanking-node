@@ -25,6 +25,8 @@ import {
   BankVotes,
 } from './resources/bank-votes';
 import {
+  BankGetByHostnameParams,
+  BankGetByHostnameResponse,
   BankGetParams,
   BankGetResponse,
   BankListParams,
@@ -803,9 +805,11 @@ export declare namespace MoonBanking {
     Banks as Banks,
     type BankListResponse as BankListResponse,
     type BankGetResponse as BankGetResponse,
+    type BankGetByHostnameResponse as BankGetByHostnameResponse,
     type BankListResponsesCursorPage as BankListResponsesCursorPage,
     type BankListParams as BankListParams,
     type BankGetParams as BankGetParams,
+    type BankGetByHostnameParams as BankGetByHostnameParams,
   };
 
   export {

@@ -67,7 +67,7 @@ describe('resource banks', () => {
 
   // Prism tests are disabled
   test.skip('getByHostname: only required params', async () => {
-    const responsePromise = client.banks.getByHostname({ hostname: 'chase.com' });
+    const responsePromise = client.banks.getByHostname({ hostname: 'fidelity.com' });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -80,9 +80,9 @@ describe('resource banks', () => {
   // Prism tests are disabled
   test.skip('getByHostname: required and optional params', async () => {
     const response = await client.banks.getByHostname({
-      hostname: 'chase.com',
+      hostname: 'fidelity.com',
       include: 'scores,country',
-      pageTitle: 'Chase Bank',
+      pageTitle: 'Fidelity Investments',
     });
   });
 });

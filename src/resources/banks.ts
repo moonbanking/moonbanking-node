@@ -1889,7 +1889,7 @@ export interface BankGetParams {
 
 export interface BankGetByHostnameParams {
   /**
-   * The hostname to search for (e.g., "chase.com" or "www.chase.com").
+   * The hostname to search for (e.g., "fidelity.com" or "www.fidelity.com").
    */
   hostname: string;
 

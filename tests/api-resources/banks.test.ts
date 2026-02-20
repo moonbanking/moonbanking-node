@@ -8,7 +8,7 @@ const client = new MoonBanking({
 });
 
 describe('resource banks', () => {
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list', async () => {
     const responsePromise = client.banks.list();
     const rawResponse = await responsePromise.asResponse();
@@ -20,7 +20,7 @@ describe('resource banks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('list: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -41,7 +41,7 @@ describe('resource banks', () => {
     ).rejects.toThrow(MoonBanking.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('get', async () => {
     const responsePromise = client.banks.get('6jkxE4N8gHXgDPK');
     const rawResponse = await responsePromise.asResponse();
@@ -53,7 +53,7 @@ describe('resource banks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('get: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
@@ -65,7 +65,7 @@ describe('resource banks', () => {
     ).rejects.toThrow(MoonBanking.NotFoundError);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getByHostname: only required params', async () => {
     const responsePromise = client.banks.getByHostname({ hostname: 'fidelity.com' });
     const rawResponse = await responsePromise.asResponse();
@@ -77,7 +77,7 @@ describe('resource banks', () => {
     expect(dataAndResponse.response).toBe(rawResponse);
   });
 
-  // Prism tests are disabled
+  // Mock server tests are disabled
   test.skip('getByHostname: required and optional params', async () => {
     const response = await client.banks.getByHostname({
       hostname: 'fidelity.com',

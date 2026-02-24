@@ -60,7 +60,7 @@ $ yarn link moonbanking
 # With pnpm
 $ pnpm link --global
 $ cd ../my-package
-$ pnpm link -—global moonbanking
+$ pnpm link --global moonbanking
 ```
 
 ## Running tests

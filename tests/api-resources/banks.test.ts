@@ -85,4 +85,27 @@ describe('resource banks', () => {
       pageTitle: 'Fidelity Investments',
     });
   });
+
+  // Mock server tests are disabled
+  test.skip('semanticSearch: only required params', async () => {
+    const responsePromise = client.banks.semanticSearch({
+      query: 'banks with strong digital banking and mobile apps',
+    });
+    const rawResponse = await responsePromise.asResponse();
+    expect(rawResponse).toBeInstanceOf(Response);
+    const response = await responsePromise;
+    expect(response).not.toBeInstanceOf(Response);
+    const dataAndResponse = await responsePromise.withResponse();
+    expect(dataAndResponse.data).toBe(response);
+    expect(dataAndResponse.response).toBe(rawResponse);
+  });
+
+  // Mock server tests are disabled
+  test.skip('semanticSearch: required and optional params', async () => {
+    const response = await client.banks.semanticSearch({
+      query: 'banks with strong digital banking and mobile apps',
+      countryCode: 'US',
+      limit: 10,
+    });
+  });
 });

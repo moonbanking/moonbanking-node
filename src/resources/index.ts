@@ -11,9 +11,11 @@ export {
   type BankListResponse,
   type BankGetResponse,
   type BankGetByHostnameResponse,
+  type BankSemanticSearchResponse,
   type BankListParams,
   type BankGetParams,
   type BankGetByHostnameParams,
+  type BankSemanticSearchParams,
   type BankListResponsesCursorPage,
 } from './banks';
 export {

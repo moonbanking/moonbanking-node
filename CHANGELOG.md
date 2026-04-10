@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.1 (2026-04-10)
+
+Full Changelog: [v0.10.0...v0.10.1](https://github.com/moonbanking/moonbanking-node/compare/v0.10.0...v0.10.1)
+
+### Chores
+
+* add provenance flag back to npm publish command ([5b66de1](https://github.com/moonbanking/moonbanking-node/commit/5b66de14bc92c6c3271daeed36e476238eeb9cb0))
+
 ## 0.10.0 (2026-04-10)
 
 Full Changelog: [v0.9.3...v0.10.0](https://github.com/moonbanking/moonbanking-node/compare/v0.9.3...v0.10.0)

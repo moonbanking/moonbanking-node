@@ -45,6 +45,19 @@ export class Banks extends APIResource {
   ): APIPromise<BankGetByHostnameResponse> {
     return this._client.get('/banks/by-hostname', { query, ...options });
   }
+
+  /**
+   * Search for banks by describing what you are looking for in natural language.
+   * This searches across bank descriptions including services offered, history,
+   * location, unique features, and institution type. Use this when the user asks
+   * about banks with specific characteristics, services, or qualities.
+   */
+  semanticSearch(
+    query: BankSemanticSearchParams,
+    options?: RequestOptions,
+  ): APIPromise<BankSemanticSearchResponse> {
+    return this._client.get('/banks/semantic-search', { query, ...options });
+  }
 }
 
 export type BankListResponsesCursorPage = CursorPage<BankListResponse>;
@@ -1778,6 +1791,49 @@ export namespace BankGetByHostnameResponse {
   }
 }
 
+export interface BankSemanticSearchResponse {
+  data: Array<BankSemanticSearchResponse.Data>;
+
+  success: true;
+
+  timestamp: string;
+
+  version: string;
+
+  message?: string;
+}
+
+export namespace BankSemanticSearchResponse {
+  export interface Data {
+    /**
+     * The unique identifier of the matched bank.
+     */
+    bankId: string;
+
+    /**
+     * The display name of the matched bank.
+     */
+    bankName: string;
+
+    /**
+     * The full text of the bank description section that best matched the query.
+     */
+    matchingSection: string;
+
+    /**
+     * The markdown header of the matched section (e.g. '# What services does Fidelity
+     * offer?').
+     */
+    sectionTitle: string;
+
+    /**
+     * Cosine similarity score between the query and the best-matching description
+     * section, ranging from 0 (no match) to 1 (exact match).
+     */
+    similarity: number;
+  }
+}
+
 export interface BankListParams extends CursorPageParams {
   /**
    * Only return banks in the specified country. A country's code is the ISO 3166-1
@@ -1905,14 +1961,36 @@ export interface BankGetByHostnameParams {
   pageTitle?: string;
 }
 
+export interface BankSemanticSearchParams {
+  /**
+   * A detailed, specific natural language sentence describing what the user is
+   * looking for. Combine all relevant context: location, institution type, user
+   * occupation or eligibility, services needed, and any preferences. Write a full
+   * descriptive sentence, NOT a keyword list.
+   */
+  query: string;
+
+  /**
+   * Filter results to banks in this country (ISO 3166-1 code).
+   */
+  countryCode?: string;
+
+  /**
+   * Maximum number of bank results to return.
+   */
+  limit?: number;
+}
+
 export declare namespace Banks {
   export {
     type BankListResponse as BankListResponse,
     type BankGetResponse as BankGetResponse,
     type BankGetByHostnameResponse as BankGetByHostnameResponse,
+    type BankSemanticSearchResponse as BankSemanticSearchResponse,
     type BankListResponsesCursorPage as BankListResponsesCursorPage,
     type BankListParams as BankListParams,
     type BankGetParams as BankGetParams,
     type BankGetByHostnameParams as BankGetByHostnameParams,
+    type BankSemanticSearchParams as BankSemanticSearchParams,
   };
 }

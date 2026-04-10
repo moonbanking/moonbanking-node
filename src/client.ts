@@ -33,6 +33,8 @@ import {
   BankListParams,
   BankListResponse,
   BankListResponsesCursorPage,
+  BankSemanticSearchParams,
+  BankSemanticSearchResponse,
   Banks,
 } from './resources/banks';
 import {
@@ -803,10 +805,12 @@ export declare namespace MoonBanking {
     type BankListResponse as BankListResponse,
     type BankGetResponse as BankGetResponse,
     type BankGetByHostnameResponse as BankGetByHostnameResponse,
+    type BankSemanticSearchResponse as BankSemanticSearchResponse,
     type BankListResponsesCursorPage as BankListResponsesCursorPage,
     type BankListParams as BankListParams,
     type BankGetParams as BankGetParams,
     type BankGetByHostnameParams as BankGetByHostnameParams,
+    type BankSemanticSearchParams as BankSemanticSearchParams,
   };
 
   export {

@@ -1,4 +1,4 @@
-configured_endpoints: 10
+configured_endpoints: 11
 openapi_spec_url: https://storage.googleapis.com/stainless-sdk-openapi-specs/moon-banking%2Fmoon-banking-7e56cb4d71d25b18347ac5cfd352be6fc535ad827088cc6a449826e4fe43118f.yml
 openapi_spec_hash: e57f11cf4a2ca43c37afbb88afbc30cc
-config_hash: 2a4e2b1b0164ada0a7bf09d761c0dbe3
+config_hash: 1ca9fc3912147cbfed86623605a37f8f

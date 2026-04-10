@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.10.0 (2026-04-10)
+
+Full Changelog: [v0.9.3...v0.10.0](https://github.com/moonbanking/moonbanking-node/compare/v0.9.3...v0.10.0)
+
+### Features
+
+* **api:** manual updates ([153f546](https://github.com/moonbanking/moonbanking-node/commit/153f54658f5881556293cb0f640fc46f60877da8))
+
+
+### Chores
+
+* remove registry-url from npm publish workflow ([df63c57](https://github.com/moonbanking/moonbanking-node/commit/df63c578ec9ee71700c35d6cbd8aa31924e90c25))
+
 ## 0.9.3 (2026-04-10)
 
 Full Changelog: [v0.9.2...v0.9.3](https://github.com/moonbanking/moonbanking-node/compare/v0.9.2...v0.9.3)

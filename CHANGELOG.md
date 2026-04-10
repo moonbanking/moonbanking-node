@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.10.2 (2026-04-10)
+
+Full Changelog: [v0.10.1...v0.10.2](https://github.com/moonbanking/moonbanking-node/compare/v0.10.1...v0.10.2)
+
+### Chores
+
+* update Node.js version in publish workflow and remove provenance flag from npm publish command ([5ac89e5](https://github.com/moonbanking/moonbanking-node/commit/5ac89e5791b22ba95cf483395f3288126ef05ea2))
+
 ## 0.10.1 (2026-04-10)
 
 Full Changelog: [v0.10.0...v0.10.1](https://github.com/moonbanking/moonbanking-node/compare/v0.10.0...v0.10.1)

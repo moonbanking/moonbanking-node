@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.9.1 (2026-04-10)
+
+Full Changelog: [v0.9.0...v0.9.1](https://github.com/moonbanking/moonbanking-node/compare/v0.9.0...v0.9.1)
+
+### Chores
+
+* update Node.js setup in publish workflow ([7d5da25](https://github.com/moonbanking/moonbanking-node/commit/7d5da2554f83b53f1191ba0274e63ce2f1fd384f))
+
 ## 0.9.0 (2026-04-10)
 
 Full Changelog: [v0.8.0...v0.9.0](https://github.com/moonbanking/moonbanking-node/compare/v0.8.0...v0.9.0)

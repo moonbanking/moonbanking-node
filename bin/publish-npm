@@ -57,4 +57,4 @@ fi
 
 # Publish with the appropriate tag
 # Provenance is automatically generated when using trusted publishing
-npm publish --tag "$TAG" --access public --provenance
+npm publish --tag "$TAG" --access public

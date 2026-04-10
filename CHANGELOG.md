@@ -1,5 +1,36 @@
 # Changelog
 
+## 0.9.0 (2026-04-10)
+
+Full Changelog: [v0.8.0...v0.9.0](https://github.com/moonbanking/moonbanking-node/compare/v0.8.0...v0.9.0)
+
+### Features
+
+* **api:** manual updates ([8fd0d88](https://github.com/moonbanking/moonbanking-node/commit/8fd0d88de19156aedb8e2e579621330dce53c9c8))
+
+
+### Bug Fixes
+
+* **client:** preserve URL params already embedded in path ([eccd000](https://github.com/moonbanking/moonbanking-node/commit/eccd000a7274698a53cda25a0394f1259f93552c))
+* **docs/contributing:** correct pnpm link command ([0919953](https://github.com/moonbanking/moonbanking-node/commit/0919953865acedc346e2b28e1e34c7406f378408))
+
+
+### Chores
+
+* **ci:** skip lint on metadata-only changes ([34eca45](https://github.com/moonbanking/moonbanking-node/commit/34eca45f672256da79db1faaf6e3c58160298567))
+* **ci:** skip uploading artifacts on stainless-internal branches ([5912829](https://github.com/moonbanking/moonbanking-node/commit/591282901fb10d47d42bdcf7e221bfd97cca0684))
+* **internal/client:** fix form-urlencoded requests ([be00f4e](https://github.com/moonbanking/moonbanking-node/commit/be00f4eda95434fec0c3bee75ddbce72907fc862))
+* **internal:** avoid type checking errors with ts-reset ([f35ccab](https://github.com/moonbanking/moonbanking-node/commit/f35ccab6afd1e6b8d078b22c5a818922b461f778))
+* **internal:** codegen related update ([665d6c1](https://github.com/moonbanking/moonbanking-node/commit/665d6c140802ccafc8eac95dfaf91b11d8b93f48))
+* **internal:** codegen related update ([7ee36a5](https://github.com/moonbanking/moonbanking-node/commit/7ee36a51c1f7c17833027a79d78d1b9da98e766a))
+* **internal:** codegen related update ([9f404ee](https://github.com/moonbanking/moonbanking-node/commit/9f404eefacd7dc5ff2b22d1b671035c139bed39b))
+* **internal:** move stringifyQuery implementation to internal function ([c407079](https://github.com/moonbanking/moonbanking-node/commit/c4070792a46e0390ead55cd63c5f142c465fb23a))
+* **internal:** remove mock server code ([4021b54](https://github.com/moonbanking/moonbanking-node/commit/4021b54a32689b6cf4675cf4513ee687e38dbdda))
+* **internal:** tweak CI branches ([c501167](https://github.com/moonbanking/moonbanking-node/commit/c501167541219bede9692ad483fa8b51700e134b))
+* **internal:** update dependencies to address dependabot vulnerabilities ([f7fd4c5](https://github.com/moonbanking/moonbanking-node/commit/f7fd4c5808940861872a9c36fed2557fe3b8c47f))
+* **internal:** update gitignore ([2799d71](https://github.com/moonbanking/moonbanking-node/commit/2799d71c87016dd27b87c016541ca9b9b42b4347))
+* update mock server docs ([8f5183f](https://github.com/moonbanking/moonbanking-node/commit/8f5183f422468e67d928b04795e07e0b8bf134b2))
+
 ## 0.8.0 (2026-02-11)
 
 Full Changelog: [v0.7.0...v0.8.0](https://github.com/moonbanking/moonbanking-node/compare/v0.7.0...v0.8.0)

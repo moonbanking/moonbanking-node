@@ -1,35 +1,40 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+// File generated from the OpenAPI spec. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
-import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
-import { RequestOptions } from '../internal/request-options';
-import { path } from '../internal/utils/path';
+import type { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, type PagePromise } from '../core/pagination';
+import type { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils';
 
 export class Stories extends APIResource {
   /**
    * This endpoint allows you to retrieve a paginated list of all stories. By
-   * default, a maximum of ten stories are shown per page. You can search stories by
-   * text content, filter by bank ID, sort them by various fields, and include
+   * default, a maximum of ten stories are shown per page. You can search stories
+   * by text content, filter by bank ID, sort them by various fields, and include
    * related data like bank and country information.
    */
   list(
     query: StoryListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<StoryListResponsesCursorPage, StoryListResponse> {
-    return this._client.getAPIList('/stories', CursorPage<StoryListResponse>, { query, ...options });
+    return this._client.getAPIList<StoryListResponse, StoryListResponsesCursorPage>(
+      '/stories',
+      CursorPage<StoryListResponse>,
+      { query, ...options },
+    );
   }
 
   /**
-   * This endpoint allows you to retrieve a specific story by providing the story ID.
-   * You can include related data like bank and country information in the response.
+   * This endpoint allows you to retrieve a specific story by providing the story
+   * ID. You can include related data like bank and country information in the
+   * response.
    */
   get(
     id: string,
     query: StoryGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<StoryGetResponse> {
-    return this._client.get(path`/stories/${id}`, { query, ...options });
+    return this._client.get<StoryGetResponse>(path`/stories/${id}`, { query, ...options });
   }
 }
 
@@ -59,8 +64,8 @@ export interface StoryListResponse {
    * An array of tags associated with this story for categorization and filtering.
    * Possible tags are `CRYPTO_FRIENDLY`, `FEES_PRICING`, `DIGITAL_EXPERIENCE`,
    * `ACCOUNT_FEATURES`, `CUSTOMER_SERVICE`, `SECURITY_TRUST`, `BRANCH_ATM_ACCESS`,
-   * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
-   * `INNOVATION`, `INVESTMENT_SERVICES` and `LENDING`.
+   * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`,
+   * `TRANSPARENCY`, `INNOVATION`, `INVESTMENT_SERVICES` and `LENDING`.
    */
   tags: Array<string>;
 
@@ -183,8 +188,8 @@ export namespace StoryGetResponse {
      * An array of tags associated with this story for categorization and filtering.
      * Possible tags are `CRYPTO_FRIENDLY`, `FEES_PRICING`, `DIGITAL_EXPERIENCE`,
      * `ACCOUNT_FEATURES`, `CUSTOMER_SERVICE`, `SECURITY_TRUST`, `BRANCH_ATM_ACCESS`,
-     * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
-     * `INNOVATION`, `INVESTMENT_SERVICES` and `LENDING`.
+     * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`,
+     * `TRANSPARENCY`, `INNOVATION`, `INVESTMENT_SERVICES` and `LENDING`.
      */
     tags: Array<string>;
 
@@ -279,8 +284,8 @@ export interface StoryListParams extends CursorPageParams {
   countryCode?: string;
 
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `bank`, `country`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `bank`, `country`
    */
   include?: string;
 
@@ -300,19 +305,20 @@ export interface StoryListParams extends CursorPageParams {
   sortOrder?: 'asc' | 'desc';
 
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `CRYPTO_FRIENDLY`, `CUSTOMER_SERVICE`, `FEES_PRICING`,
-   * `DIGITAL_EXPERIENCE`, `SECURITY_TRUST`, `ACCOUNT_FEATURES`, `BRANCH_ATM_ACCESS`,
-   * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
-   * `INNOVATION`, `INVESTMENT_SERVICES`, `LENDING`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `CRYPTO_FRIENDLY`, `CUSTOMER_SERVICE`, `FEES_PRICING`,
+   * `DIGITAL_EXPERIENCE`, `SECURITY_TRUST`, `ACCOUNT_FEATURES`,
+   * `BRANCH_ATM_ACCESS`, `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`,
+   * `PROCESSING_SPEED`, `TRANSPARENCY`, `INNOVATION`, `INVESTMENT_SERVICES`,
+   * `LENDING`
    */
   tags?: string;
 }
 
 export interface StoryGetParams {
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `bank`, `country`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `bank`, `country`
    */
   include?: string;
 }

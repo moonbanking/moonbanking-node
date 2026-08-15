@@ -1,23 +1,27 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+// File generated from the OpenAPI spec. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
-import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
-import { RequestOptions } from '../internal/request-options';
-import { path } from '../internal/utils/path';
+import type { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, type PagePromise } from '../core/pagination';
+import type { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils';
 
 export class Countries extends APIResource {
   /**
    * This endpoint allows you to retrieve a paginated list of all countries. By
-   * default, a maximum of ten countries are shown per page. You can search countries
-   * by name or 2-letter code, sort them by various fields, and include related data
-   * like scores.
+   * default, a maximum of ten countries are shown per page. You can search
+   * countries by name or 2-letter code, sort them by various fields, and include
+   * related data like scores.
    */
   list(
     query: CountryListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<CountryListResponsesCursorPage, CountryListResponse> {
-    return this._client.getAPIList('/countries', CursorPage<CountryListResponse>, { query, ...options });
+    return this._client.getAPIList<CountryListResponse, CountryListResponsesCursorPage>(
+      '/countries',
+      CursorPage<CountryListResponse>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -30,7 +34,7 @@ export class Countries extends APIResource {
     query: CountryGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<CountryGetResponse> {
-    return this._client.get(path`/countries/${code}`, { query, ...options });
+    return this._client.get<CountryGetResponse>(path`/countries/${code}`, { query, ...options });
   }
 }
 
@@ -101,38 +105,38 @@ export namespace CountryListResponse {
    */
   export interface Scores {
     /**
-     * Aggregate voting counts and score for account features category for all banks in
-     * the country.
+     * Aggregate voting counts and score for account features category for all banks
+     * in the country.
      */
     accountFeatures: Scores.AccountFeatures;
 
     /**
-     * Aggregate voting counts and score for branch & ATM access category for all banks
-     * in the country.
+     * Aggregate voting counts and score for branch & ATM access category for all
+     * banks in the country.
      */
     branchAtmAccess: Scores.BranchAtmAccess;
 
     /**
-     * Aggregate voting counts and score for business banking category for all banks in
-     * the country.
+     * Aggregate voting counts and score for business banking category for all banks
+     * in the country.
      */
     businessBanking: Scores.BusinessBanking;
 
     /**
-     * Aggregate voting counts and score for crypto-friendliness category for all banks
-     * in the country.
+     * Aggregate voting counts and score for crypto-friendliness category for all
+     * banks in the country.
      */
     cryptoFriendly: Scores.CryptoFriendly;
 
     /**
-     * Aggregate voting counts and score for customer service category for all banks in
-     * the country.
+     * Aggregate voting counts and score for customer service category for all banks
+     * in the country.
      */
     customerService: Scores.CustomerService;
 
     /**
-     * Aggregate voting counts and score for digital experience category for all banks
-     * in the country.
+     * Aggregate voting counts and score for digital experience category for all
+     * banks in the country.
      */
     digitalExperience: Scores.DigitalExperience;
 
@@ -155,8 +159,8 @@ export namespace CountryListResponse {
     internationalBanking: Scores.InternationalBanking;
 
     /**
-     * Aggregate voting counts and score for investment services category for all banks
-     * in the country.
+     * Aggregate voting counts and score for investment services category for all
+     * banks in the country.
      */
     investmentServices: Scores.InvestmentServices;
 
@@ -167,34 +171,34 @@ export namespace CountryListResponse {
     lending: Scores.Lending;
 
     /**
-     * Aggregate voting counts and score for all banks in the country across all voting
-     * categories.
+     * Aggregate voting counts and score for all banks in the country across all
+     * voting categories.
      */
     overall: Scores.Overall;
 
     /**
-     * Aggregate voting counts and score for processing speed category for all banks in
-     * the country.
+     * Aggregate voting counts and score for processing speed category for all banks
+     * in the country.
      */
     processingSpeed: Scores.ProcessingSpeed;
 
     /**
-     * Aggregate voting counts and score for security & trust category for all banks in
-     * the country.
+     * Aggregate voting counts and score for security & trust category for all banks
+     * in the country.
      */
     securityTrust: Scores.SecurityTrust;
 
     /**
-     * Aggregate voting counts and score for transparency category for all banks in the
-     * country.
+     * Aggregate voting counts and score for transparency category for all banks in
+     * the country.
      */
     transparency: Scores.Transparency;
   }
 
   export namespace Scores {
     /**
-     * Aggregate voting counts and score for account features category for all banks in
-     * the country.
+     * Aggregate voting counts and score for account features category for all banks
+     * in the country.
      */
     export interface AccountFeatures {
       /**
@@ -219,12 +223,13 @@ export namespace CountryListResponse {
     }
 
     /**
-     * Aggregate voting counts and score for branch & ATM access category for all banks
-     * in the country.
+     * Aggregate voting counts and score for branch & ATM access category for all
+     * banks in the country.
      */
     export interface BranchAtmAccess {
       /**
-       * The total number of downvotes for branch & ATM access for banks in the country.
+       * The total number of downvotes for branch & ATM access for banks in the
+       * country.
        */
       down: number;
 
@@ -245,8 +250,8 @@ export namespace CountryListResponse {
     }
 
     /**
-     * Aggregate voting counts and score for business banking category for all banks in
-     * the country.
+     * Aggregate voting counts and score for business banking category for all banks
+     * in the country.
      */
     export interface BusinessBanking {
       /**
@@ -271,12 +276,13 @@ export namespace CountryListResponse {
     }
 
     /**
-     * Aggregate voting counts and score for crypto-friendliness category for all banks
-     * in the country.
+     * Aggregate voting counts and score for crypto-friendliness category for all
+     * banks in the country.
      */
     export interface CryptoFriendly {
       /**
-       * The total number of downvotes for crypto-friendliness for banks in the country.
+       * The total number of downvotes for crypto-friendliness for banks in the
+       * country.
        */
       down: number;
 
@@ -297,8 +303,8 @@ export namespace CountryListResponse {
     }
 
     /**
-     * Aggregate voting counts and score for customer service category for all banks in
-     * the country.
+     * Aggregate voting counts and score for customer service category for all banks
+     * in the country.
      */
     export interface CustomerService {
       /**
@@ -323,8 +329,8 @@ export namespace CountryListResponse {
     }
 
     /**
-     * Aggregate voting counts and score for digital experience category for all banks
-     * in the country.
+     * Aggregate voting counts and score for digital experience category for all
+     * banks in the country.
      */
     export interface DigitalExperience {
       /**
@@ -422,18 +428,20 @@ export namespace CountryListResponse {
       total: number;
 
       /**
-       * The total number of upvotes for international banking for banks in the country.
+       * The total number of upvotes for international banking for banks in the
+       * country.
        */
       up: number;
     }
 
     /**
-     * Aggregate voting counts and score for investment services category for all banks
-     * in the country.
+     * Aggregate voting counts and score for investment services category for all
+     * banks in the country.
      */
     export interface InvestmentServices {
       /**
-       * The total number of downvotes for investment services for banks in the country.
+       * The total number of downvotes for investment services for banks in the
+       * country.
        */
       down: number;
 
@@ -480,8 +488,8 @@ export namespace CountryListResponse {
     }
 
     /**
-     * Aggregate voting counts and score for all banks in the country across all voting
-     * categories.
+     * Aggregate voting counts and score for all banks in the country across all
+     * voting categories.
      */
     export interface Overall {
       /**
@@ -492,8 +500,8 @@ export namespace CountryListResponse {
 
       /**
        * The overall score for banks in the country across all categories, ranging from
-       * -100 to 100. Based on upvotes and downvotes across all categories and all banks
-       * in the country.
+       * -100 to 100. Based on upvotes and downvotes across all categories and all
+       * banks in the country.
        */
       score: number;
 
@@ -504,15 +512,15 @@ export namespace CountryListResponse {
       total: number;
 
       /**
-       * The total number of upvotes for banks in the country. This is the sum of upvotes
-       * across all categories.
+       * The total number of upvotes for banks in the country. This is the sum of
+       * upvotes across all categories.
        */
       up: number;
     }
 
     /**
-     * Aggregate voting counts and score for processing speed category for all banks in
-     * the country.
+     * Aggregate voting counts and score for processing speed category for all banks
+     * in the country.
      */
     export interface ProcessingSpeed {
       /**
@@ -537,8 +545,8 @@ export namespace CountryListResponse {
     }
 
     /**
-     * Aggregate voting counts and score for security & trust category for all banks in
-     * the country.
+     * Aggregate voting counts and score for security & trust category for all banks
+     * in the country.
      */
     export interface SecurityTrust {
       /**
@@ -563,8 +571,8 @@ export namespace CountryListResponse {
     }
 
     /**
-     * Aggregate voting counts and score for transparency category for all banks in the
-     * country.
+     * Aggregate voting counts and score for transparency category for all banks in
+     * the country.
      */
     export interface Transparency {
       /**
@@ -671,38 +679,38 @@ export namespace CountryGetResponse {
      */
     export interface Scores {
       /**
-       * Aggregate voting counts and score for account features category for all banks in
-       * the country.
+       * Aggregate voting counts and score for account features category for all banks
+       * in the country.
        */
       accountFeatures: Scores.AccountFeatures;
 
       /**
-       * Aggregate voting counts and score for branch & ATM access category for all banks
-       * in the country.
+       * Aggregate voting counts and score for branch & ATM access category for all
+       * banks in the country.
        */
       branchAtmAccess: Scores.BranchAtmAccess;
 
       /**
-       * Aggregate voting counts and score for business banking category for all banks in
-       * the country.
+       * Aggregate voting counts and score for business banking category for all banks
+       * in the country.
        */
       businessBanking: Scores.BusinessBanking;
 
       /**
-       * Aggregate voting counts and score for crypto-friendliness category for all banks
-       * in the country.
+       * Aggregate voting counts and score for crypto-friendliness category for all
+       * banks in the country.
        */
       cryptoFriendly: Scores.CryptoFriendly;
 
       /**
-       * Aggregate voting counts and score for customer service category for all banks in
-       * the country.
+       * Aggregate voting counts and score for customer service category for all banks
+       * in the country.
        */
       customerService: Scores.CustomerService;
 
       /**
-       * Aggregate voting counts and score for digital experience category for all banks
-       * in the country.
+       * Aggregate voting counts and score for digital experience category for all
+       * banks in the country.
        */
       digitalExperience: Scores.DigitalExperience;
 
@@ -725,8 +733,8 @@ export namespace CountryGetResponse {
       internationalBanking: Scores.InternationalBanking;
 
       /**
-       * Aggregate voting counts and score for investment services category for all banks
-       * in the country.
+       * Aggregate voting counts and score for investment services category for all
+       * banks in the country.
        */
       investmentServices: Scores.InvestmentServices;
 
@@ -737,34 +745,34 @@ export namespace CountryGetResponse {
       lending: Scores.Lending;
 
       /**
-       * Aggregate voting counts and score for all banks in the country across all voting
-       * categories.
+       * Aggregate voting counts and score for all banks in the country across all
+       * voting categories.
        */
       overall: Scores.Overall;
 
       /**
-       * Aggregate voting counts and score for processing speed category for all banks in
-       * the country.
+       * Aggregate voting counts and score for processing speed category for all banks
+       * in the country.
        */
       processingSpeed: Scores.ProcessingSpeed;
 
       /**
-       * Aggregate voting counts and score for security & trust category for all banks in
-       * the country.
+       * Aggregate voting counts and score for security & trust category for all banks
+       * in the country.
        */
       securityTrust: Scores.SecurityTrust;
 
       /**
-       * Aggregate voting counts and score for transparency category for all banks in the
-       * country.
+       * Aggregate voting counts and score for transparency category for all banks in
+       * the country.
        */
       transparency: Scores.Transparency;
     }
 
     export namespace Scores {
       /**
-       * Aggregate voting counts and score for account features category for all banks in
-       * the country.
+       * Aggregate voting counts and score for account features category for all banks
+       * in the country.
        */
       export interface AccountFeatures {
         /**
@@ -789,12 +797,13 @@ export namespace CountryGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for branch & ATM access category for all banks
-       * in the country.
+       * Aggregate voting counts and score for branch & ATM access category for all
+       * banks in the country.
        */
       export interface BranchAtmAccess {
         /**
-         * The total number of downvotes for branch & ATM access for banks in the country.
+         * The total number of downvotes for branch & ATM access for banks in the
+         * country.
          */
         down: number;
 
@@ -815,8 +824,8 @@ export namespace CountryGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for business banking category for all banks in
-       * the country.
+       * Aggregate voting counts and score for business banking category for all banks
+       * in the country.
        */
       export interface BusinessBanking {
         /**
@@ -841,12 +850,13 @@ export namespace CountryGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for crypto-friendliness category for all banks
-       * in the country.
+       * Aggregate voting counts and score for crypto-friendliness category for all
+       * banks in the country.
        */
       export interface CryptoFriendly {
         /**
-         * The total number of downvotes for crypto-friendliness for banks in the country.
+         * The total number of downvotes for crypto-friendliness for banks in the
+         * country.
          */
         down: number;
 
@@ -867,8 +877,8 @@ export namespace CountryGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for customer service category for all banks in
-       * the country.
+       * Aggregate voting counts and score for customer service category for all banks
+       * in the country.
        */
       export interface CustomerService {
         /**
@@ -893,8 +903,8 @@ export namespace CountryGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for digital experience category for all banks
-       * in the country.
+       * Aggregate voting counts and score for digital experience category for all
+       * banks in the country.
        */
       export interface DigitalExperience {
         /**
@@ -992,18 +1002,20 @@ export namespace CountryGetResponse {
         total: number;
 
         /**
-         * The total number of upvotes for international banking for banks in the country.
+         * The total number of upvotes for international banking for banks in the
+         * country.
          */
         up: number;
       }
 
       /**
-       * Aggregate voting counts and score for investment services category for all banks
-       * in the country.
+       * Aggregate voting counts and score for investment services category for all
+       * banks in the country.
        */
       export interface InvestmentServices {
         /**
-         * The total number of downvotes for investment services for banks in the country.
+         * The total number of downvotes for investment services for banks in the
+         * country.
          */
         down: number;
 
@@ -1050,8 +1062,8 @@ export namespace CountryGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for all banks in the country across all voting
-       * categories.
+       * Aggregate voting counts and score for all banks in the country across all
+       * voting categories.
        */
       export interface Overall {
         /**
@@ -1062,8 +1074,8 @@ export namespace CountryGetResponse {
 
         /**
          * The overall score for banks in the country across all categories, ranging from
-         * -100 to 100. Based on upvotes and downvotes across all categories and all banks
-         * in the country.
+         * -100 to 100. Based on upvotes and downvotes across all categories and all
+         * banks in the country.
          */
         score: number;
 
@@ -1074,15 +1086,15 @@ export namespace CountryGetResponse {
         total: number;
 
         /**
-         * The total number of upvotes for banks in the country. This is the sum of upvotes
-         * across all categories.
+         * The total number of upvotes for banks in the country. This is the sum of
+         * upvotes across all categories.
          */
         up: number;
       }
 
       /**
-       * Aggregate voting counts and score for processing speed category for all banks in
-       * the country.
+       * Aggregate voting counts and score for processing speed category for all banks
+       * in the country.
        */
       export interface ProcessingSpeed {
         /**
@@ -1107,8 +1119,8 @@ export namespace CountryGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for security & trust category for all banks in
-       * the country.
+       * Aggregate voting counts and score for security & trust category for all banks
+       * in the country.
        */
       export interface SecurityTrust {
         /**
@@ -1133,8 +1145,8 @@ export namespace CountryGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for transparency category for all banks in the
-       * country.
+       * Aggregate voting counts and score for transparency category for all banks in
+       * the country.
        */
       export interface Transparency {
         /**
@@ -1163,8 +1175,8 @@ export namespace CountryGetResponse {
 
 export interface CountryListParams extends CursorPageParams {
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `scores`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `scores`
    */
   include?: string;
 
@@ -1251,8 +1263,8 @@ export interface CountryListParams extends CursorPageParams {
 
 export interface CountryGetParams {
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `scores`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `scores`
    */
   include?: string;
 }

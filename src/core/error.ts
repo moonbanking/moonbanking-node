@@ -1,96 +1,87 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
-
-import { castToError } from '../internal/errors';
+/**
+ * Error types raised by the MoonBanking client.
+ *
+ * This file is part of the generated SDK's static runtime.
+ */
 
 export class MoonBankingError extends Error {}
 
 export class APIError<
   TStatus extends number | undefined = number | undefined,
   THeaders extends Headers | undefined = Headers | undefined,
-  TError extends Object | undefined = Object | undefined,
+  TError extends Record<string, unknown> | undefined = Record<string, unknown> | undefined,
 > extends MoonBankingError {
-  /** HTTP status for the response that caused the error */
+  /** HTTP status code, or `undefined` if the request never completed. */
   readonly status: TStatus;
-  /** HTTP headers for the response that caused the error */
+  /** Response headers, or `undefined` if the request never completed. */
   readonly headers: THeaders;
-  /** JSON body of the response that caused the error */
+  /** Parsed response body, when the server returned one. */
   readonly error: TError;
 
   constructor(status: TStatus, error: TError, message: string | undefined, headers: THeaders) {
-    super(`${APIError.makeMessage(status, error, message)}`);
+    super(APIError.makeMessage(status, error, message));
     this.status = status;
     this.headers = headers;
     this.error = error;
+    this.name = new.target.name;
   }
 
-  private static makeMessage(status: number | undefined, error: any, message: string | undefined) {
-    const msg =
-      error?.message ?
-        typeof error.message === 'string' ?
-          error.message
-        : JSON.stringify(error.message)
-      : error ? JSON.stringify(error)
-      : message;
+  private static makeMessage(
+    status: number | undefined,
+    error: unknown,
+    message: string | undefined,
+  ): string {
+    const body = (() => {
+      if (!error || typeof error !== 'object') return undefined;
+      const record = error as Record<string, unknown>;
+      if (typeof record['message'] === 'string') return record['message'];
+      const nested = record['error'];
+      if (nested && typeof nested === 'object') {
+        const nestedMessage = (nested as Record<string, unknown>)['message'];
+        if (typeof nestedMessage === 'string') return nestedMessage;
+      }
+      if (typeof record['error'] === 'string') return record['error'];
+      return undefined;
+    })();
 
-    if (status && msg) {
-      return `${status} ${msg}`;
-    }
-    if (status) {
-      return `${status} status code (no body)`;
-    }
-    if (msg) {
-      return msg;
-    }
+    const detail = body ?? message;
+
+    if (status && detail) return `${status} ${detail}`;
+    if (status) return `${status} status code (no body)`;
+    if (detail) return detail;
     return '(no status code or body)';
   }
 
   static generate(
     status: number | undefined,
-    errorResponse: Object | undefined,
+    errorResponse: unknown,
     message: string | undefined,
     headers: Headers | undefined,
   ): APIError {
     if (!status || !headers) {
-      return new APIConnectionError({ message, cause: castToError(errorResponse) });
+      return new APIConnectionError({ message, cause: toError(errorResponse) });
     }
 
-    const error = errorResponse as Record<string, any>;
+    const error = (errorResponse ?? undefined) as Record<string, unknown> | undefined;
 
-    if (status === 400) {
-      return new BadRequestError(status, error, message, headers);
-    }
-
-    if (status === 401) {
-      return new AuthenticationError(status, error, message, headers);
-    }
-
-    if (status === 403) {
-      return new PermissionDeniedError(status, error, message, headers);
-    }
-
-    if (status === 404) {
-      return new NotFoundError(status, error, message, headers);
-    }
-
-    if (status === 409) {
-      return new ConflictError(status, error, message, headers);
-    }
-
-    if (status === 422) {
-      return new UnprocessableEntityError(status, error, message, headers);
-    }
-
-    if (status === 429) {
-      return new RateLimitError(status, error, message, headers);
-    }
-
-    if (status >= 500) {
-      return new InternalServerError(status, error, message, headers);
-    }
+    if (status === 400) return new BadRequestError(status, error, message, headers);
+    if (status === 401) return new AuthenticationError(status, error, message, headers);
+    if (status === 403) return new PermissionDeniedError(status, error, message, headers);
+    if (status === 404) return new NotFoundError(status, error, message, headers);
+    if (status === 409) return new ConflictError(status, error, message, headers);
+    if (status === 422) return new UnprocessableEntityError(status, error, message, headers);
+    if (status === 429) return new RateLimitError(status, error, message, headers);
+    if (status >= 500) return new InternalServerError(status, error, message, headers);
 
     return new APIError(status, error, message, headers);
   }
 }
+
+const toError = (value: unknown): Error | undefined => {
+  if (value instanceof Error) return value;
+  if (value === undefined || value === null) return undefined;
+  return new Error(String(value));
+};
 
 export class APIUserAbortError extends APIError<undefined, undefined, undefined> {
   constructor({ message }: { message?: string } = {}) {
@@ -101,8 +92,6 @@ export class APIUserAbortError extends APIError<undefined, undefined, undefined>
 export class APIConnectionError extends APIError<undefined, undefined, undefined> {
   constructor({ message, cause }: { message?: string | undefined; cause?: Error | undefined }) {
     super(undefined, undefined, message || 'Connection error.', undefined);
-    // in some environments the 'cause' property is already declared
-    // @ts-ignore
     if (cause) this.cause = cause;
   }
 }

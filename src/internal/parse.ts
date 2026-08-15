@@ -1,56 +1,35 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
-
 import type { FinalRequestOptions } from './request-options';
-import { type MoonBanking } from '../client';
-import { formatRequestDetails, loggerFor } from './utils/log';
 
-export type APIResponseProps = {
+/** Everything the client knows about a completed HTTP exchange. */
+export interface APIResponseProps {
   response: Response;
   options: FinalRequestOptions;
   controller: AbortController;
-  requestLogID: string;
-  retryOfRequestLogID: string | undefined;
-  startTime: number;
-};
-
-export async function defaultParseResponse<T>(client: MoonBanking, props: APIResponseProps): Promise<T> {
-  const { response, requestLogID, retryOfRequestLogID, startTime } = props;
-  const body = await (async () => {
-    // fetch refuses to read the body when the status code is 204.
-    if (response.status === 204) {
-      return null as T;
-    }
-
-    if (props.options.__binaryResponse) {
-      return response as unknown as T;
-    }
-
-    const contentType = response.headers.get('content-type');
-    const mediaType = contentType?.split(';')[0]?.trim();
-    const isJSON = mediaType?.includes('application/json') || mediaType?.endsWith('+json');
-    if (isJSON) {
-      const contentLength = response.headers.get('content-length');
-      if (contentLength === '0') {
-        // if there is no content we can't do anything
-        return undefined as T;
-      }
-
-      const json = await response.json();
-      return json as T;
-    }
-
-    const text = await response.text();
-    return text as unknown as T;
-  })();
-  loggerFor(client).debug(
-    `[${requestLogID}] response parsed`,
-    formatRequestDetails({
-      retryOfRequestLogID,
-      url: response.url,
-      status: response.status,
-      body,
-      durationMs: Date.now() - startTime,
-    }),
-  );
-  return body;
 }
+
+/**
+ * Parse a successful response body.
+ *
+ * JSON responses are parsed; everything else is returned as text so callers can
+ * still reach non-JSON endpoints. `204` and empty bodies resolve to `null`.
+ */
+export const defaultParseResponse = async <T,>(props: APIResponseProps): Promise<T> => {
+  const { response } = props;
+
+  if (response.status === 204) return null as T;
+
+  const contentType = response.headers.get('content-type') ?? '';
+
+  if (contentType.includes('json')) {
+    const text = await response.text();
+    if (text.length === 0) return null as T;
+
+    try {
+      return JSON.parse(text) as T;
+    } catch (error) {
+      throw new Error(`Could not parse JSON response body: ${String(error)}`);
+    }
+  }
+
+  return (await response.text()) as unknown as T;
+};

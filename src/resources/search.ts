@@ -1,23 +1,24 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+// File generated from the OpenAPI spec. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
-import { RequestOptions } from '../internal/request-options';
+import type { APIPromise } from '../core/api-promise';
+import type { RequestOptions } from '../internal/request-options';
 
 export class Search extends APIResource {
   /**
-   * Search across banks, countries, and stories. You can specify which entities to
-   * search using the include parameter. If no include value is provided, all
-   * entities will be searched.
+   * Search across banks, countries, stories, and stocks. You can specify which
+   * entities to search using the include parameter. If no include value is
+   * provided, all entities will be searched. Banks are also matched on the ticker
+   * symbol of their stock listings, so searching `BAC` returns Bank of America.
    */
   get(query: SearchGetParams, options?: RequestOptions): APIPromise<SearchGetResponse> {
-    return this._client.get('/search', { query, ...options });
+    return this._client.get<SearchGetResponse>('/search', { query, ...options });
   }
 }
 
 export interface SearchGetResponse {
   /**
-   * The results of a search across banks, countries, and stories.
+   * The results of a search across banks, countries, stories, and stocks.
    */
   data: SearchGetResponse.Data;
 
@@ -32,11 +33,12 @@ export interface SearchGetResponse {
 
 export namespace SearchGetResponse {
   /**
-   * The results of a search across banks, countries, and stories.
+   * The results of a search across banks, countries, stories, and stocks.
    */
   export interface Data {
     /**
-     * Array of search results for banks.
+     * Array of search results for banks. Each bank embeds its `stocks`, which is
+     * empty for a bank with no public listing.
      */
     banks: Array<Data.Bank>;
 
@@ -44,6 +46,12 @@ export namespace SearchGetResponse {
      * Array of search results for countries.
      */
     countries: Array<Data.Country>;
+
+    /**
+     * Array of search results for stocks. Each stock embeds its associated `market`
+     * and `bank`.
+     */
+    stocks: Array<Data.Stock>;
 
     /**
      * Array of search results for stories.
@@ -92,8 +100,8 @@ export namespace SearchGetResponse {
       country?: Bank.Country;
 
       /**
-       * The bank's rank within the country. Based on the bank's overall score, which is
-       * determined by user votes across all categories. Only banks with at least 10
+       * The bank's rank within the country. Based on the bank's overall score, which
+       * is determined by user votes across all categories. Only banks with at least 10
        * votes are ranked.
        */
       countryRank?: number | null;
@@ -115,6 +123,8 @@ export namespace SearchGetResponse {
        * by users.
        */
       scores?: Bank.Scores;
+
+      stocks?: Array<Bank.Stock>;
 
       /**
        * The bank's official website URL.
@@ -181,7 +191,8 @@ export namespace SearchGetResponse {
         customerService: Scores.CustomerService;
 
         /**
-         * Aggregate voting counts and score for digital experience category for this bank.
+         * Aggregate voting counts and score for digital experience category for this
+         * bank.
          */
         digitalExperience: Scores.DigitalExperience;
 
@@ -362,7 +373,8 @@ export namespace SearchGetResponse {
         }
 
         /**
-         * Aggregate voting counts and score for digital experience category for this bank.
+         * Aggregate voting counts and score for digital experience category for this
+         * bank.
          */
         export interface DigitalExperience {
           /**
@@ -518,13 +530,14 @@ export namespace SearchGetResponse {
          */
         export interface Overall {
           /**
-           * The total number of downvotes for this bank. This is the sum of downvotes across
-           * all categories.
+           * The total number of downvotes for this bank. This is the sum of downvotes
+           * across all categories.
            */
           down: number;
 
           /**
-           * The overall score for this bank across all categories, ranging from -100 to 100.
+           * The overall score for this bank across all categories, ranging from -100 to
+           * 100.
            */
           score: number;
 
@@ -535,8 +548,8 @@ export namespace SearchGetResponse {
           total: number;
 
           /**
-           * The total number of upvotes for this bank. This is the sum of upvotes across all
-           * categories.
+           * The total number of upvotes for this bank. This is the sum of upvotes across
+           * all categories.
            */
           up: number;
         }
@@ -616,6 +629,141 @@ export namespace SearchGetResponse {
           up: number;
         }
       }
+
+      /**
+       * The stock model contains identifying information for a stock listing,
+       * including its ticker symbol, primary-listing flag, market, and the bank it
+       * belongs to.
+       */
+      export interface Stock {
+        /**
+         * The stock's auto-generated unique identifier.
+         */
+        id: string;
+
+        /**
+         * The date and time the stock was created in Moon Banking.
+         */
+        createdAt: string;
+
+        /**
+         * Whether the stock is the primary stock of the bank.
+         */
+        isPrimary: boolean;
+
+        /**
+         * The date and time the stock was last updated in Moon Banking.
+         */
+        updatedAt: string;
+
+        /**
+         * The bank this stock listing belongs to.
+         */
+        bank?: Stock.Bank;
+
+        /**
+         * The ID of the bank this stock belongs to.
+         */
+        bankId?: string | null;
+
+        /**
+         * The market model contains identifying information for a market, including its
+         * name, code, type, and the country it belongs to.
+         */
+        market?: Stock.Market;
+
+        /**
+         * The ID of the market this stock belongs to.
+         */
+        marketId?: string | null;
+
+        /**
+         * The symbol of the stock.
+         */
+        symbol?: string | null;
+      }
+
+      export namespace Stock {
+        /**
+         * The bank this stock listing belongs to.
+         */
+        export interface Bank {
+          /**
+           * The bank's auto-generated unique identifier.
+           */
+          id: string;
+
+          /**
+           * The ID of the country where this bank is located.
+           */
+          countryId: string;
+
+          /**
+           * The bank's official name or display name.
+           */
+          name: string;
+
+          /**
+           * The bank's rank within the country. Based on the bank's overall score, which
+           * is determined by user votes across all categories. Only banks with at least 10
+           * votes are ranked.
+           */
+          countryRank?: number | null;
+
+          /**
+           * The bank's worldwide rank. Based on the bank's overall score, which is
+           * determined by user votes across all categories. Only banks with at least 10
+           * votes are ranked.
+           */
+          rank?: number | null;
+
+          /**
+           * The bank's official website URL.
+           */
+          url?: string | null;
+        }
+
+        /**
+         * The market model contains identifying information for a market, including its
+         * name, code, type, and the country it belongs to.
+         */
+        export interface Market {
+          /**
+           * The stock exchange's auto-generated unique identifier.
+           */
+          id: string;
+
+          /**
+           * The code of the stock exchange.
+           */
+          code: string;
+
+          /**
+           * The ID of the country this stock exchange belongs to.
+           */
+          countryId: string;
+
+          /**
+           * The date and time the stock exchange was created in Moon Banking.
+           */
+          createdAt: string;
+
+          /**
+           * The name of the stock exchange.
+           */
+          name: string;
+
+          /**
+           * The type of market.
+           */
+          type: 'STOCK';
+
+          /**
+           * The date and time the stock exchange was last updated in Moon Banking.
+           */
+          updatedAt: string;
+        }
+      }
     }
 
     /**
@@ -683,38 +831,38 @@ export namespace SearchGetResponse {
        */
       export interface Scores {
         /**
-         * Aggregate voting counts and score for account features category for all banks in
-         * the country.
+         * Aggregate voting counts and score for account features category for all banks
+         * in the country.
          */
         accountFeatures: Scores.AccountFeatures;
 
         /**
-         * Aggregate voting counts and score for branch & ATM access category for all banks
-         * in the country.
+         * Aggregate voting counts and score for branch & ATM access category for all
+         * banks in the country.
          */
         branchAtmAccess: Scores.BranchAtmAccess;
 
         /**
-         * Aggregate voting counts and score for business banking category for all banks in
-         * the country.
+         * Aggregate voting counts and score for business banking category for all banks
+         * in the country.
          */
         businessBanking: Scores.BusinessBanking;
 
         /**
-         * Aggregate voting counts and score for crypto-friendliness category for all banks
-         * in the country.
+         * Aggregate voting counts and score for crypto-friendliness category for all
+         * banks in the country.
          */
         cryptoFriendly: Scores.CryptoFriendly;
 
         /**
-         * Aggregate voting counts and score for customer service category for all banks in
-         * the country.
+         * Aggregate voting counts and score for customer service category for all banks
+         * in the country.
          */
         customerService: Scores.CustomerService;
 
         /**
-         * Aggregate voting counts and score for digital experience category for all banks
-         * in the country.
+         * Aggregate voting counts and score for digital experience category for all
+         * banks in the country.
          */
         digitalExperience: Scores.DigitalExperience;
 
@@ -737,8 +885,8 @@ export namespace SearchGetResponse {
         internationalBanking: Scores.InternationalBanking;
 
         /**
-         * Aggregate voting counts and score for investment services category for all banks
-         * in the country.
+         * Aggregate voting counts and score for investment services category for all
+         * banks in the country.
          */
         investmentServices: Scores.InvestmentServices;
 
@@ -749,34 +897,34 @@ export namespace SearchGetResponse {
         lending: Scores.Lending;
 
         /**
-         * Aggregate voting counts and score for all banks in the country across all voting
-         * categories.
+         * Aggregate voting counts and score for all banks in the country across all
+         * voting categories.
          */
         overall: Scores.Overall;
 
         /**
-         * Aggregate voting counts and score for processing speed category for all banks in
-         * the country.
+         * Aggregate voting counts and score for processing speed category for all banks
+         * in the country.
          */
         processingSpeed: Scores.ProcessingSpeed;
 
         /**
-         * Aggregate voting counts and score for security & trust category for all banks in
-         * the country.
+         * Aggregate voting counts and score for security & trust category for all banks
+         * in the country.
          */
         securityTrust: Scores.SecurityTrust;
 
         /**
-         * Aggregate voting counts and score for transparency category for all banks in the
-         * country.
+         * Aggregate voting counts and score for transparency category for all banks in
+         * the country.
          */
         transparency: Scores.Transparency;
       }
 
       export namespace Scores {
         /**
-         * Aggregate voting counts and score for account features category for all banks in
-         * the country.
+         * Aggregate voting counts and score for account features category for all banks
+         * in the country.
          */
         export interface AccountFeatures {
           /**
@@ -801,12 +949,13 @@ export namespace SearchGetResponse {
         }
 
         /**
-         * Aggregate voting counts and score for branch & ATM access category for all banks
-         * in the country.
+         * Aggregate voting counts and score for branch & ATM access category for all
+         * banks in the country.
          */
         export interface BranchAtmAccess {
           /**
-           * The total number of downvotes for branch & ATM access for banks in the country.
+           * The total number of downvotes for branch & ATM access for banks in the
+           * country.
            */
           down: number;
 
@@ -827,8 +976,8 @@ export namespace SearchGetResponse {
         }
 
         /**
-         * Aggregate voting counts and score for business banking category for all banks in
-         * the country.
+         * Aggregate voting counts and score for business banking category for all banks
+         * in the country.
          */
         export interface BusinessBanking {
           /**
@@ -853,12 +1002,13 @@ export namespace SearchGetResponse {
         }
 
         /**
-         * Aggregate voting counts and score for crypto-friendliness category for all banks
-         * in the country.
+         * Aggregate voting counts and score for crypto-friendliness category for all
+         * banks in the country.
          */
         export interface CryptoFriendly {
           /**
-           * The total number of downvotes for crypto-friendliness for banks in the country.
+           * The total number of downvotes for crypto-friendliness for banks in the
+           * country.
            */
           down: number;
 
@@ -879,8 +1029,8 @@ export namespace SearchGetResponse {
         }
 
         /**
-         * Aggregate voting counts and score for customer service category for all banks in
-         * the country.
+         * Aggregate voting counts and score for customer service category for all banks
+         * in the country.
          */
         export interface CustomerService {
           /**
@@ -905,8 +1055,8 @@ export namespace SearchGetResponse {
         }
 
         /**
-         * Aggregate voting counts and score for digital experience category for all banks
-         * in the country.
+         * Aggregate voting counts and score for digital experience category for all
+         * banks in the country.
          */
         export interface DigitalExperience {
           /**
@@ -1004,18 +1154,20 @@ export namespace SearchGetResponse {
           total: number;
 
           /**
-           * The total number of upvotes for international banking for banks in the country.
+           * The total number of upvotes for international banking for banks in the
+           * country.
            */
           up: number;
         }
 
         /**
-         * Aggregate voting counts and score for investment services category for all banks
-         * in the country.
+         * Aggregate voting counts and score for investment services category for all
+         * banks in the country.
          */
         export interface InvestmentServices {
           /**
-           * The total number of downvotes for investment services for banks in the country.
+           * The total number of downvotes for investment services for banks in the
+           * country.
            */
           down: number;
 
@@ -1062,8 +1214,8 @@ export namespace SearchGetResponse {
         }
 
         /**
-         * Aggregate voting counts and score for all banks in the country across all voting
-         * categories.
+         * Aggregate voting counts and score for all banks in the country across all
+         * voting categories.
          */
         export interface Overall {
           /**
@@ -1074,8 +1226,8 @@ export namespace SearchGetResponse {
 
           /**
            * The overall score for banks in the country across all categories, ranging from
-           * -100 to 100. Based on upvotes and downvotes across all categories and all banks
-           * in the country.
+           * -100 to 100. Based on upvotes and downvotes across all categories and all
+           * banks in the country.
            */
           score: number;
 
@@ -1086,15 +1238,15 @@ export namespace SearchGetResponse {
           total: number;
 
           /**
-           * The total number of upvotes for banks in the country. This is the sum of upvotes
-           * across all categories.
+           * The total number of upvotes for banks in the country. This is the sum of
+           * upvotes across all categories.
            */
           up: number;
         }
 
         /**
-         * Aggregate voting counts and score for processing speed category for all banks in
-         * the country.
+         * Aggregate voting counts and score for processing speed category for all banks
+         * in the country.
          */
         export interface ProcessingSpeed {
           /**
@@ -1119,8 +1271,8 @@ export namespace SearchGetResponse {
         }
 
         /**
-         * Aggregate voting counts and score for security & trust category for all banks in
-         * the country.
+         * Aggregate voting counts and score for security & trust category for all banks
+         * in the country.
          */
         export interface SecurityTrust {
           /**
@@ -1145,8 +1297,8 @@ export namespace SearchGetResponse {
         }
 
         /**
-         * Aggregate voting counts and score for transparency category for all banks in the
-         * country.
+         * Aggregate voting counts and score for transparency category for all banks in
+         * the country.
          */
         export interface Transparency {
           /**
@@ -1169,6 +1321,141 @@ export namespace SearchGetResponse {
            */
           up: number;
         }
+      }
+    }
+
+    /**
+     * The stock model contains identifying information for a stock listing,
+     * including its ticker symbol, primary-listing flag, market, and the bank it
+     * belongs to.
+     */
+    export interface Stock {
+      /**
+       * The stock's auto-generated unique identifier.
+       */
+      id: string;
+
+      /**
+       * The date and time the stock was created in Moon Banking.
+       */
+      createdAt: string;
+
+      /**
+       * Whether the stock is the primary stock of the bank.
+       */
+      isPrimary: boolean;
+
+      /**
+       * The date and time the stock was last updated in Moon Banking.
+       */
+      updatedAt: string;
+
+      /**
+       * The bank this stock listing belongs to.
+       */
+      bank?: Stock.Bank;
+
+      /**
+       * The ID of the bank this stock belongs to.
+       */
+      bankId?: string | null;
+
+      /**
+       * The market model contains identifying information for a market, including its
+       * name, code, type, and the country it belongs to.
+       */
+      market?: Stock.Market;
+
+      /**
+       * The ID of the market this stock belongs to.
+       */
+      marketId?: string | null;
+
+      /**
+       * The symbol of the stock.
+       */
+      symbol?: string | null;
+    }
+
+    export namespace Stock {
+      /**
+       * The bank this stock listing belongs to.
+       */
+      export interface Bank {
+        /**
+         * The bank's auto-generated unique identifier.
+         */
+        id: string;
+
+        /**
+         * The ID of the country where this bank is located.
+         */
+        countryId: string;
+
+        /**
+         * The bank's official name or display name.
+         */
+        name: string;
+
+        /**
+         * The bank's rank within the country. Based on the bank's overall score, which
+         * is determined by user votes across all categories. Only banks with at least 10
+         * votes are ranked.
+         */
+        countryRank?: number | null;
+
+        /**
+         * The bank's worldwide rank. Based on the bank's overall score, which is
+         * determined by user votes across all categories. Only banks with at least 10
+         * votes are ranked.
+         */
+        rank?: number | null;
+
+        /**
+         * The bank's official website URL.
+         */
+        url?: string | null;
+      }
+
+      /**
+       * The market model contains identifying information for a market, including its
+       * name, code, type, and the country it belongs to.
+       */
+      export interface Market {
+        /**
+         * The stock exchange's auto-generated unique identifier.
+         */
+        id: string;
+
+        /**
+         * The code of the stock exchange.
+         */
+        code: string;
+
+        /**
+         * The ID of the country this stock exchange belongs to.
+         */
+        countryId: string;
+
+        /**
+         * The date and time the stock exchange was created in Moon Banking.
+         */
+        createdAt: string;
+
+        /**
+         * The name of the stock exchange.
+         */
+        name: string;
+
+        /**
+         * The type of market.
+         */
+        type: 'STOCK';
+
+        /**
+         * The date and time the stock exchange was last updated in Moon Banking.
+         */
+        updatedAt: string;
       }
     }
 
@@ -1196,8 +1483,8 @@ export namespace SearchGetResponse {
        * An array of tags associated with this story for categorization and filtering.
        * Possible tags are `CRYPTO_FRIENDLY`, `FEES_PRICING`, `DIGITAL_EXPERIENCE`,
        * `ACCOUNT_FEATURES`, `CUSTOMER_SERVICE`, `SECURITY_TRUST`, `BRANCH_ATM_ACCESS`,
-       * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
-       * `INNOVATION`, `INVESTMENT_SERVICES` and `LENDING`.
+       * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`,
+       * `TRANSPARENCY`, `INNOVATION`, `INVESTMENT_SERVICES` and `LENDING`.
        */
       tags: Array<string>;
 
@@ -1288,8 +1575,8 @@ export interface SearchGetParams {
   q: string;
 
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `banks`, `countries`, `stories`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `banks`, `countries`, `stories`, `stocks`
    */
   include?: string;
 

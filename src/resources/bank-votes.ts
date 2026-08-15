@@ -1,20 +1,24 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+// File generated from the OpenAPI spec. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
-import { RequestOptions } from '../internal/request-options';
+import { CursorPage, type CursorPageParams, type PagePromise } from '../core/pagination';
+import type { RequestOptions } from '../internal/request-options';
 
 export class BankVotes extends APIResource {
   /**
    * This endpoint allows you to retrieve a paginated list of bank votes. You can
-   * filter by bank ID, category, country, vote type (upvote or downvote), and other
-   * parameters.
+   * filter by bank ID, category, country, vote type (upvote or downvote), and
+   * other parameters.
    */
   list(
     query: BankVoteListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<BankVoteListResponsesCursorPage, BankVoteListResponse> {
-    return this._client.getAPIList('/bank-votes', CursorPage<BankVoteListResponse>, { query, ...options });
+    return this._client.getAPIList<BankVoteListResponse, BankVoteListResponsesCursorPage>(
+      '/bank-votes',
+      CursorPage<BankVoteListResponse>,
+      { query, ...options },
+    );
   }
 }
 
@@ -135,11 +139,12 @@ export interface BankVoteListParams extends CursorPageParams {
   bankId?: string;
 
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `CRYPTO_FRIENDLY`, `CUSTOMER_SERVICE`, `FEES_PRICING`,
-   * `DIGITAL_EXPERIENCE`, `SECURITY_TRUST`, `ACCOUNT_FEATURES`, `BRANCH_ATM_ACCESS`,
-   * `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`, `PROCESSING_SPEED`, `TRANSPARENCY`,
-   * `INNOVATION`, `INVESTMENT_SERVICES`, `LENDING`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `CRYPTO_FRIENDLY`, `CUSTOMER_SERVICE`, `FEES_PRICING`,
+   * `DIGITAL_EXPERIENCE`, `SECURITY_TRUST`, `ACCOUNT_FEATURES`,
+   * `BRANCH_ATM_ACCESS`, `INTERNATIONAL_BANKING`, `BUSINESS_BANKING`,
+   * `PROCESSING_SPEED`, `TRANSPARENCY`, `INNOVATION`, `INVESTMENT_SERVICES`,
+   * `LENDING`
    */
   categories?: string;
 
@@ -149,8 +154,8 @@ export interface BankVoteListParams extends CursorPageParams {
   countryCode?: string;
 
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `bank`, `country`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `bank`, `country`
    */
   include?: string;
 

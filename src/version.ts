@@ -1,1 +1,3 @@
-export const VERSION = '0.10.2'; // x-release-please-version
+// File generated from the OpenAPI spec. See CONTRIBUTING.md for details.
+
+export const VERSION = '1.0.0';

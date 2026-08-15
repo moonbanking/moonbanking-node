@@ -1,91 +1,58 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+/**
+ * Request option types shared by the client and its resources.
+ */
 
-import { NullableHeaders } from './headers';
+export type HTTPMethod = 'get' | 'post' | 'put' | 'patch' | 'delete';
 
-import type { BodyInit } from './builtin-types';
-import type { HTTPMethod, MergedRequestInit } from './types';
-import { type HeadersLike } from './headers';
+/** Header values; `null` removes a default header for a single request. */
+export type HeadersLike =
+  | Headers
+  | Record<string, string | null | undefined>
+  | Array<[string, string]>
+  | undefined;
 
-export type FinalRequestOptions = RequestOptions & { method: HTTPMethod; path: string };
+export type QueryValue =
+  | string
+  | number
+  | boolean
+  | null
+  | undefined
+  | Array<string | number | boolean>;
 
-export type RequestOptions = {
-  /**
-   * The HTTP method for the request (e.g., 'get', 'post', 'put', 'delete').
-   */
-  method?: HTTPMethod;
+/**
+ * Query parameters.
+ *
+ * Typed as `object` rather than an index-signature record so that the generated
+ * `*Params` interfaces are assignable without each one declaring an index
+ * signature.
+ */
+export type Query = object;
 
-  /**
-   * The URL path for the request.
-   *
-   * @example "/v1/foo"
-   */
-  path?: string;
+export type MergedRequestInit = RequestInit & {
+  /** Runtime-specific options, e.g. undici's `dispatcher` or Bun's `proxy`. */
+  [key: string]: unknown;
+};
 
-  /**
-   * Query parameters to include in the request URL.
-   */
-  query?: object | undefined | null;
-
-  /**
-   * The request body. Can be a string, JSON object, FormData, or other supported types.
-   */
-  body?: unknown;
-
-  /**
-   * HTTP headers to include with the request. Can be a Headers object, plain object, or array of tuples.
-   */
-  headers?: HeadersLike;
-
-  /**
-   * The maximum number of times that the client will retry a request in case of a
-   * temporary failure, like a network error or a 5XX error from the server.
-   *
-   * @default 2
-   */
+export interface RequestOptions {
+  /** Per-request override for the number of retries. */
   maxRetries?: number;
-
-  stream?: boolean | undefined;
-
-  /**
-   * The maximum amount of time (in milliseconds) that the client should wait for a response
-   * from the server before timing out a single request.
-   *
-   * @unit milliseconds
-   */
+  /** Per-request timeout in milliseconds. */
   timeout?: number;
-
-  /**
-   * Additional `RequestInit` options to be passed to the underlying `fetch` call.
-   * These options will be merged with the client's default fetch options.
-   */
+  /** Additional headers for this request. */
+  headers?: HeadersLike;
+  /** Additional query parameters for this request. */
+  query?: Query | null | undefined;
+  /** Abort signal for this request. */
+  signal?: AbortSignal | null | undefined;
+  /** Additional `RequestInit` options for this request. */
   fetchOptions?: MergedRequestInit;
+  /** Override the base URL for this request. */
+  baseURL?: string;
+  /** JSON request body. */
+  body?: unknown;
+}
 
-  /**
-   * An AbortSignal that can be used to cancel the request.
-   */
-  signal?: AbortSignal | undefined | null;
-
-  /**
-   * A unique key for this request to enable idempotency.
-   */
-  idempotencyKey?: string;
-
-  /**
-   * Override the default base URL for this specific request.
-   */
-  defaultBaseURL?: string | undefined;
-
-  __binaryResponse?: boolean | undefined;
-};
-
-export type EncodedContent = { bodyHeaders: HeadersLike; body: BodyInit };
-export type RequestEncoder = (request: { headers: NullableHeaders; body: unknown }) => EncodedContent;
-
-export const FallbackEncoder: RequestEncoder = ({ headers, body }) => {
-  return {
-    bodyHeaders: {
-      'content-type': 'application/json',
-    },
-    body: JSON.stringify(body),
-  };
-};
+export interface FinalRequestOptions extends RequestOptions {
+  method: HTTPMethod;
+  path: string;
+}

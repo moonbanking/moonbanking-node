@@ -1,23 +1,27 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+// File generated from the OpenAPI spec. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
-import { CursorPage, type CursorPageParams, PagePromise } from '../core/pagination';
-import { RequestOptions } from '../internal/request-options';
-import { path } from '../internal/utils/path';
+import type { APIPromise } from '../core/api-promise';
+import { CursorPage, type CursorPageParams, type PagePromise } from '../core/pagination';
+import type { RequestOptions } from '../internal/request-options';
+import { path } from '../internal/utils';
 
 export class Banks extends APIResource {
   /**
-   * This endpoint allows you to retrieve a paginated list of all banks. By default,
-   * a maximum of ten banks are shown per page. You can search banks by name, filter
-   * by country, sort them by various fields, and include related data like scores
-   * and country information.
+   * This endpoint allows you to retrieve a paginated list of all banks. By
+   * default, a maximum of ten banks are shown per page. You can search banks by
+   * name, filter by country, sort them by various fields, and include related data
+   * like scores and country information.
    */
   list(
     query: BankListParams | null | undefined = {},
     options?: RequestOptions,
   ): PagePromise<BankListResponsesCursorPage, BankListResponse> {
-    return this._client.getAPIList('/banks', CursorPage<BankListResponse>, { query, ...options });
+    return this._client.getAPIList<BankListResponse, BankListResponsesCursorPage>(
+      '/banks',
+      CursorPage<BankListResponse>,
+      { query, ...options },
+    );
   }
 
   /**
@@ -30,20 +34,20 @@ export class Banks extends APIResource {
     query: BankGetParams | null | undefined = {},
     options?: RequestOptions,
   ): APIPromise<BankGetResponse> {
-    return this._client.get(path`/banks/${id}`, { query, ...options });
+    return this._client.get<BankGetResponse>(path`/banks/${id}`, { query, ...options });
   }
 
   /**
-   * This endpoint allows you to retrieve banks by hostname. It will return up to one
-   * bank per country that matches the provided hostname. The hostname is normalized
-   * (www. prefix removed if present) and matched against both the primary hostname
-   * and alternative hostnames.
+   * This endpoint allows you to retrieve banks by hostname. It will return up to
+   * one bank per country that matches the provided hostname. The hostname is
+   * normalized (www. prefix removed if present) and matched against both the
+   * primary hostname and alternative hostnames.
    */
   getByHostname(
     query: BankGetByHostnameParams,
     options?: RequestOptions,
   ): APIPromise<BankGetByHostnameResponse> {
-    return this._client.get('/banks/by-hostname', { query, ...options });
+    return this._client.get<BankGetByHostnameResponse>('/banks/by-hostname', { query, ...options });
   }
 
   /**
@@ -56,7 +60,10 @@ export class Banks extends APIResource {
     query: BankSemanticSearchParams,
     options?: RequestOptions,
   ): APIPromise<BankSemanticSearchResponse> {
-    return this._client.get('/banks/semantic-search', { query, ...options });
+    return this._client.get<BankSemanticSearchResponse>('/banks/semantic-search', {
+      query,
+      ...options,
+    });
   }
 }
 
@@ -102,8 +109,8 @@ export interface BankListResponse {
   country?: BankListResponse.Country;
 
   /**
-   * The bank's rank within the country. Based on the bank's overall score, which is
-   * determined by user votes across all categories. Only banks with at least 10
+   * The bank's rank within the country. Based on the bank's overall score, which
+   * is determined by user votes across all categories. Only banks with at least 10
    * votes are ranked.
    */
   countryRank?: number | null;
@@ -125,6 +132,8 @@ export interface BankListResponse {
    * by users.
    */
   scores?: BankListResponse.Scores;
+
+  stocks?: Array<BankListResponse.Stock>;
 
   /**
    * The bank's official website URL.
@@ -191,7 +200,8 @@ export namespace BankListResponse {
     customerService: Scores.CustomerService;
 
     /**
-     * Aggregate voting counts and score for digital experience category for this bank.
+     * Aggregate voting counts and score for digital experience category for this
+     * bank.
      */
     digitalExperience: Scores.DigitalExperience;
 
@@ -372,7 +382,8 @@ export namespace BankListResponse {
     }
 
     /**
-     * Aggregate voting counts and score for digital experience category for this bank.
+     * Aggregate voting counts and score for digital experience category for this
+     * bank.
      */
     export interface DigitalExperience {
       /**
@@ -528,13 +539,14 @@ export namespace BankListResponse {
      */
     export interface Overall {
       /**
-       * The total number of downvotes for this bank. This is the sum of downvotes across
-       * all categories.
+       * The total number of downvotes for this bank. This is the sum of downvotes
+       * across all categories.
        */
       down: number;
 
       /**
-       * The overall score for this bank across all categories, ranging from -100 to 100.
+       * The overall score for this bank across all categories, ranging from -100 to
+       * 100.
        */
       score: number;
 
@@ -545,8 +557,8 @@ export namespace BankListResponse {
       total: number;
 
       /**
-       * The total number of upvotes for this bank. This is the sum of upvotes across all
-       * categories.
+       * The total number of upvotes for this bank. This is the sum of upvotes across
+       * all categories.
        */
       up: number;
     }
@@ -626,6 +638,141 @@ export namespace BankListResponse {
       up: number;
     }
   }
+
+  /**
+   * The stock model contains identifying information for a stock listing,
+   * including its ticker symbol, primary-listing flag, market, and the bank it
+   * belongs to.
+   */
+  export interface Stock {
+    /**
+     * The stock's auto-generated unique identifier.
+     */
+    id: string;
+
+    /**
+     * The date and time the stock was created in Moon Banking.
+     */
+    createdAt: string;
+
+    /**
+     * Whether the stock is the primary stock of the bank.
+     */
+    isPrimary: boolean;
+
+    /**
+     * The date and time the stock was last updated in Moon Banking.
+     */
+    updatedAt: string;
+
+    /**
+     * The bank this stock listing belongs to.
+     */
+    bank?: Stock.Bank;
+
+    /**
+     * The ID of the bank this stock belongs to.
+     */
+    bankId?: string | null;
+
+    /**
+     * The market model contains identifying information for a market, including its
+     * name, code, type, and the country it belongs to.
+     */
+    market?: Stock.Market;
+
+    /**
+     * The ID of the market this stock belongs to.
+     */
+    marketId?: string | null;
+
+    /**
+     * The symbol of the stock.
+     */
+    symbol?: string | null;
+  }
+
+  export namespace Stock {
+    /**
+     * The bank this stock listing belongs to.
+     */
+    export interface Bank {
+      /**
+       * The bank's auto-generated unique identifier.
+       */
+      id: string;
+
+      /**
+       * The ID of the country where this bank is located.
+       */
+      countryId: string;
+
+      /**
+       * The bank's official name or display name.
+       */
+      name: string;
+
+      /**
+       * The bank's rank within the country. Based on the bank's overall score, which
+       * is determined by user votes across all categories. Only banks with at least 10
+       * votes are ranked.
+       */
+      countryRank?: number | null;
+
+      /**
+       * The bank's worldwide rank. Based on the bank's overall score, which is
+       * determined by user votes across all categories. Only banks with at least 10
+       * votes are ranked.
+       */
+      rank?: number | null;
+
+      /**
+       * The bank's official website URL.
+       */
+      url?: string | null;
+    }
+
+    /**
+     * The market model contains identifying information for a market, including its
+     * name, code, type, and the country it belongs to.
+     */
+    export interface Market {
+      /**
+       * The stock exchange's auto-generated unique identifier.
+       */
+      id: string;
+
+      /**
+       * The code of the stock exchange.
+       */
+      code: string;
+
+      /**
+       * The ID of the country this stock exchange belongs to.
+       */
+      countryId: string;
+
+      /**
+       * The date and time the stock exchange was created in Moon Banking.
+       */
+      createdAt: string;
+
+      /**
+       * The name of the stock exchange.
+       */
+      name: string;
+
+      /**
+       * The type of market.
+       */
+      type: 'STOCK';
+
+      /**
+       * The date and time the stock exchange was last updated in Moon Banking.
+       */
+      updatedAt: string;
+    }
+  }
 }
 
 export interface BankGetResponse {
@@ -684,8 +831,8 @@ export namespace BankGetResponse {
     country?: Data.Country;
 
     /**
-     * The bank's rank within the country. Based on the bank's overall score, which is
-     * determined by user votes across all categories. Only banks with at least 10
+     * The bank's rank within the country. Based on the bank's overall score, which
+     * is determined by user votes across all categories. Only banks with at least 10
      * votes are ranked.
      */
     countryRank?: number | null;
@@ -707,6 +854,8 @@ export namespace BankGetResponse {
      * by users.
      */
     scores?: Data.Scores;
+
+    stocks?: Array<Data.Stock>;
 
     /**
      * The bank's official website URL.
@@ -773,7 +922,8 @@ export namespace BankGetResponse {
       customerService: Scores.CustomerService;
 
       /**
-       * Aggregate voting counts and score for digital experience category for this bank.
+       * Aggregate voting counts and score for digital experience category for this
+       * bank.
        */
       digitalExperience: Scores.DigitalExperience;
 
@@ -954,7 +1104,8 @@ export namespace BankGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for digital experience category for this bank.
+       * Aggregate voting counts and score for digital experience category for this
+       * bank.
        */
       export interface DigitalExperience {
         /**
@@ -1110,13 +1261,14 @@ export namespace BankGetResponse {
        */
       export interface Overall {
         /**
-         * The total number of downvotes for this bank. This is the sum of downvotes across
-         * all categories.
+         * The total number of downvotes for this bank. This is the sum of downvotes
+         * across all categories.
          */
         down: number;
 
         /**
-         * The overall score for this bank across all categories, ranging from -100 to 100.
+         * The overall score for this bank across all categories, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -1127,8 +1279,8 @@ export namespace BankGetResponse {
         total: number;
 
         /**
-         * The total number of upvotes for this bank. This is the sum of upvotes across all
-         * categories.
+         * The total number of upvotes for this bank. This is the sum of upvotes across
+         * all categories.
          */
         up: number;
       }
@@ -1206,6 +1358,141 @@ export namespace BankGetResponse {
          * The total number of upvotes for transparency for this bank.
          */
         up: number;
+      }
+    }
+
+    /**
+     * The stock model contains identifying information for a stock listing,
+     * including its ticker symbol, primary-listing flag, market, and the bank it
+     * belongs to.
+     */
+    export interface Stock {
+      /**
+       * The stock's auto-generated unique identifier.
+       */
+      id: string;
+
+      /**
+       * The date and time the stock was created in Moon Banking.
+       */
+      createdAt: string;
+
+      /**
+       * Whether the stock is the primary stock of the bank.
+       */
+      isPrimary: boolean;
+
+      /**
+       * The date and time the stock was last updated in Moon Banking.
+       */
+      updatedAt: string;
+
+      /**
+       * The bank this stock listing belongs to.
+       */
+      bank?: Stock.Bank;
+
+      /**
+       * The ID of the bank this stock belongs to.
+       */
+      bankId?: string | null;
+
+      /**
+       * The market model contains identifying information for a market, including its
+       * name, code, type, and the country it belongs to.
+       */
+      market?: Stock.Market;
+
+      /**
+       * The ID of the market this stock belongs to.
+       */
+      marketId?: string | null;
+
+      /**
+       * The symbol of the stock.
+       */
+      symbol?: string | null;
+    }
+
+    export namespace Stock {
+      /**
+       * The bank this stock listing belongs to.
+       */
+      export interface Bank {
+        /**
+         * The bank's auto-generated unique identifier.
+         */
+        id: string;
+
+        /**
+         * The ID of the country where this bank is located.
+         */
+        countryId: string;
+
+        /**
+         * The bank's official name or display name.
+         */
+        name: string;
+
+        /**
+         * The bank's rank within the country. Based on the bank's overall score, which
+         * is determined by user votes across all categories. Only banks with at least 10
+         * votes are ranked.
+         */
+        countryRank?: number | null;
+
+        /**
+         * The bank's worldwide rank. Based on the bank's overall score, which is
+         * determined by user votes across all categories. Only banks with at least 10
+         * votes are ranked.
+         */
+        rank?: number | null;
+
+        /**
+         * The bank's official website URL.
+         */
+        url?: string | null;
+      }
+
+      /**
+       * The market model contains identifying information for a market, including its
+       * name, code, type, and the country it belongs to.
+       */
+      export interface Market {
+        /**
+         * The stock exchange's auto-generated unique identifier.
+         */
+        id: string;
+
+        /**
+         * The code of the stock exchange.
+         */
+        code: string;
+
+        /**
+         * The ID of the country this stock exchange belongs to.
+         */
+        countryId: string;
+
+        /**
+         * The date and time the stock exchange was created in Moon Banking.
+         */
+        createdAt: string;
+
+        /**
+         * The name of the stock exchange.
+         */
+        name: string;
+
+        /**
+         * The type of market.
+         */
+        type: 'STOCK';
+
+        /**
+         * The date and time the stock exchange was last updated in Moon Banking.
+         */
+        updatedAt: string;
       }
     }
   }
@@ -1264,8 +1551,8 @@ export namespace BankGetByHostnameResponse {
     country?: Data.Country;
 
     /**
-     * The bank's rank within the country. Based on the bank's overall score, which is
-     * determined by user votes across all categories. Only banks with at least 10
+     * The bank's rank within the country. Based on the bank's overall score, which
+     * is determined by user votes across all categories. Only banks with at least 10
      * votes are ranked.
      */
     countryRank?: number | null;
@@ -1287,6 +1574,8 @@ export namespace BankGetByHostnameResponse {
      * by users.
      */
     scores?: Data.Scores;
+
+    stocks?: Array<Data.Stock>;
 
     /**
      * The bank's official website URL.
@@ -1353,7 +1642,8 @@ export namespace BankGetByHostnameResponse {
       customerService: Scores.CustomerService;
 
       /**
-       * Aggregate voting counts and score for digital experience category for this bank.
+       * Aggregate voting counts and score for digital experience category for this
+       * bank.
        */
       digitalExperience: Scores.DigitalExperience;
 
@@ -1534,7 +1824,8 @@ export namespace BankGetByHostnameResponse {
       }
 
       /**
-       * Aggregate voting counts and score for digital experience category for this bank.
+       * Aggregate voting counts and score for digital experience category for this
+       * bank.
        */
       export interface DigitalExperience {
         /**
@@ -1690,13 +1981,14 @@ export namespace BankGetByHostnameResponse {
        */
       export interface Overall {
         /**
-         * The total number of downvotes for this bank. This is the sum of downvotes across
-         * all categories.
+         * The total number of downvotes for this bank. This is the sum of downvotes
+         * across all categories.
          */
         down: number;
 
         /**
-         * The overall score for this bank across all categories, ranging from -100 to 100.
+         * The overall score for this bank across all categories, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -1707,8 +1999,8 @@ export namespace BankGetByHostnameResponse {
         total: number;
 
         /**
-         * The total number of upvotes for this bank. This is the sum of upvotes across all
-         * categories.
+         * The total number of upvotes for this bank. This is the sum of upvotes across
+         * all categories.
          */
         up: number;
       }
@@ -1788,6 +2080,141 @@ export namespace BankGetByHostnameResponse {
         up: number;
       }
     }
+
+    /**
+     * The stock model contains identifying information for a stock listing,
+     * including its ticker symbol, primary-listing flag, market, and the bank it
+     * belongs to.
+     */
+    export interface Stock {
+      /**
+       * The stock's auto-generated unique identifier.
+       */
+      id: string;
+
+      /**
+       * The date and time the stock was created in Moon Banking.
+       */
+      createdAt: string;
+
+      /**
+       * Whether the stock is the primary stock of the bank.
+       */
+      isPrimary: boolean;
+
+      /**
+       * The date and time the stock was last updated in Moon Banking.
+       */
+      updatedAt: string;
+
+      /**
+       * The bank this stock listing belongs to.
+       */
+      bank?: Stock.Bank;
+
+      /**
+       * The ID of the bank this stock belongs to.
+       */
+      bankId?: string | null;
+
+      /**
+       * The market model contains identifying information for a market, including its
+       * name, code, type, and the country it belongs to.
+       */
+      market?: Stock.Market;
+
+      /**
+       * The ID of the market this stock belongs to.
+       */
+      marketId?: string | null;
+
+      /**
+       * The symbol of the stock.
+       */
+      symbol?: string | null;
+    }
+
+    export namespace Stock {
+      /**
+       * The bank this stock listing belongs to.
+       */
+      export interface Bank {
+        /**
+         * The bank's auto-generated unique identifier.
+         */
+        id: string;
+
+        /**
+         * The ID of the country where this bank is located.
+         */
+        countryId: string;
+
+        /**
+         * The bank's official name or display name.
+         */
+        name: string;
+
+        /**
+         * The bank's rank within the country. Based on the bank's overall score, which
+         * is determined by user votes across all categories. Only banks with at least 10
+         * votes are ranked.
+         */
+        countryRank?: number | null;
+
+        /**
+         * The bank's worldwide rank. Based on the bank's overall score, which is
+         * determined by user votes across all categories. Only banks with at least 10
+         * votes are ranked.
+         */
+        rank?: number | null;
+
+        /**
+         * The bank's official website URL.
+         */
+        url?: string | null;
+      }
+
+      /**
+       * The market model contains identifying information for a market, including its
+       * name, code, type, and the country it belongs to.
+       */
+      export interface Market {
+        /**
+         * The stock exchange's auto-generated unique identifier.
+         */
+        id: string;
+
+        /**
+         * The code of the stock exchange.
+         */
+        code: string;
+
+        /**
+         * The ID of the country this stock exchange belongs to.
+         */
+        countryId: string;
+
+        /**
+         * The date and time the stock exchange was created in Moon Banking.
+         */
+        createdAt: string;
+
+        /**
+         * The name of the stock exchange.
+         */
+        name: string;
+
+        /**
+         * The type of market.
+         */
+        type: 'STOCK';
+
+        /**
+         * The date and time the stock exchange was last updated in Moon Banking.
+         */
+        updatedAt: string;
+      }
+    }
   }
 }
 
@@ -1821,8 +2248,8 @@ export namespace BankSemanticSearchResponse {
     matchingSection: string;
 
     /**
-     * The markdown header of the matched section (e.g. '# What services does Fidelity
-     * offer?').
+     * The markdown header of the matched section (e.g. '# What services does
+     * Fidelity offer?').
      */
     sectionTitle: string;
 
@@ -1849,8 +2276,8 @@ export interface BankListParams extends CursorPageParams {
   countryId?: string;
 
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `scores`, `country`, `meta`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `scores`, `country`, `meta`, `stocks`
    */
   include?: string;
 
@@ -1937,8 +2364,8 @@ export interface BankListParams extends CursorPageParams {
 
 export interface BankGetParams {
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `scores`, `country`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `scores`, `country`, `stocks`
    */
   include?: string;
 }
@@ -1950,8 +2377,8 @@ export interface BankGetByHostnameParams {
   hostname: string;
 
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `scores`, `country`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `scores`, `country`
    */
   include?: string;
 

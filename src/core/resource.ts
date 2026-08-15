@@ -1,11 +1,10 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+import type { BaseClient } from '../internal/base-client';
 
-import type { MoonBanking } from '../client';
+/** Base class for every generated resource namespace on the client. */
+export class APIResource {
+  protected _client: BaseClient;
 
-export abstract class APIResource {
-  protected _client: MoonBanking;
-
-  constructor(client: MoonBanking) {
+  constructor(client: BaseClient) {
     this._client = client;
   }
 }

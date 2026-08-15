@@ -1,69 +1,132 @@
-# Banks
+# API reference
 
-Types:
-
-- <code><a href="./src/resources/banks.ts">BankListResponse</a></code>
-- <code><a href="./src/resources/banks.ts">BankGetResponse</a></code>
-- <code><a href="./src/resources/banks.ts">BankGetByHostnameResponse</a></code>
-- <code><a href="./src/resources/banks.ts">BankSemanticSearchResponse</a></code>
-
-Methods:
-
-- <code title="get /banks">client.banks.<a href="./src/resources/banks.ts">list</a>({ ...params }) -> BankListResponsesCursorPage</code>
-- <code title="get /banks/{id}">client.banks.<a href="./src/resources/banks.ts">get</a>(id, { ...params }) -> BankGetResponse</code>
-- <code title="get /banks/by-hostname">client.banks.<a href="./src/resources/banks.ts">getByHostname</a>({ ...params }) -> BankGetByHostnameResponse</code>
-- <code title="get /banks/semantic-search">client.banks.<a href="./src/resources/banks.ts">semanticSearch</a>({ ...params }) -> BankSemanticSearchResponse</code>
+All methods are available on an instance of the `MoonBanking` client.
 
 # BankVotes
 
 Types:
 
-- <code><a href="./src/resources/bank-votes.ts">BankVoteListResponse</a></code>
+- `MoonBanking.BankVotes.BankVoteListResponse`
+- `MoonBanking.BankVotes.BankVoteListResponsesCursorPage`
+- `MoonBanking.BankVotes.BankVoteListParams`
 
 Methods:
 
-- <code title="get /bank-votes">client.bankVotes.<a href="./src/resources/bank-votes.ts">list</a>({ ...params }) -> BankVoteListResponsesCursorPage</code>
+- `client.bankVotes.list(query?)` -> `MoonBanking.BankVotes.BankVoteListResponsesCursorPage`
+  - `GET /bank-votes`
+
+# Banks
+
+Types:
+
+- `MoonBanking.Banks.BankListResponse`
+- `MoonBanking.Banks.BankListResponsesCursorPage`
+- `MoonBanking.Banks.BankListParams`
+- `MoonBanking.Banks.BankGetResponse`
+- `MoonBanking.Banks.BankGetParams`
+- `MoonBanking.Banks.BankGetByHostnameResponse`
+- `MoonBanking.Banks.BankGetByHostnameParams`
+- `MoonBanking.Banks.BankSemanticSearchResponse`
+- `MoonBanking.Banks.BankSemanticSearchParams`
+
+Methods:
+
+- `client.banks.list(query?)` -> `MoonBanking.Banks.BankListResponsesCursorPage`
+  - `GET /banks`
+- `client.banks.get(id, query?)` -> `MoonBanking.Banks.BankGetResponse`
+  - `GET /banks/{id}`
+- `client.banks.getByHostname(query)` -> `MoonBanking.Banks.BankGetByHostnameResponse`
+  - `GET /banks/by-hostname`
+- `client.banks.semanticSearch(query)` -> `MoonBanking.Banks.BankSemanticSearchResponse`
+  - `GET /banks/semantic-search`
 
 # Countries
 
 Types:
 
-- <code><a href="./src/resources/countries.ts">CountryListResponse</a></code>
-- <code><a href="./src/resources/countries.ts">CountryGetResponse</a></code>
+- `MoonBanking.Countries.CountryListResponse`
+- `MoonBanking.Countries.CountryListResponsesCursorPage`
+- `MoonBanking.Countries.CountryListParams`
+- `MoonBanking.Countries.CountryGetResponse`
+- `MoonBanking.Countries.CountryGetParams`
 
 Methods:
 
-- <code title="get /countries">client.countries.<a href="./src/resources/countries.ts">list</a>({ ...params }) -> CountryListResponsesCursorPage</code>
-- <code title="get /countries/{code}">client.countries.<a href="./src/resources/countries.ts">get</a>(code, { ...params }) -> CountryGetResponse</code>
+- `client.countries.list(query?)` -> `MoonBanking.Countries.CountryListResponsesCursorPage`
+  - `GET /countries`
+- `client.countries.get(code, query?)` -> `MoonBanking.Countries.CountryGetResponse`
+  - `GET /countries/{code}`
 
-# Stories
+# Markets
 
 Types:
 
-- <code><a href="./src/resources/stories.ts">StoryListResponse</a></code>
-- <code><a href="./src/resources/stories.ts">StoryGetResponse</a></code>
+- `MoonBanking.Markets.MarketListResponse`
+- `MoonBanking.Markets.MarketListResponsesCursorPage`
+- `MoonBanking.Markets.MarketListParams`
+- `MoonBanking.Markets.MarketGetResponse`
 
 Methods:
 
-- <code title="get /stories">client.stories.<a href="./src/resources/stories.ts">list</a>({ ...params }) -> StoryListResponsesCursorPage</code>
-- <code title="get /stories/{id}">client.stories.<a href="./src/resources/stories.ts">get</a>(id, { ...params }) -> StoryGetResponse</code>
-
-# World
-
-Types:
-
-- <code><a href="./src/resources/world.ts">WorldGetResponse</a></code>
-
-Methods:
-
-- <code title="get /world">client.world.<a href="./src/resources/world.ts">get</a>({ ...params }) -> WorldGetResponse</code>
+- `client.markets.list(query?)` -> `MoonBanking.Markets.MarketListResponsesCursorPage`
+  - `GET /markets`
+- `client.markets.get(id)` -> `MoonBanking.Markets.MarketGetResponse`
+  - `GET /markets/{id}`
 
 # Search
 
 Types:
 
-- <code><a href="./src/resources/search.ts">SearchGetResponse</a></code>
+- `MoonBanking.Search.SearchGetResponse`
+- `MoonBanking.Search.SearchGetParams`
 
 Methods:
 
-- <code title="get /search">client.search.<a href="./src/resources/search.ts">get</a>({ ...params }) -> SearchGetResponse</code>
+- `client.search.get(query)` -> `MoonBanking.Search.SearchGetResponse`
+  - `GET /search`
+
+# Stocks
+
+Types:
+
+- `MoonBanking.Stocks.StockListResponse`
+- `MoonBanking.Stocks.StockListResponsesCursorPage`
+- `MoonBanking.Stocks.StockListParams`
+- `MoonBanking.Stocks.StockGetResponse`
+- `MoonBanking.Stocks.StockGetParams`
+
+Methods:
+
+- `client.stocks.list(query?)` -> `MoonBanking.Stocks.StockListResponsesCursorPage`
+  - `GET /stocks`
+- `client.stocks.get(id, query?)` -> `MoonBanking.Stocks.StockGetResponse`
+  - `GET /stocks/{id}`
+
+# Stories
+
+Types:
+
+- `MoonBanking.Stories.StoryListResponse`
+- `MoonBanking.Stories.StoryListResponsesCursorPage`
+- `MoonBanking.Stories.StoryListParams`
+- `MoonBanking.Stories.StoryGetResponse`
+- `MoonBanking.Stories.StoryGetParams`
+
+Methods:
+
+- `client.stories.list(query?)` -> `MoonBanking.Stories.StoryListResponsesCursorPage`
+  - `GET /stories`
+- `client.stories.get(id, query?)` -> `MoonBanking.Stories.StoryGetResponse`
+  - `GET /stories/{id}`
+
+# World
+
+Types:
+
+- `MoonBanking.World.WorldGetResponse`
+- `MoonBanking.World.WorldGetParams`
+
+Methods:
+
+- `client.world.get(query?)` -> `MoonBanking.World.WorldGetResponse`
+  - `GET /world`

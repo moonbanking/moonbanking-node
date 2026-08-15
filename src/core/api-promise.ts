@@ -1,65 +1,43 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
-
-import { type MoonBanking } from '../client';
-
-import { type PromiseOrValue } from '../internal/types';
-import { APIResponseProps, defaultParseResponse } from '../internal/parse';
+import { defaultParseResponse, type APIResponseProps } from '../internal/parse';
 
 /**
- * A subclass of `Promise` providing additional helper methods
- * for interacting with the SDK.
+ * A `Promise` that also exposes the underlying HTTP response.
+ *
+ * Every SDK method returns one of these, so callers can await the parsed body
+ * directly or reach for headers and status via `asResponse()` /
+ * `withResponse()`.
  */
 export class APIPromise<T> extends Promise<T> {
   private parsedPromise: Promise<T> | undefined;
-  #client: MoonBanking;
 
   constructor(
-    client: MoonBanking,
     private responsePromise: Promise<APIResponseProps>,
-    private parseResponse: (
-      client: MoonBanking,
-      props: APIResponseProps,
-    ) => PromiseOrValue<T> = defaultParseResponse,
+    private parseResponse: (props: APIResponseProps) => Promise<T> = defaultParseResponse,
   ) {
+    // The real work happens in `parse()`; this executor is never used.
     super((resolve) => {
-      // this is maybe a bit weird but this has to be a no-op to not implicitly
-      // parse the response body; instead .then, .catch, .finally are overridden
-      // to parse the response
-      resolve(null as any);
+      resolve(null as unknown as T);
     });
-    this.#client = client;
   }
 
-  _thenUnwrap<U>(transform: (data: T, props: APIResponseProps) => U): APIPromise<U> {
-    return new APIPromise(this.#client, this.responsePromise, async (client, props) =>
-      transform(await this.parseResponse(client, props), props),
+  /** Chain an additional transform over the parsed body. */
+  _thenUnwrap<U>(transform: (value: T, props: APIResponseProps) => U): APIPromise<U> {
+    return new APIPromise(this.responsePromise, async (props) =>
+      transform(await this.parseResponse(props), props),
     );
   }
 
   /**
-   * Gets the raw `Response` instance instead of parsing the response
-   * data.
-   *
-   * If you want to parse the response body but still get the `Response`
-   * instance, you can use {@link withResponse()}.
-   *
-   * 👋 Getting the wrong TypeScript type for `Response`?
-   * Try setting `"moduleResolution": "NodeNext"` or add `"lib": ["DOM"]`
-   * to your `tsconfig.json`.
+   * Resolve as soon as response headers are available, without consuming the
+   * body. Useful for streaming or custom parsing.
    */
   asResponse(): Promise<Response> {
-    return this.responsePromise.then((p) => p.response);
+    return this.responsePromise.then((props) => props.response);
   }
 
   /**
-   * Gets the parsed response data and the raw `Response` instance.
-   *
-   * If you just want to get the raw `Response` instance without parsing it,
-   * you can use {@link asResponse()}.
-   *
-   * 👋 Getting the wrong TypeScript type for `Response`?
-   * Try setting `"moduleResolution": "NodeNext"` or add `"lib": ["DOM"]`
-   * to your `tsconfig.json`.
+   * Resolve with both the parsed body and the raw response. Unlike
+   * `asResponse()`, this consumes the body.
    */
   async withResponse(): Promise<{ data: T; response: Response }> {
     const [data, response] = await Promise.all([this.parse(), this.asResponse()]);
@@ -68,25 +46,25 @@ export class APIPromise<T> extends Promise<T> {
 
   private parse(): Promise<T> {
     if (!this.parsedPromise) {
-      this.parsedPromise = this.responsePromise.then((data) => this.parseResponse(this.#client, data));
+      this.parsedPromise = this.responsePromise.then(this.parseResponse);
     }
     return this.parsedPromise;
   }
 
   override then<TResult1 = T, TResult2 = never>(
-    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null,
-    onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null,
+    onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | null,
+    onrejected?: ((reason: unknown) => TResult2 | PromiseLike<TResult2>) | null,
   ): Promise<TResult1 | TResult2> {
     return this.parse().then(onfulfilled, onrejected);
   }
 
   override catch<TResult = never>(
-    onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null,
+    onrejected?: ((reason: unknown) => TResult | PromiseLike<TResult>) | null,
   ): Promise<T | TResult> {
     return this.parse().catch(onrejected);
   }
 
-  override finally(onfinally?: (() => void) | undefined | null): Promise<T> {
+  override finally(onfinally?: (() => void) | null): Promise<T> {
     return this.parse().finally(onfinally);
   }
 }

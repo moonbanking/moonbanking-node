@@ -1,52 +1,47 @@
-# Moon Banking TypeScript and JavaScript API Library
+# Moon Banking API TypeScript and JavaScript SDK
 
-[![NPM version](<https://img.shields.io/npm/v/moonbanking.svg?label=npm%20(stable)>)](https://npmjs.org/package/moonbanking) ![npm bundle size](https://img.shields.io/bundlephobia/minzip/moonbanking)
+[![NPM version](https://img.shields.io/npm/v/moonbanking.svg)](https://npmjs.org/package/moonbanking)
 
-This library provides convenient access to the Moon Banking REST API from server-side TypeScript or JavaScript.
+This library provides convenient access to the Moon Banking API from server-side TypeScript or JavaScript.
 
-It is generated from our [OpenAPI specification](https://github.com/moonbanking/moonbanking-openapi) with [Stainless](https://www.stainless.com/).
-
-The REST API documentation can be found on [docs.moonbanking.com](https://docs.moonbanking.com). The full API of this library can be found in [api.md](api.md).
+It is generated from our [OpenAPI specification](https://docs.moonbanking.com). The REST API documentation can be found on [docs.moonbanking.com](https://docs.moonbanking.com). The full API of this library can be found in [api.md](api.md).
 
 ## Installation
 
 ```sh
-# npm
-npm install --save moonbanking
+npm install moonbanking
+```
 
-# pnpm
+```sh
 pnpm add moonbanking
+```
 
-# yarn
+```sh
 yarn add moonbanking
+```
 
-# bun
+```sh
 bun add moonbanking
 ```
 
 ## Usage
 
-The full API of this library can be found in [api.md](api.md).
-
-<!-- prettier-ignore -->
-```js
+```ts
 import MoonBanking from 'moonbanking';
 
 const client = new MoonBanking({
-  bearerToken: process.env['MOON_BANKING_API_KEY'],
+  bearerToken: process.env['MOON_BANKING_API_KEY'], // This is the default and can be omitted
 });
 
-const page = await client.banks.list();
-const bankListResponse = page.data[0];
+const result = await client.banks.list();
 
-console.log(bankListResponse.id);
+console.log(result);
 ```
 
 ### Request & Response types
 
 This library includes TypeScript definitions for all request params and response fields. You may import and use them like so:
 
-<!-- prettier-ignore -->
 ```ts
 import MoonBanking from 'moonbanking';
 
@@ -54,22 +49,18 @@ const client = new MoonBanking({
   bearerToken: process.env['MOON_BANKING_API_KEY'],
 });
 
-const bankListResponse: MoonBanking.Banks.BankListResponsesCursorPage = await client.banks.list();
-
-console.log(bankListResponse?.data?.[0]?.id);
+const params: MoonBanking.Banks.BankListParams = { limit: 20 };
+const result = await client.banks.list(params);
 ```
 
-Documentation for each method, request param, and response field are available in docstrings and will appear on hover in most modern editors.
+Documentation for each method, request param, and response field is available in docstrings and will appear on hover in most modern editors.
 
 ## Handling errors
 
-When the library is unable to connect to the API,
-or if the API returns a non-success status code (i.e., 4xx or 5xx response),
-a subclass of `APIError` will be thrown:
+When the library is unable to connect to the API, or if the API returns a non-success status code (i.e., 4xx or 5xx response), a subclass of `APIError` will be thrown:
 
-<!-- prettier-ignore -->
 ```ts
-const page = await client.banks.list().catch(async (err) => {
+const result = await client.banks.list().catch(async (err) => {
   if (err instanceof MoonBanking.APIError) {
     console.log(err.status); // 400
     console.log(err.name); // BadRequestError
@@ -88,6 +79,7 @@ Error codes are as follows:
 | 401         | `AuthenticationError`      |
 | 403         | `PermissionDeniedError`    |
 | 404         | `NotFoundError`            |
+| 409         | `ConflictError`            |
 | 422         | `UnprocessableEntityError` |
 | 429         | `RateLimitError`           |
 | >=500       | `InternalServerError`      |
@@ -95,112 +87,88 @@ Error codes are as follows:
 
 ### Retries
 
-Certain errors will be automatically retried 2 times by default, with a short exponential backoff.
-Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict,
-429 Rate Limit, and >=500 Internal errors will all be retried by default.
+Certain errors will be automatically retried 2 times by default, with a short exponential backoff. Connection errors (for example, due to a network connectivity problem), 408 Request Timeout, 409 Conflict, 429 Rate Limit, and >=500 Internal errors will all be retried by default.
 
 You can use the `maxRetries` option to configure or disable this:
 
-<!-- prettier-ignore -->
-```js
+```ts
 // Configure the default for all requests:
 const client = new MoonBanking({
   maxRetries: 0, // default is 2
 });
 
 // Or, configure per-request:
-await client.banks.list({
-  maxRetries: 5,
-});
+await client.banks.list({}, { maxRetries: 5 });
 ```
 
 ### Timeouts
 
-The maximum timeout for requests to the Moon Banking API is 20 seconds. You can configure a shorter timeout with a `timeout` option:
+Requests time out after 20 seconds by default. You can configure this with a `timeout` option:
 
-<!-- prettier-ignore -->
 ```ts
 // Configure the default for all requests:
 const client = new MoonBanking({
   timeout: 10 * 1000, // 10 seconds (default is 20 seconds)
 });
-
-// Override per-request:
-await client.banks.list({
-  timeout: 5 * 1000,
-});
 ```
 
 On timeout, an `APIConnectionTimeoutError` is thrown.
 
-Note that requests which time out will be [retried twice by default](#retries).
+Note that requests which time out will be retried twice by default.
 
 ## Auto-pagination
 
-List methods in the MoonBanking API are paginated.
-You can use the `for await … of` syntax to iterate through items across all pages:
+List methods are paginated. Use `for await … of` to iterate through items across all pages:
 
 ```ts
-async function fetchAllBankListResponses(params) {
-  const allBankListResponses = [];
+async function fetchAllBanks() {
+  const all = [];
   // Automatically fetches more pages as needed.
-  for await (const bankListResponse of client.banks.list({
-    limit: 20,
-    starting_after: '6jkxE4N8gHXgDPK',
-  })) {
-    allBankListResponses.push(bankListResponse);
+  for await (const item of client.banks.list({ limit: 20 })) {
+    all.push(item);
   }
-  return allBankListResponses;
+  return all;
 }
 ```
 
-Alternatively, you can request a single page at a time:
+Alternatively, request a single page at a time:
 
 ```ts
-let page = await client.banks.list({ limit: 20, starting_after: '6jkxE4N8gHXgDPK' });
-for (const bankListResponse of page.data) {
-  console.log(bankListResponse);
+let page = await client.banks.list({ limit: 20 });
+for (const item of page.data) {
+  console.log(item);
 }
 
 // Convenience methods are provided for manually paginating:
 while (page.hasNextPage()) {
   page = await page.getNextPage();
-  // ...
 }
 ```
 
-## Advanced Usage
+## Advanced usage
 
 ### Accessing raw Response data (e.g., headers)
 
-The "raw" `Response` returned by `fetch()` can be accessed through the `.asResponse()` method on the `APIPromise` type that all methods return.
-This method returns as soon as the headers for a successful response are received and does not consume the response body, so you are free to write custom parsing or streaming logic.
+The "raw" `Response` returned by `fetch()` can be accessed through the `.asResponse()` method on the `APIPromise` type that all methods return. This method returns as soon as the headers for a successful response are received and does not consume the response body, so you are free to write custom parsing or streaming logic.
 
 You can also use the `.withResponse()` method to get the raw `Response` along with the parsed data.
-Unlike `.asResponse()` this method consumes the body, returning once it is parsed.
 
-<!-- prettier-ignore -->
 ```ts
 const client = new MoonBanking();
 
 const response = await client.banks.list().asResponse();
 console.log(response.headers.get('X-My-Header'));
-console.log(response.statusText); // access the underlying Response object
+console.log(response.statusText);
 
-const { data: page, response: raw } = await client.banks.list().withResponse();
+const { data, response: raw } = await client.banks.list().withResponse();
 console.log(raw.headers.get('X-My-Header'));
-for await (const bankListResponse of page) {
-  console.log(bankListResponse.id);
-}
+console.log(data);
 ```
 
 ### Logging
 
 > [!IMPORTANT]
-> All log messages are intended for debugging only. The format and content of log messages
-> may change between releases.
-
-#### Log levels
+> All log messages are intended for debugging only. The format and content of log messages may change between releases.
 
 The log level can be configured in two ways:
 
@@ -223,17 +191,11 @@ Available log levels, from most to least verbose:
 - `'error'` - Show only errors
 - `'off'` - Disable all logging
 
-At the `'debug'` level, all HTTP requests and responses are logged, including headers and bodies.
-Some authentication-related headers are redacted, but sensitive data in request and response bodies
-may still be visible.
+At the `'debug'` level, all HTTP requests and responses are logged. Authentication headers are redacted, but sensitive data in request and response bodies may still be visible.
 
 #### Custom logger
 
-By default, this library logs to `globalThis.console`. You can also provide a custom logger.
-Most logging libraries are supported, including [pino](https://www.npmjs.com/package/pino), [winston](https://www.npmjs.com/package/winston), [bunyan](https://www.npmjs.com/package/bunyan), [consola](https://www.npmjs.com/package/consola), [signale](https://www.npmjs.com/package/signale), and [@std/log](https://jsr.io/@std/log). If your logger doesn't work, please open an issue.
-
-When providing a custom logger, the `logLevel` option still controls which messages are emitted, messages
-below the configured level will not be sent to your logger.
+By default, this library logs to `globalThis.console`. You can also provide a custom logger, such as [pino](https://github.com/pinojs/pino):
 
 ```ts
 import MoonBanking from 'moonbanking';
@@ -284,12 +246,10 @@ const client = new MoonBanking({
 
 #### Configuring proxies
 
-To modify proxy behavior, you can provide custom `fetchOptions` that add runtime-specific proxy
-options to requests:
-
-<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/node.svg" align="top" width="18" height="21"> **Node** <sup>[[docs](https://github.com/nodejs/undici/blob/main/docs/docs/api/ProxyAgent.md#example---proxyagent-with-fetch)]</sup>
+To modify proxy behavior, you can provide custom `fetchOptions` that add runtime-specific proxy options to requests:
 
 ```ts
+// Node
 import MoonBanking from 'moonbanking';
 import * as undici from 'undici';
 
@@ -301,9 +261,8 @@ const client = new MoonBanking({
 });
 ```
 
-<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/bun.svg" align="top" width="18" height="21"> **Bun** <sup>[[docs](https://bun.sh/guides/http/proxy)]</sup>
-
 ```ts
+// Bun
 import MoonBanking from 'moonbanking';
 
 const client = new MoonBanking({
@@ -313,32 +272,15 @@ const client = new MoonBanking({
 });
 ```
 
-<img src="https://raw.githubusercontent.com/stainless-api/sdk-assets/refs/heads/main/deno.svg" align="top" width="18" height="21"> **Deno** <sup>[[docs](https://docs.deno.com/api/deno/~/Deno.createHttpClient)]</sup>
-
-```ts
-import MoonBanking from 'npm:moonbanking';
-
-const httpClient = Deno.createHttpClient({ proxy: { url: 'http://localhost:8888' } });
-const client = new MoonBanking({
-  fetchOptions: {
-    client: httpClient,
-  },
-});
-```
-
-## Frequently Asked Questions
-
 ## Semantic versioning
 
 This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) conventions, though certain backwards-incompatible changes may be released as minor versions:
 
 1. Changes that only affect static types, without breaking runtime behavior.
-2. Changes to library internals which are technically public but not intended or documented for external use. _(Please open a GitHub issue to let us know if you are relying on such internals.)_
+2. Changes to library internals which are technically public but not intended or documented for external use.
 3. Changes that we do not expect to impact the vast majority of users in practice.
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
-
-We are interested in your feedback. Please open an [issue](https://www.github.com/moonbanking/moonbanking-node/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
@@ -346,20 +288,15 @@ TypeScript >= 4.9 is supported.
 
 The following runtimes are supported:
 
-- Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
-  - Although this library functions in browsers, it is meant to only be used on the server side.
-- Node.js 20 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
+- Node.js 20 LTS or later (non-EOL) versions.
 - Deno v1.28.0 or higher.
 - Bun 1.0 or later.
 - Cloudflare Workers.
 - Vercel Edge Runtime.
-- Jest 28 or greater with the `"node"` environment (`"jsdom"` is not supported at this time).
-- Nitro v2.6 or greater.
-
-Note that React Native is not supported at this time.
-
-If you are interested in other runtime environments, please open or upvote an issue on GitHub.
+- Web browsers (although this library is meant to be used server-side).
 
 ## Contributing
 
-See [the contributing documentation](./CONTRIBUTING.md).
+This repository is generated from the Moon Banking API OpenAPI specification. See [CONTRIBUTING.md](CONTRIBUTING.md) — please do not edit these files directly.
+
+Issues and feature requests are welcome at https://github.com/moonbanking/moonbanking-node/issues.

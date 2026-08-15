@@ -1,17 +1,20 @@
-// File generated from our OpenAPI spec by Stainless. See CONTRIBUTING.md for details.
+// File generated from the OpenAPI spec. See CONTRIBUTING.md for details.
 
 import { APIResource } from '../core/resource';
-import { APIPromise } from '../core/api-promise';
-import { RequestOptions } from '../internal/request-options';
+import type { APIPromise } from '../core/api-promise';
+import type { RequestOptions } from '../internal/request-options';
 
 export class World extends APIResource {
   /**
-   * This endpoint allows you to retrieve global overview data that aggregates banks
-   * votes, stories and other data across all banks in all countries. You can include
-   * related data like scores in the response.
+   * This endpoint allows you to retrieve global overview data that aggregates
+   * banks votes, stories and other data across all banks in all countries. You can
+   * include related data like scores in the response.
    */
-  get(query: WorldGetParams | null | undefined = {}, options?: RequestOptions): APIPromise<WorldGetResponse> {
-    return this._client.get('/world', { query, ...options });
+  get(
+    query: WorldGetParams | null | undefined = {},
+    options?: RequestOptions,
+  ): APIPromise<WorldGetResponse> {
+    return this._client.get<WorldGetResponse>('/world', { query, ...options });
   }
 }
 
@@ -46,7 +49,8 @@ export namespace WorldGetResponse {
     countryCount: number;
 
     /**
-     * The total number of stories submitted by users about banks across all countries.
+     * The total number of stories submitted by users about banks across all
+     * countries.
      */
     storyCount: number;
 
@@ -69,8 +73,8 @@ export namespace WorldGetResponse {
      */
     export interface Scores {
       /**
-       * Aggregate voting counts and score for account features category across all banks
-       * globally.
+       * Aggregate voting counts and score for account features category across all
+       * banks globally.
        */
       accountFeatures: Scores.AccountFeatures;
 
@@ -81,8 +85,8 @@ export namespace WorldGetResponse {
       branchAtmAccess: Scores.BranchAtmAccess;
 
       /**
-       * Aggregate voting counts and score for business banking category across all banks
-       * globally.
+       * Aggregate voting counts and score for business banking category across all
+       * banks globally.
        */
       businessBanking: Scores.BusinessBanking;
 
@@ -93,8 +97,8 @@ export namespace WorldGetResponse {
       cryptoFriendly: Scores.CryptoFriendly;
 
       /**
-       * Aggregate voting counts and score for customer service category across all banks
-       * globally.
+       * Aggregate voting counts and score for customer service category across all
+       * banks globally.
        */
       customerService: Scores.CustomerService;
 
@@ -117,8 +121,8 @@ export namespace WorldGetResponse {
       innovation: Scores.Innovation;
 
       /**
-       * Aggregate voting counts and score for international banking category across all
-       * banks globally.
+       * Aggregate voting counts and score for international banking category across
+       * all banks globally.
        */
       internationalBanking: Scores.InternationalBanking;
 
@@ -141,14 +145,14 @@ export namespace WorldGetResponse {
       overall: Scores.Overall;
 
       /**
-       * Aggregate voting counts and score for processing speed category across all banks
-       * globally.
+       * Aggregate voting counts and score for processing speed category across all
+       * banks globally.
        */
       processingSpeed: Scores.ProcessingSpeed;
 
       /**
-       * Aggregate voting counts and score for security & trust category across all banks
-       * globally.
+       * Aggregate voting counts and score for security & trust category across all
+       * banks globally.
        */
       securityTrust: Scores.SecurityTrust;
 
@@ -161,8 +165,8 @@ export namespace WorldGetResponse {
 
     export namespace Scores {
       /**
-       * Aggregate voting counts and score for account features category across all banks
-       * globally.
+       * Aggregate voting counts and score for account features category across all
+       * banks globally.
        */
       export interface AccountFeatures {
         /**
@@ -172,7 +176,8 @@ export namespace WorldGetResponse {
         down: number;
 
         /**
-         * The score for the account features category globally, ranging from -100 to 100.
+         * The score for the account features category globally, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -201,8 +206,8 @@ export namespace WorldGetResponse {
         down: number;
 
         /**
-         * The score for the branch & ATM access category globally, ranging from -100
-         * to 100.
+         * The score for the branch & ATM access category globally, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -220,8 +225,8 @@ export namespace WorldGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for business banking category across all banks
-       * globally.
+       * Aggregate voting counts and score for business banking category across all
+       * banks globally.
        */
       export interface BusinessBanking {
         /**
@@ -231,7 +236,8 @@ export namespace WorldGetResponse {
         down: number;
 
         /**
-         * The score for the business banking category globally, ranging from -100 to 100.
+         * The score for the business banking category globally, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -260,8 +266,8 @@ export namespace WorldGetResponse {
         down: number;
 
         /**
-         * The score for the crypto-friendliness category globally, ranging from -100
-         * to 100.
+         * The score for the crypto-friendliness category globally, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -279,8 +285,8 @@ export namespace WorldGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for customer service category across all banks
-       * globally.
+       * Aggregate voting counts and score for customer service category across all
+       * banks globally.
        */
       export interface CustomerService {
         /**
@@ -290,7 +296,8 @@ export namespace WorldGetResponse {
         down: number;
 
         /**
-         * The score for the customer service category globally, ranging from -100 to 100.
+         * The score for the customer service category globally, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -319,8 +326,8 @@ export namespace WorldGetResponse {
         down: number;
 
         /**
-         * The score for the digital experience category globally, ranging from -100
-         * to 100.
+         * The score for the digital experience category globally, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -354,7 +361,8 @@ export namespace WorldGetResponse {
         score: number;
 
         /**
-         * The total number of votes for fees & pricing across all banks in all countries.
+         * The total number of votes for fees & pricing across all banks in all
+         * countries.
          */
         total: number;
 
@@ -371,7 +379,8 @@ export namespace WorldGetResponse {
        */
       export interface Innovation {
         /**
-         * The total number of downvotes for innovation across all banks in all countries.
+         * The total number of downvotes for innovation across all banks in all
+         * countries.
          */
         down: number;
 
@@ -392,13 +401,13 @@ export namespace WorldGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for international banking category across all
-       * banks globally.
+       * Aggregate voting counts and score for international banking category across
+       * all banks globally.
        */
       export interface InternationalBanking {
         /**
-         * The total number of downvotes for international banking across all banks in all
-         * countries.
+         * The total number of downvotes for international banking across all banks in
+         * all countries.
          */
         down: number;
 
@@ -433,8 +442,8 @@ export namespace WorldGetResponse {
         down: number;
 
         /**
-         * The score for the investment services category globally, ranging from -100
-         * to 100.
+         * The score for the investment services category globally, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -483,8 +492,8 @@ export namespace WorldGetResponse {
        */
       export interface Overall {
         /**
-         * The total number of downvotes across all banks in all countries. This is the sum
-         * of downvotes across all categories globally.
+         * The total number of downvotes across all banks in all countries. This is the
+         * sum of downvotes across all categories globally.
          */
         down: number;
 
@@ -496,8 +505,8 @@ export namespace WorldGetResponse {
         score: number;
 
         /**
-         * The total number of votes across all banks in all countries. This is the sum of
-         * upvotes and downvotes across all categories and all banks globally.
+         * The total number of votes across all banks in all countries. This is the sum
+         * of upvotes and downvotes across all categories and all banks globally.
          */
         total: number;
 
@@ -509,8 +518,8 @@ export namespace WorldGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for processing speed category across all banks
-       * globally.
+       * Aggregate voting counts and score for processing speed category across all
+       * banks globally.
        */
       export interface ProcessingSpeed {
         /**
@@ -520,7 +529,8 @@ export namespace WorldGetResponse {
         down: number;
 
         /**
-         * The score for the processing speed category globally, ranging from -100 to 100.
+         * The score for the processing speed category globally, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -538,8 +548,8 @@ export namespace WorldGetResponse {
       }
 
       /**
-       * Aggregate voting counts and score for security & trust category across all banks
-       * globally.
+       * Aggregate voting counts and score for security & trust category across all
+       * banks globally.
        */
       export interface SecurityTrust {
         /**
@@ -549,7 +559,8 @@ export namespace WorldGetResponse {
         down: number;
 
         /**
-         * The score for the security & trust category globally, ranging from -100 to 100.
+         * The score for the security & trust category globally, ranging from -100 to
+         * 100.
          */
         score: number;
 
@@ -588,7 +599,8 @@ export namespace WorldGetResponse {
         total: number;
 
         /**
-         * The total number of upvotes for transparency across all banks in all countries.
+         * The total number of upvotes for transparency across all banks in all
+         * countries.
          */
         up: number;
       }
@@ -598,8 +610,8 @@ export namespace WorldGetResponse {
 
 export interface WorldGetParams {
   /**
-   * An optional comma-separated list of fields to include in the response. Possible
-   * values: `scores`
+   * An optional comma-separated list of fields to include in the response.
+   * Possible values: `scores`
    */
   include?: string;
 }

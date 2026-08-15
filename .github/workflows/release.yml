@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+jobs:
+  publish:
+    # Trusted publishing requires a GitHub-hosted runner.
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      # Lets the runner mint the OIDC token that npm authenticates against.
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+
+      # registry-url is deliberately omitted: it writes an _authToken line into
+      # .npmrc that can shadow the OIDC credential. The registry is pinned by
+      # publishConfig in package.json instead.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      # Trusted publishing needs npm >=11.5.1; Node 24 does not always bundle it.
+      - name: Pin npm
+        run: npm install -g npm@^12.0.2
+
+      - name: Install dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Test
+        run: npm test
+
+      - name: Build
+        run: npm run build
+
+      - name: Verify tag matches package version
+        run: |
+          TAG_VERSION="${GITHUB_REF#refs/tags/v}"
+          PKG_VERSION="$(node -p "require('./package.json').version")"
+          if [ "$TAG_VERSION" != "$PKG_VERSION" ]; then
+            echo "Tag v$TAG_VERSION does not match package.json version $PKG_VERSION" >&2
+            exit 1
+          fi
+
+      # No NODE_AUTH_TOKEN, and no --provenance flag: trusted publishing
+      # authenticates over OIDC and attaches provenance by default.
+      - name: Publish to npm
+        run: npm publish

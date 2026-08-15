@@ -1,101 +1,52 @@
-## Setting up the environment
+# Contributing
 
-This repository uses [`yarn@v1`](https://classic.yarnpkg.com/lang/en/docs/install).
-Other package managers may work but are not officially supported for development.
+## This repository is generated
 
-To set up the repository, run:
+Every file in this repository — apart from `.git` — is generated from the
+Moon Banking API OpenAPI specification. **Do not edit it by hand**: the next
+release will overwrite your changes.
 
-```sh
-$ yarn
-$ yarn build
-```
+The generator lives in the Moon Banking monorepo at:
 
-This will install all the required dependencies and build output files to `dist/`.
+    libs/openapi/src/lib/sdk
 
-## Modifying/Adding code
+To change the SDK, change the generator (or the OpenAPI spec that feeds it) and
+publish a new release.
 
-Most of the SDK is generated code. Modifications to code will be persisted between generations, but may
-result in merge conflicts between manual patches and changes from the generator. The generator will never
-modify the contents of the `src/lib/` and `examples/` directories.
+## Publishing
 
-## Adding and running examples
+Releases are cut from the monorepo, and are always explicit. Pushing a commit to
+`master` there whose message contains a version marker:
 
-All files in the `examples/` directory are not modified by the generator and can be freely edited or added to.
+    [node-sdk 1.2.3]
 
-```ts
-// add an example to examples/<your-example>.ts
+regenerates this repository at that version, pushes the result, and tags it
+`v1.2.3`. The tag triggers `.github/workflows/release.yml` here, which builds
+the package and publishes it to npm with provenance.
 
-#!/usr/bin/env -S npm run tsn -T
-…
-```
+Commits without a marker release nothing, and the version is never bumped
+automatically — the marker is the version. The same release can also be started
+by running the "Publish Node SDK" workflow manually in the monorepo.
 
-```sh
-$ chmod +x examples/<your-example>.ts
-# run the example against your api
-$ yarn tsn -T examples/<your-example>.ts
-```
+### Authentication
 
-## Using the repository from source
+Publishing uses npm trusted publishing, so there is no npm token to store or
+rotate. npm is configured to trust `release.yml` in this repository and issues
+a short-lived credential to that workflow over OIDC.
 
-If you’d like to use the repository from source, you can either install from git or link to a cloned repository:
+Two consequences worth knowing: renaming or moving `release.yml` breaks
+publishing until the trusted publisher is updated on npmjs.com, and the release
+job has to run on a GitHub-hosted runner, because npm does not accept OIDC from
+self-hosted runners.
 
-To install via git:
-
-```sh
-$ npm install git+ssh://git@github.com:moonbanking/moonbanking-node.git
-```
-
-Alternatively, to link a local copy of the repo:
+## Local development
 
 ```sh
-# Clone
-$ git clone https://www.github.com/moonbanking/moonbanking-node
-$ cd moonbanking-node
-
-# With yarn
-$ yarn link
-$ cd ../my-package
-$ yarn link moonbanking
-
-# With pnpm
-$ pnpm link --global
-$ cd ../my-package
-$ pnpm link --global moonbanking
+npm install
+npm run build
+npm test
 ```
 
-## Running tests
+## Reporting issues
 
-```sh
-$ yarn run test
-```
-
-## Linting and formatting
-
-This repository uses [prettier](https://www.npmjs.com/package/prettier) and
-[eslint](https://www.npmjs.com/package/eslint) to format the code in the repository.
-
-To lint:
-
-```sh
-$ yarn lint
-```
-
-To format and fix all lint issues automatically:
-
-```sh
-$ yarn fix
-```
-
-## Publishing and releases
-
-Changes made to this repository via the automated release PR pipeline should publish to npm automatically. If
-the changes aren't made through the automated pipeline, you may want to make releases manually.
-
-### Publish with a GitHub workflow
-
-You can release to package managers by using [the `Publish NPM` GitHub action](https://www.github.com/moonbanking/moonbanking-node/actions/workflows/publish-npm.yml). This requires a setup organization or repository secret to be set up.
-
-### Publish manually
-
-If you need to manually release a package, you can run the `bin/publish-npm` script with an `NPM_TOKEN` set on
-the environment.
+Please open an issue at https://github.com/moonbanking/moonbanking-node/issues.

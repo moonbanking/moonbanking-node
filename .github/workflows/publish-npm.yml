@@ -1,4 +1,4 @@
-name: Release
+name: Publish NPM
 
 on:
   push:
@@ -17,9 +17,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # registry-url is deliberately omitted: it writes an _authToken line into
-      # .npmrc that can shadow the OIDC credential. The registry is pinned by
-      # publishConfig in package.json instead.
+      # registry-url is deliberately omitted. npm derives the OIDC audience from
+      # the resolved registry, which already defaults to registry.npmjs.org and
+      # is pinned by publishConfig in package.json. Setting it here only adds an
+      # _authToken line to .npmrc.
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -49,7 +50,22 @@ jobs:
             exit 1
           fi
 
+      # npm's OIDC path never throws: on any failure it returns quietly and
+      # falls back to token auth, which then reports a bare ENEEDAUTH. Checking
+      # the one prerequisite npm cannot recover from turns the most common
+      # misconfiguration into a legible error.
+      - name: Check OIDC token is available
+        run: |
+          if [ -z "${ACTIONS_ID_TOKEN_REQUEST_URL:-}" ] || [ -z "${ACTIONS_ID_TOKEN_REQUEST_TOKEN:-}" ]; then
+            echo "::error::No OIDC token endpoint. This job needs 'permissions: id-token: write'."
+            exit 1
+          fi
+          echo "OIDC token endpoint available."
+
       # No NODE_AUTH_TOKEN, and no --provenance flag: trusted publishing
       # authenticates over OIDC and attaches provenance by default.
+      #
+      # Verbose logging is deliberate. npm logs why an OIDC exchange failed at
+      # verbose level only, so without it an ENEEDAUTH gives nothing to act on.
       - name: Publish to npm
-        run: npm publish
+        run: npm publish --loglevel verbose

@@ -62,10 +62,67 @@ jobs:
           fi
           echo "OIDC token endpoint available."
 
+      # Provenance signing uses a second token, minted for the "sigstore"
+      # audience rather than npm's. Sigstore rejects it with a bare 403, so
+      # print the claims it is judging. These are public — they end up in the
+      # published attestation — but the raw token is never echoed.
+      - name: Inspect Sigstore OIDC identity
+        run: |
+          set -euo pipefail
+
+          RESPONSE="$(curl -sS             -H "Authorization: Bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}"             "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=sigstore")"
+
+          printf '%s' "$RESPONSE" | node -e "
+            const body = require('fs').readFileSync(0, 'utf8');
+            const token = JSON.parse(body).value;
+            if (!token) throw new Error('no sigstore-audience token returned');
+            const claims = JSON.parse(
+              Buffer.from(token.split('.')[1], 'base64url').toString('utf8')
+            );
+            for (const key of [
+              'iss', 'aud', 'sub', 'repository', 'repository_owner',
+              'repository_visibility', 'workflow_ref', 'job_workflow_ref',
+              'event_name', 'ref', 'ref_type', 'runner_environment',
+            ]) {
+              console.log(key.padEnd(22), claims[key] ?? '(missing)');
+            }
+          "
+
       # No NODE_AUTH_TOKEN, and no --provenance flag: trusted publishing
       # authenticates over OIDC and attaches provenance by default.
       #
       # Verbose logging is deliberate. npm logs why an OIDC exchange failed at
       # verbose level only, so without it an ENEEDAUTH gives nothing to act on.
+      #
+      # The retry exists because provenance signing can fail on a bodyless 403
+      # from the edge in front of fulcio.sigstore.dev. Sigstore only retries
+      # 408, 429 and 5xx, so that status aborts the publish on the first try.
       - name: Publish to npm
-        run: npm publish --loglevel verbose
+        run: |
+          set -uo pipefail
+
+          NAME="$(node -p "require('./package.json').name")"
+          VERSION="$(node -p "require('./package.json').version")"
+
+          for attempt in 1 2 3; do
+            if [ "$attempt" -gt 1 ]; then
+              DELAY=$((attempt * 30))
+              echo "Retrying in ${DELAY}s (attempt $attempt of 3)."
+              sleep "$DELAY"
+            fi
+
+            if npm publish --loglevel verbose; then
+              echo "Published $NAME@$VERSION."
+              exit 0
+            fi
+
+            # A publish can fail after the registry has accepted the tarball.
+            # Re-publishing would then fail as a version conflict, so stop.
+            if npm view "$NAME@$VERSION" version >/dev/null 2>&1; then
+              echo "$NAME@$VERSION is already on the registry; treating as published."
+              exit 0
+            fi
+          done
+
+          echo "::error::npm publish failed after 3 attempts."
+          exit 1

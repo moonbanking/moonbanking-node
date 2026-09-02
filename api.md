@@ -2,6 +2,40 @@
 
 All methods are available on an instance of the `MoonBanking` client.
 
+# BankProducts
+
+Types:
+
+- `MoonBanking.BankProducts.BankProductListResponse`
+- `MoonBanking.BankProducts.BankProductListResponsesCursorPage`
+- `MoonBanking.BankProducts.BankProductListParams`
+- `MoonBanking.BankProducts.BankProductCreateResponse`
+- `MoonBanking.BankProducts.BankProductCreateBody`
+- `MoonBanking.BankProducts.BankProductDeleteResponse`
+- `MoonBanking.BankProducts.BankProductListByBankResponse`
+- `MoonBanking.BankProducts.BankProductListManagedResponse`
+- `MoonBanking.BankProducts.BankProductSetStatusResponse`
+- `MoonBanking.BankProducts.BankProductSetStatusBody`
+- `MoonBanking.BankProducts.BankProductUpdateResponse`
+- `MoonBanking.BankProducts.BankProductUpdateBody`
+
+Methods:
+
+- `client.bankProducts.list(query?)` -> `MoonBanking.BankProducts.BankProductListResponsesCursorPage`
+  - `GET /bank-products`
+- `client.bankProducts.create(bankId, body)` -> `MoonBanking.BankProducts.BankProductCreateResponse`
+  - `POST /banks/{bankId}/products`
+- `client.bankProducts.delete(bankId, id)` -> `MoonBanking.BankProducts.BankProductDeleteResponse`
+  - `DELETE /banks/{bankId}/products/{id}`
+- `client.bankProducts.listByBank(bankId)` -> `MoonBanking.BankProducts.BankProductListByBankResponse`
+  - `GET /banks/{bankId}/products`
+- `client.bankProducts.listManaged(bankId)` -> `MoonBanking.BankProducts.BankProductListManagedResponse`
+  - `GET /banks/{bankId}/managed-products`
+- `client.bankProducts.setStatus(bankId, id, body)` -> `MoonBanking.BankProducts.BankProductSetStatusResponse`
+  - `PUT /banks/{bankId}/products/{id}/status`
+- `client.bankProducts.update(bankId, id, body)` -> `MoonBanking.BankProducts.BankProductUpdateResponse`
+  - `PUT /banks/{bankId}/products/{id}`
+
 # BankVotes
 
 Types:

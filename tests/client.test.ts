@@ -54,7 +54,7 @@ describe('MoonBanking client', () => {
     const { fetch, calls } = stubFetch(() => jsonResponse(successBody));
     const client = new MoonBanking({ bearerToken: 'secret-token', fetch });
 
-    await client.bankVotes.list();
+    await client.bankProducts.list();
 
     expect(calls).toHaveLength(1);
     expect(calls[0]!.url).toContain('https://api.moonbanking.com/v1');
@@ -72,7 +72,7 @@ describe('MoonBanking client', () => {
       fetch,
     });
 
-    await client.bankVotes.list();
+    await client.bankProducts.list();
 
     expect(calls[0]!.url.startsWith('https://example.test/v9')).toBe(true);
   });
@@ -81,7 +81,7 @@ describe('MoonBanking client', () => {
     const { fetch } = stubFetch(() => jsonResponse(successBody));
     const client = new MoonBanking({ bearerToken: 'token', fetch });
 
-    const response = await client.bankVotes.list().asResponse();
+    const response = await client.bankProducts.list().asResponse();
 
     expect(response.status).toBe(200);
     expect(response.headers.get('content-type')).toContain('application/json');
@@ -91,7 +91,7 @@ describe('MoonBanking client', () => {
     const { fetch } = stubFetch(() => jsonResponse(successBody));
     const client = new MoonBanking({ bearerToken: 'token', fetch });
 
-    const { data, response } = await client.bankVotes.list().withResponse();
+    const { data, response } = await client.bankProducts.list().withResponse();
 
     expect(response.status).toBe(200);
     expect(data).toBeDefined();
@@ -103,21 +103,21 @@ describe('error handling', () => {
     const { fetch } = stubFetch(() => jsonResponse({ message: 'Not found' }, 404));
     const client = new MoonBanking({ bearerToken: 'token', fetch, maxRetries: 0 });
 
-    await expect(client.bankVotes.list()).rejects.toBeInstanceOf(NotFoundError);
+    await expect(client.bankProducts.list()).rejects.toBeInstanceOf(NotFoundError);
   });
 
   it('throws AuthenticationError on a 401', async () => {
     const { fetch } = stubFetch(() => jsonResponse({ message: 'Unauthorized' }, 401));
     const client = new MoonBanking({ bearerToken: 'bad', fetch, maxRetries: 0 });
 
-    await expect(client.bankVotes.list()).rejects.toBeInstanceOf(AuthenticationError);
+    await expect(client.bankProducts.list()).rejects.toBeInstanceOf(AuthenticationError);
   });
 
   it('surfaces the status and message on the error', async () => {
     const { fetch } = stubFetch(() => jsonResponse({ message: 'Nope' }, 404));
     const client = new MoonBanking({ bearerToken: 'token', fetch, maxRetries: 0 });
 
-    const error = await client.bankVotes.list().catch((err: unknown) => err);
+    const error = await client.bankProducts.list().catch((err: unknown) => err);
 
     expect(error).toBeInstanceOf(NotFoundError);
     expect((error as NotFoundError).status).toBe(404);
@@ -134,7 +134,7 @@ describe('error handling', () => {
 
     const client = new MoonBanking({ bearerToken: 'token', fetch, maxRetries: 2 });
 
-    await client.bankVotes.list();
+    await client.bankProducts.list();
 
     expect(attempts).toBe(3);
   });
@@ -143,7 +143,7 @@ describe('error handling', () => {
     const { fetch } = stubFetch(() => jsonResponse({ message: 'Slow down' }, 429));
     const client = new MoonBanking({ bearerToken: 'token', fetch, maxRetries: 1 });
 
-    await expect(client.bankVotes.list()).rejects.toBeInstanceOf(RateLimitError);
+    await expect(client.bankProducts.list()).rejects.toBeInstanceOf(RateLimitError);
   });
 
   it('does not retry non-retryable statuses', async () => {
@@ -155,7 +155,7 @@ describe('error handling', () => {
 
     const client = new MoonBanking({ bearerToken: 'token', fetch, maxRetries: 3 });
 
-    await expect(client.bankVotes.list()).rejects.toThrow();
+    await expect(client.bankProducts.list()).rejects.toThrow();
     expect(attempts).toBe(1);
   });
 
@@ -175,6 +175,6 @@ describe('error handling', () => {
       maxRetries: 0,
     });
 
-    await expect(client.bankVotes.list()).rejects.toBeInstanceOf(APIConnectionTimeoutError);
+    await expect(client.bankProducts.list()).rejects.toBeInstanceOf(APIConnectionTimeoutError);
   });
 });

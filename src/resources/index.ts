@@ -1,6 +1,21 @@
 // File generated from the OpenAPI spec. See CONTRIBUTING.md for details.
 
 export {
+  BankProducts,
+  type BankProductListResponse,
+  type BankProductCreateResponse,
+  type BankProductCreateBody,
+  type BankProductDeleteResponse,
+  type BankProductListByBankResponse,
+  type BankProductListManagedResponse,
+  type BankProductSetStatusResponse,
+  type BankProductSetStatusBody,
+  type BankProductUpdateResponse,
+  type BankProductUpdateBody,
+  type BankProductListResponsesCursorPage,
+  type BankProductListParams,
+} from './bank-products';
+export {
   BankVotes,
   type BankVoteListResponse,
   type BankVoteListResponsesCursorPage,

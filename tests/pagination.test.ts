@@ -38,7 +38,7 @@ describe('cursor pagination', () => {
     const { fetch } = pagedFetch([['a', 'b']]);
     const client = new MoonBanking({ bearerToken: 'token', fetch });
 
-    const result = await client.bankVotes.list();
+    const result = await client.bankProducts.list();
 
     expect(result.data.map((item) => item.id)).toEqual(['a', 'b']);
   });
@@ -48,7 +48,7 @@ describe('cursor pagination', () => {
     const client = new MoonBanking({ bearerToken: 'token', fetch });
 
     const seen: string[] = [];
-    for await (const item of client.bankVotes.list({ limit: 2 })) {
+    for await (const item of client.bankProducts.list({ limit: 2 })) {
       seen.push(item.id);
     }
 
@@ -62,7 +62,7 @@ describe('cursor pagination', () => {
     const { fetch } = pagedFetch([['a'], ['b'], []]);
     const client = new MoonBanking({ bearerToken: 'token', fetch });
 
-    let current = await client.bankVotes.list({ limit: 1 });
+    let current = await client.bankProducts.list({ limit: 1 });
     const seen = current.data.map((item) => item.id);
 
     while (current.hasNextPage()) {
@@ -77,7 +77,7 @@ describe('cursor pagination', () => {
     const { fetch } = pagedFetch([[]]);
     const client = new MoonBanking({ bearerToken: 'token', fetch });
 
-    const result = await client.bankVotes.list();
+    const result = await client.bankProducts.list();
 
     expect(result.hasNextPage()).toBe(false);
   });
@@ -86,7 +86,7 @@ describe('cursor pagination', () => {
     const { fetch, urls } = pagedFetch([['a']]);
     const client = new MoonBanking({ bearerToken: 'token', fetch });
 
-    await client.bankVotes.list({ limit: 5 });
+    await client.bankProducts.list({ limit: 5 });
 
     expect(urls[0]).toContain('limit=5');
   });

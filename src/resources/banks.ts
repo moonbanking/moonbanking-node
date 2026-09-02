@@ -103,6 +103,8 @@ export interface BankListResponse {
    */
   updatedAt: string;
 
+  claimedAt?: string | null;
+
   /**
    * The country where the bank is located.
    */
@@ -758,6 +760,11 @@ export namespace BankListResponse {
       createdAt: string;
 
       /**
+       * Whether the market is supported by TradingView embeddable widgets.
+       */
+      isTvEmbeddable: boolean;
+
+      /**
        * The name of the stock exchange.
        */
       name: string;
@@ -771,6 +778,12 @@ export namespace BankListResponse {
        * The date and time the stock exchange was last updated in Moon Banking.
        */
       updatedAt: string;
+
+      /**
+       * The TradingView code of the stock exchange. The value is null if the market is
+       * not supported by TradingView embeddable widgets.
+       */
+      tvCode?: string | null;
     }
   }
 }
@@ -825,6 +838,8 @@ export namespace BankGetResponse {
      */
     updatedAt: string;
 
+    claimedAt?: string | null;
+
     /**
      * The country where the bank is located.
      */
@@ -1480,6 +1495,11 @@ export namespace BankGetResponse {
         createdAt: string;
 
         /**
+         * Whether the market is supported by TradingView embeddable widgets.
+         */
+        isTvEmbeddable: boolean;
+
+        /**
          * The name of the stock exchange.
          */
         name: string;
@@ -1493,6 +1513,12 @@ export namespace BankGetResponse {
          * The date and time the stock exchange was last updated in Moon Banking.
          */
         updatedAt: string;
+
+        /**
+         * The TradingView code of the stock exchange. The value is null if the market is
+         * not supported by TradingView embeddable widgets.
+         */
+        tvCode?: string | null;
       }
     }
   }
@@ -1545,6 +1571,8 @@ export namespace BankGetByHostnameResponse {
      */
     updatedAt: string;
 
+    claimedAt?: string | null;
+
     /**
      * The country where the bank is located.
      */
@@ -2200,6 +2228,11 @@ export namespace BankGetByHostnameResponse {
         createdAt: string;
 
         /**
+         * Whether the market is supported by TradingView embeddable widgets.
+         */
+        isTvEmbeddable: boolean;
+
+        /**
          * The name of the stock exchange.
          */
         name: string;
@@ -2213,6 +2246,12 @@ export namespace BankGetByHostnameResponse {
          * The date and time the stock exchange was last updated in Moon Banking.
          */
         updatedAt: string;
+
+        /**
+         * The TradingView code of the stock exchange. The value is null if the market is
+         * not supported by TradingView embeddable widgets.
+         */
+        tvCode?: string | null;
       }
     }
   }

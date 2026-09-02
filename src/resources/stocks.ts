@@ -158,6 +158,11 @@ export namespace StockListResponse {
     createdAt: string;
 
     /**
+     * Whether the market is supported by TradingView embeddable widgets.
+     */
+    isTvEmbeddable: boolean;
+
+    /**
      * The name of the stock exchange.
      */
     name: string;
@@ -171,6 +176,12 @@ export namespace StockListResponse {
      * The date and time the stock exchange was last updated in Moon Banking.
      */
     updatedAt: string;
+
+    /**
+     * The TradingView code of the stock exchange. The value is null if the market is
+     * not supported by TradingView embeddable widgets.
+     */
+    tvCode?: string | null;
   }
 }
 
@@ -311,6 +322,11 @@ export namespace StockGetResponse {
       createdAt: string;
 
       /**
+       * Whether the market is supported by TradingView embeddable widgets.
+       */
+      isTvEmbeddable: boolean;
+
+      /**
        * The name of the stock exchange.
        */
       name: string;
@@ -324,6 +340,12 @@ export namespace StockGetResponse {
        * The date and time the stock exchange was last updated in Moon Banking.
        */
       updatedAt: string;
+
+      /**
+       * The TradingView code of the stock exchange. The value is null if the market is
+       * not supported by TradingView embeddable widgets.
+       */
+      tvCode?: string | null;
     }
   }
 }

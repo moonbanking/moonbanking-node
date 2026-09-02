@@ -60,6 +60,11 @@ export interface MarketListResponse {
   createdAt: string;
 
   /**
+   * Whether the market is supported by TradingView embeddable widgets.
+   */
+  isTvEmbeddable: boolean;
+
+  /**
    * The name of the stock exchange.
    */
   name: string;
@@ -73,6 +78,12 @@ export interface MarketListResponse {
    * The date and time the stock exchange was last updated in Moon Banking.
    */
   updatedAt: string;
+
+  /**
+   * The TradingView code of the stock exchange. The value is null if the market is
+   * not supported by TradingView embeddable widgets.
+   */
+  tvCode?: string | null;
 }
 
 export interface MarketGetResponse {
@@ -118,6 +129,11 @@ export namespace MarketGetResponse {
     createdAt: string;
 
     /**
+     * Whether the market is supported by TradingView embeddable widgets.
+     */
+    isTvEmbeddable: boolean;
+
+    /**
      * The name of the stock exchange.
      */
     name: string;
@@ -131,6 +147,12 @@ export namespace MarketGetResponse {
      * The date and time the stock exchange was last updated in Moon Banking.
      */
     updatedAt: string;
+
+    /**
+     * The TradingView code of the stock exchange. The value is null if the market is
+     * not supported by TradingView embeddable widgets.
+     */
+    tvCode?: string | null;
   }
 }
 

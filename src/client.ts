@@ -6,6 +6,21 @@ import type { CursorPage, CursorPageParams, CursorPageResponse } from './core/pa
 import * as Errors from './core/error';
 import { VERSION } from './version';
 import {
+  BankProducts,
+  type BankProductListResponse,
+  type BankProductCreateResponse,
+  type BankProductCreateBody,
+  type BankProductDeleteResponse,
+  type BankProductListByBankResponse,
+  type BankProductListManagedResponse,
+  type BankProductSetStatusResponse,
+  type BankProductSetStatusBody,
+  type BankProductUpdateResponse,
+  type BankProductUpdateBody,
+  type BankProductListResponsesCursorPage,
+  type BankProductListParams,
+} from './resources/bank-products';
+import {
   BankVotes,
   type BankVoteListResponse,
   type BankVoteListResponsesCursorPage,
@@ -68,6 +83,7 @@ import { World, type WorldGetResponse, type WorldGetParams } from './resources/w
  * ```
  */
 export class MoonBanking extends BaseClient {
+  bankProducts: BankProducts;
   bankVotes: BankVotes;
   banks: Banks;
   countries: Countries;
@@ -106,6 +122,7 @@ export class MoonBanking extends BaseClient {
       userAgent: `moonbanking/${VERSION}`,
     });
 
+    this.bankProducts = new BankProducts(this);
     this.bankVotes = new BankVotes(this);
     this.banks = new Banks(this);
     this.countries = new Countries(this);
@@ -128,6 +145,22 @@ export declare namespace MoonBanking {
     CursorPage as CursorPage,
     CursorPageParams as CursorPageParams,
     CursorPageResponse as CursorPageResponse,
+  };
+
+  export {
+    BankProducts as BankProducts,
+    type BankProductListResponse as BankProductListResponse,
+    type BankProductCreateResponse as BankProductCreateResponse,
+    type BankProductCreateBody as BankProductCreateBody,
+    type BankProductDeleteResponse as BankProductDeleteResponse,
+    type BankProductListByBankResponse as BankProductListByBankResponse,
+    type BankProductListManagedResponse as BankProductListManagedResponse,
+    type BankProductSetStatusResponse as BankProductSetStatusResponse,
+    type BankProductSetStatusBody as BankProductSetStatusBody,
+    type BankProductUpdateResponse as BankProductUpdateResponse,
+    type BankProductUpdateBody as BankProductUpdateBody,
+    type BankProductListResponsesCursorPage as BankProductListResponsesCursorPage,
+    type BankProductListParams as BankProductListParams,
   };
 
   export {

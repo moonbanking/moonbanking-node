@@ -10,6 +10,7 @@ describe('public type surface', () => {
   it('exposes the client and its resources', () => {
     const client = new MoonBanking({ bearerToken: 'token' });
 
+    expect(client.bankProducts).toBeDefined();
     expect(client.bankVotes).toBeDefined();
     expect(client.banks).toBeDefined();
     expect(client.countries).toBeDefined();
@@ -21,7 +22,7 @@ describe('public type surface', () => {
   });
 
   it('exposes namespaced types', () => {
-    type Page = MoonBanking.BankVotes.BankVoteListResponsesCursorPage;
+    type Page = MoonBanking.BankProducts.BankProductListResponsesCursorPage;
     const check = (value: Page | undefined): Page | undefined => value;
 
     expect(check(undefined)).toBeUndefined();

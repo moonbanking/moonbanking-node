@@ -15,18 +15,19 @@ publish a new release.
 
 ## Publishing
 
-Releases are cut from the monorepo, and are always explicit. Pushing a commit to
-`master` there whose message contains a version marker:
+Releases are cut from the monorepo, and are always explicit. Pushing a tag
+matching `node-sdk@**`:
 
-    [node-sdk 1.2.3]
+    git tag node-sdk@1.2.3
+    git push origin node-sdk@1.2.3
 
 regenerates this repository at that version, pushes the result, and tags it
 `v1.2.3`. The tag triggers `.github/workflows/publish-npm.yml` here, which
 builds the package and publishes it to npm with provenance.
 
-Commits without a marker release nothing, and the version is never bumped
-automatically — the marker is the version. The same release can also be started
-by running the "Publish Node SDK" workflow manually in the monorepo.
+The version after `@` is the version published to npm; it is never bumped
+automatically. The same release can also be started by running the "Publish
+Node SDK" workflow manually in the monorepo.
 
 ### Authentication
 

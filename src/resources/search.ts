@@ -6,10 +6,10 @@ import type { RequestOptions } from '../internal/request-options';
 
 export class Search extends APIResource {
   /**
-   * Search across banks, countries, stories, and stocks. You can specify which
-   * entities to search using the include parameter. If no include value is
-   * provided, all entities will be searched. Banks are also matched on the ticker
-   * symbol of their stock listings, so searching `BAC` returns Bank of America.
+   * Search across banks, countries, stories, and stocks. Use the include parameter
+   * to specify which entities to search; if no include value is provided, all
+   * entities are searched. Banks are also matched on the ticker symbol of their
+   * stock listings, so searching `BAC` returns Bank of America.
    */
   get(query: SearchGetParams, options?: RequestOptions): APIPromise<SearchGetResponse> {
     return this._client.get<SearchGetResponse>('/search', { query, ...options });

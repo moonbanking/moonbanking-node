@@ -8,9 +8,9 @@ import { path } from '../internal/utils';
 
 export class Stocks extends APIResource {
   /**
-   * This endpoint allows you to retrieve a paginated list of stock listings. You
-   * can search by ticker symbol, filter by exact symbol, market, bank, or
-   * primary-listing status, and sort the results.
+   * Retrieve a paginated list of stock listings. Search by ticker symbol, filter
+   * by exact symbol, market, bank, or primary-listing status, and sort the
+   * results.
    */
   list(
     query: StockListParams | null | undefined = {},
@@ -24,9 +24,8 @@ export class Stocks extends APIResource {
   }
 
   /**
-   * This endpoint allows you to retrieve a specific stock listing by providing the
-   * stock id. You can optionally include the associated `market` and/or `bank` as
-   * nested objects.
+   * Retrieve a stock listing by ID. Optionally include the associated `market`
+   * and/or `bank` as nested objects.
    */
   get(
     id: string,

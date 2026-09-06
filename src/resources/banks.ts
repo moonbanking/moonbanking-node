@@ -8,10 +8,9 @@ import { path } from '../internal/utils';
 
 export class Banks extends APIResource {
   /**
-   * This endpoint allows you to retrieve a paginated list of all banks. By
-   * default, a maximum of ten banks are shown per page. You can search banks by
-   * name, filter by country, sort them by various fields, and include related data
-   * like scores and country information.
+   * Retrieve a paginated list of banks, ten per page by default. Search by name,
+   * filter by country, sort by various fields, and include related data such as
+   * scores and country information.
    */
   list(
     query: BankListParams | null | undefined = {},
@@ -25,9 +24,8 @@ export class Banks extends APIResource {
   }
 
   /**
-   * This endpoint allows you to retrieve a specific bank by providing the bank ID.
-   * You can include related data like scores and country information in the
-   * response.
+   * Retrieve a bank by ID. Optionally include related data such as scores and
+   * country information.
    */
   get(
     id: string,
@@ -38,8 +36,7 @@ export class Banks extends APIResource {
   }
 
   /**
-   * This endpoint allows you to retrieve banks by hostname. It will return up to
-   * one bank per country that matches the provided hostname. The hostname is
+   * Retrieve banks by hostname, up to one bank per country. The hostname is
    * normalized (www. prefix removed if present) and matched against both the
    * primary hostname and alternative hostnames.
    */
@@ -52,9 +49,9 @@ export class Banks extends APIResource {
 
   /**
    * Search for banks by describing what you are looking for in natural language.
-   * This searches across bank descriptions including services offered, history,
-   * location, unique features, and institution type. Use this when the user asks
-   * about banks with specific characteristics, services, or qualities.
+   * Searches across bank descriptions including services offered, history,
+   * location, unique features, and institution type. Use when the user asks about
+   * banks with specific characteristics, services, or qualities.
    */
   semanticSearch(
     query: BankSemanticSearchParams,

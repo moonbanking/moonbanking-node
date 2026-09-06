@@ -8,10 +8,9 @@ import { path } from '../internal/utils';
 
 export class Stories extends APIResource {
   /**
-   * This endpoint allows you to retrieve a paginated list of all stories. By
-   * default, a maximum of ten stories are shown per page. You can search stories
-   * by text content, filter by bank ID, sort them by various fields, and include
-   * related data like bank and country information.
+   * Retrieve a paginated list of stories, ten per page by default. Search by text
+   * content, filter by bank ID, sort by various fields, and include related data
+   * such as bank and country information.
    */
   list(
     query: StoryListParams | null | undefined = {},
@@ -25,9 +24,8 @@ export class Stories extends APIResource {
   }
 
   /**
-   * This endpoint allows you to retrieve a specific story by providing the story
-   * ID. You can include related data like bank and country information in the
-   * response.
+   * Retrieve a story by ID. Optionally include related data such as bank and
+   * country information.
    */
   get(
     id: string,

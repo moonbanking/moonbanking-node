@@ -8,12 +8,12 @@ import { path } from '../internal/utils';
 
 export class BankProducts extends APIResource {
   /**
-   * This endpoint allows you to retrieve a paginated list of published bank
-   * products across all banks, so you can compare rates and terms between
-   * institutions. Filter by bank, country, category, type, currency, and rate, and
-   * sort by rate to find the most competitive offers. Products are supplied and
-   * maintained by each bank's own verified representatives. Every product includes
-   * the name of the bank that offers it.
+   * Retrieve a paginated list of published bank products across all banks to
+   * compare rates and terms between institutions. Filter by bank, country,
+   * category, type, currency, and rate, and sort by rate to find the most
+   * competitive offers. Products are supplied and maintained by each bank's own
+   * verified representatives. Every product includes the name of the bank that
+   * offers it.
    */
   list(
     query: BankProductListParams | null | undefined = {},
@@ -27,10 +27,10 @@ export class BankProducts extends APIResource {
   }
 
   /**
-   * This endpoint allows a bank's verified representatives to add a product to the
-   * bank's profile. Products default to published and appear on the bank's public
-   * page immediately. Pass `status` as `DRAFT` to stage a product without
-   * publishing it. You must be an approved representative of the bank.
+   * Add a product to the bank's profile. Products default to published and appear
+   * on the bank's public page immediately. Pass `status` as `DRAFT` to stage a
+   * product without publishing it. Requires an approved representative of the
+   * bank.
    */
   create(
     bankId: string,
@@ -44,10 +44,9 @@ export class BankProducts extends APIResource {
   }
 
   /**
-   * This endpoint allows a bank's verified representatives to permanently remove a
-   * product from the bank's profile. This cannot be undone. To retire a product
-   * while keeping its record, set its status to `ARCHIVED` instead. You must be an
-   * approved representative of the bank.
+   * Permanently remove a product from the bank's profile. This cannot be undone.
+   * To retire a product while keeping its record, set its status to `ARCHIVED`
+   * instead. Requires an approved representative of the bank.
    */
   delete(
     bankId: string,
@@ -61,11 +60,11 @@ export class BankProducts extends APIResource {
   }
 
   /**
-   * This endpoint allows you to retrieve the products and services a bank
-   * publishes on its Moon Banking profile, such as deposit accounts, loans, and
-   * credit cards. Products are supplied and maintained by the bank's own verified
-   * representatives. Only published products are returned; drafts, archived
-   * entries, and anything removed by the Moon Banking team are excluded.
+   * Retrieve the products and services a bank publishes on its Moon Banking
+   * profile, such as deposit accounts, loans, and credit cards. Products are
+   * supplied and maintained by the bank's own verified representatives. Only
+   * published products are returned; drafts, archived entries, and anything
+   * removed by the Moon Banking team are excluded.
    */
   listByBank(bankId: string, options?: RequestOptions): APIPromise<BankProductListByBankResponse> {
     return this._client.get<BankProductListByBankResponse>(
@@ -75,10 +74,10 @@ export class BankProducts extends APIResource {
   }
 
   /**
-   * This endpoint allows a bank's verified representatives to retrieve every
-   * product on the bank's profile, including drafts and archived entries that the
-   * public list omits. Use it to reconcile your own catalog against Moon Banking
-   * before syncing changes. You must be an approved representative of the bank.
+   * Retrieve every product on the bank's profile, including drafts and archived
+   * entries that the public list omits. Use it to reconcile your own catalog
+   * against Moon Banking before syncing changes. Requires an approved
+   * representative of the bank.
    */
   listManaged(
     bankId: string,
@@ -91,10 +90,9 @@ export class BankProducts extends APIResource {
   }
 
   /**
-   * This endpoint allows a bank's verified representatives to move a product
-   * between draft, published, and archived without resubmitting its details.
-   * Archiving is the reversible way to retire a product you may bring back;
-   * deleting is permanent. You must be an approved representative of the bank.
+   * Move a product between draft, published, and archived without resubmitting its
+   * details. Archiving is the reversible way to retire a product you may bring
+   * back; deleting is permanent. Requires an approved representative of the bank.
    */
   setStatus(
     bankId: string,
@@ -109,10 +107,9 @@ export class BankProducts extends APIResource {
   }
 
   /**
-   * This endpoint allows a bank's verified representatives to replace a product's
-   * details. Every writable field is overwritten, so send the product's full state
-   * rather than only the fields that changed. This is the endpoint to call when
-   * rates or fees move. You must be an approved representative of the bank.
+   * Replace a product's details. Every writable field is overwritten, so send the
+   * product's full state rather than only the fields that changed. Call this when
+   * rates or fees move. Requires an approved representative of the bank.
    */
   update(
     bankId: string,

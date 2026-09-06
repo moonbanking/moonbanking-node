@@ -6,9 +6,8 @@ import type { RequestOptions } from '../internal/request-options';
 
 export class BankVotes extends APIResource {
   /**
-   * This endpoint allows you to retrieve a paginated list of bank votes. You can
-   * filter by bank ID, category, country, vote type (upvote or downvote), and
-   * other parameters.
+   * Retrieve a paginated list of bank votes. Filter by bank ID, category, country,
+   * vote type (upvote or downvote), and other parameters.
    */
   list(
     query: BankVoteListParams | null | undefined = {},

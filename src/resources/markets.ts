@@ -8,9 +8,8 @@ import { path } from '../internal/utils';
 
 export class Markets extends APIResource {
   /**
-   * This endpoint allows you to retrieve a paginated list of markets (e.g. stock
-   * exchanges). You can search by name or code, filter by exact code, country, or
-   * market type, and sort the results.
+   * Retrieve a paginated list of markets, such as stock exchanges. Search by name
+   * or code, filter by exact code, country, or market type, and sort the results.
    */
   list(
     query: MarketListParams | null | undefined = {},
@@ -24,8 +23,7 @@ export class Markets extends APIResource {
   }
 
   /**
-   * This endpoint allows you to retrieve a specific market (e.g. stock exchange)
-   * by providing the market id.
+   * Retrieve a market, such as a stock exchange, by ID.
    */
   get(id: string, options?: RequestOptions): APIPromise<MarketGetResponse> {
     return this._client.get<MarketGetResponse>(path`/markets/${id}`, options);

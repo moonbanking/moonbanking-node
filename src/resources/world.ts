@@ -6,9 +6,9 @@ import type { RequestOptions } from '../internal/request-options';
 
 export class World extends APIResource {
   /**
-   * This endpoint allows you to retrieve global overview data that aggregates
-   * banks votes, stories and other data across all banks in all countries. You can
-   * include related data like scores in the response.
+   * Retrieve global overview data aggregating bank votes, stories, and other data
+   * across all banks in all countries. Optionally include related data such as
+   * scores.
    */
   get(
     query: WorldGetParams | null | undefined = {},

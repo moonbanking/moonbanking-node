@@ -8,10 +8,9 @@ import { path } from '../internal/utils';
 
 export class Countries extends APIResource {
   /**
-   * This endpoint allows you to retrieve a paginated list of all countries. By
-   * default, a maximum of ten countries are shown per page. You can search
-   * countries by name or 2-letter code, sort them by various fields, and include
-   * related data like scores.
+   * Retrieve a paginated list of countries, ten per page by default. Search by
+   * name or 2-letter code, sort by various fields, and include related data such
+   * as scores.
    */
   list(
     query: CountryListParams | null | undefined = {},
@@ -25,9 +24,8 @@ export class Countries extends APIResource {
   }
 
   /**
-   * This endpoint allows you to retrieve a specific country by providing the
-   * 2-letter ISO country code. You can include related data like scores in the
-   * response.
+   * Retrieve a country by its 2-letter ISO code. Optionally include related data
+   * such as scores.
    */
   get(
     code: string,
